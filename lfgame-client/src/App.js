@@ -1,3 +1,5 @@
+import NavBar from './pages/Nav_bar/NavBar';
+
 import './App.scss';
 import useApplicationData from "./hooks/useApplication.js"
 
@@ -9,8 +11,8 @@ const App = () => {
     const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>
 ));
 return (<div className="App" >
-  <a className="App-header"> Users </a>
-
+  <NavBar />
+  <h1> Users </h1>
   <ul> {userList} </ul>
 </div >
 );
