@@ -1,5 +1,5 @@
 import NavBar from './pages/Nav_bar/NavBar';
-
+import GamesPage from './pages/Games_page/GamesPage';
 import './App.scss';
 import useApplicationData from "./hooks/useApplication.js"
 
@@ -12,6 +12,7 @@ const App = () => {
 ));
 return (<div className="App" >
   <NavBar />
+  <GamesPage />
   <h1> Users </h1>
   <ul> {userList} </ul>
 </div >
