@@ -2,7 +2,7 @@
 - npm install
 
 # Create the DB
-- run createdb final_project_name -O labber
+- run createdb lfgame -O labber
 - add db:reset to package.json in the scripts section
 - run node ./db/reset.js
 
@@ -19,6 +19,6 @@
   DB_HOST = localhost
   DB_USER = labber
   DB_PASS = labber
-  DB_NAME = final_project
+  DB_NAME = lfgame
   DB_PORT = 5432
 
