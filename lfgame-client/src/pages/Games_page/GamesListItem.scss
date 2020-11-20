@@ -1,4 +1,7 @@
+@import "./../../styles/variables.scss";
+
 .game_image {
   height: 10em;
   width: 10em;
+  border: 1em solid $grey;
 }

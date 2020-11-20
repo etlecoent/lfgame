@@ -11,7 +11,7 @@ const GamesListItem = (props) => {
         {props.name}
       </header>
       <div>
-        <img class="game_image" src={props.imageSource}></img>
+        <img className="game_image" src={props.imageSource}></img>
       </div>
       <footer>
         Number of sessions: {props.numOfSessions}
