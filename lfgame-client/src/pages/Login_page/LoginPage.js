@@ -7,19 +7,20 @@ import Button from 'react-bootstrap/Button';
 import './LoginPage.scss'
 
 const LoginPage = () => {
-  const API_URL = "http://localhost:3001/api/users"
+  const API_URL = "/api/users/login"
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-   
+
   const login = (email, password) => {
     return axios
-      .post(API_URL + "/login", {
+      .post(API_URL, {
         email,
         password
       })
       .then(response => {
+        console.log(response)
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
@@ -40,7 +41,7 @@ const LoginPage = () => {
           <Form.Control type="password" placeholder="Password" onChange={event => setPassword(event.target.value)}/>
         </Form.Group>
 
-        <Button variant="primary" onClick={() => login(email, password)}>
+        <Button variant="primary" type="submit" onSubmit={() => login(email, password)}>
           Submit
         </Button>
 
