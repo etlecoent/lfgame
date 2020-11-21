@@ -2,7 +2,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import NavBar from './pages/Nav_bar/NavBar';
 import GamesPage from './pages/Games_page/GamesPage';
+import LoginPage from './pages/Login_page/LoginPage';
+
 import './App.scss';
+
 import useApplicationData from "./hooks/useApplication.js"
 
 const App = () => {
@@ -37,6 +40,7 @@ const App = () => {
             <h1>
               This is the login page
             </h1>
+            <LoginPage />
           </Route>
 
           <Route path="/profile">
