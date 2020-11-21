@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {
-    getPostsByUsers
-} = require('../helpers/dataHelpers.js');
+const { getPostsByUsers } = require('../helpers/dataHelpers.js');
 
 module.exports = ({
     getUsers,
     getUserByEmail,
-    addUser,
-    getUsersPosts
+    addUser
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -19,22 +16,10 @@ module.exports = ({
             }));
     });
 
-    router.get('/posts', (req, res) => {
-        getUsersPosts()
-            .then((usersPosts) => {
-                const formattedPosts = getPostsByUsers(usersPosts);
-                res.json(formattedPosts);
-            })
-            .catch((err) => res.json({
-                error: err.message
-            }));
-    });
-
-    router.post('/', (req, res) => {
+    router.post('/register', (req, res) => {
 
         const {
-            first_name,
-            last_name,
+            username,
             email,
             password
         } = req.body;
@@ -47,9 +32,8 @@ module.exports = ({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
-                    return addUser(first_name, last_name, email, password)
+                    return addUser(username, email, password)
                 }
-
             })
             .then(newUser => res.json(newUser))
             .catch(err => res.json({
@@ -57,6 +41,41 @@ module.exports = ({
             }));
 
     })
+
+    router.post('/login', (req, res) => {
+        console.log("CHECK HERE TOO!!!!!!!")
+
+        const {
+            email,
+            password
+        } = req.body;
+
+
+        getUserByEmail(email)
+            .then(user => {
+
+                if (user) {
+                    if (user.password === password) {
+                        res.json({
+                            // Also send the token
+                            msg: 'Signed in!'
+                        });
+                    } else {
+                        res.json({
+                            // Also send the token
+                            msg: 'Wrong password!'
+                        });
+                    }
+                } else {
+                    res.json({msg: 'Wrong email adress'})
+                }
+            })
+            .catch(err => res.json({
+                error: err.message
+            }));
+
+    })
+
 
     return router;
 };
