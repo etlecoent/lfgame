@@ -10,16 +10,12 @@ const NavBar = (props) => {
   return (
     <nav>
       <div> 
-<<<<<<< HEAD
-        <img className="logo" src={logo}/>  
-=======
         <Link to="/">
-          {logo} 
+        <img className="logo" src={logo}/>  
         </Link> 
->>>>>>> master
       </div>
       {/* If the user is connected, display his name */}
-      <div> 
+      <div className="username"> 
         <Link to="/profile">
           {userName}
         </Link>
