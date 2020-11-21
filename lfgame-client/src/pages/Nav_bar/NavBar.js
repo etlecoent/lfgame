@@ -5,7 +5,7 @@ import './NavBar.scss';
 const NavBar = (props) => {
 
   const userName = 'XSlayerX';
-  const logo = "I'm a logo";
+  const logo = "Lfga.me";
 
   return (
     <nav>
