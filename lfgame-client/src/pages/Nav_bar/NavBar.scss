@@ -7,6 +7,12 @@ nav {
   color: $white;
 
   div {
-    padding: 0.5em 1.5em;
+    padding: 1em 1.5em;
+  }
+
+  .logo {
+    height: 40px;
+    width: 45px;
+    border-radius: 50%;
   }
 }
