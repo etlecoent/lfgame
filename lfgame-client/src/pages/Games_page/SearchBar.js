@@ -13,18 +13,16 @@ const SearchBar = (props) => {
   }, [term, onSearch]);
 
   return (
-    <section className="search">
-      <form className="search__form" onSubmit={event => event.preventDefault()}>
-        <input
-          spellCheck="false"
-          placeholder="Search Game"
-          name="search"
-          type="text"
-          value={value}
-          onChange={event => setValue(event.target.value)}
-        />
-      </form>
-    </section>
+    <form className="search__form" onSubmit={event => event.preventDefault()}>
+      <input
+        spellCheck="false"
+        placeholder="Search Game"
+        name="search"
+        type="text"
+        value={value}
+        onChange={event => setValue(event.target.value)}
+      />
+    </form>
   );
 }
 
