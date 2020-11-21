@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import './NavBar.scss';
 
 const NavBar = (props) => {
@@ -8,10 +10,20 @@ const NavBar = (props) => {
   return (
     <nav>
       <div> 
+<<<<<<< HEAD
         <img className="logo" src={logo}/>  
+=======
+        <Link to="/">
+          {logo} 
+        </Link> 
+>>>>>>> master
       </div>
       {/* If the user is connected, display his name */}
-      <div> {userName} </div>
+      <div> 
+        <Link to="/profile">
+          {userName}
+        </Link>
+      </div>
     </nav>
   )
 }

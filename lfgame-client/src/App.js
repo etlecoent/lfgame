@@ -20,8 +20,8 @@ const App = () => {
 
   return (
     <div className="App" >
-      <NavBar />
       <Router>
+        <NavBar />
         <Switch>
           <Route exact path="/">
             <GamesPage />      
