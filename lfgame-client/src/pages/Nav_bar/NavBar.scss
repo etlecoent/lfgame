@@ -8,6 +8,11 @@ nav {
 
   div {
     padding: 1em 2em;
+
+    a {
+      color: $white;
+      text-decoration: none;
+    }
   }
 
   .logo {
