@@ -2,8 +2,9 @@
 
 .gameListItem {
   padding: 1em;
-  // border: 2px solid $white;
-  // flex-grow: 1;
+  border: 1px solid $white;
+  flex-grow: 1;
+  flex-basis: 30%;
 
   .gameImage {
     height: 5em;
