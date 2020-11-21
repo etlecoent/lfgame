@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import "./GamePage.scss";
+
 import SearchBar from './SearchBar';
 import GameList from './GamesList';
 
@@ -28,10 +30,10 @@ const GamesPage = () => {
 
   return(
     <div>
-      <div>
+      <div className="searchBar">
         <SearchBar onSearch={term => setTerm(term)}/>
       </div>
-      <div>
+      <div className="gameList">
         <GameList games={results}/>
       </div>
     </div>
