@@ -1,0 +1,11 @@
+.gameList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.searchBar {
+  padding: 1.5em 0;
+}
