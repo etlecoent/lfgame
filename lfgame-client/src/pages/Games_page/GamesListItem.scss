@@ -1,7 +1,21 @@
 @import "./../../styles/variables.scss";
 
-.game_image {
-  height: 10em;
-  width: 10em;
-  border: 1em solid $grey;
+.gameListItem {
+  padding: 1em;
+  // border: 2px solid $white;
+  // flex-grow: 1;
+
+  .gameImage {
+    height: 5em;
+    width: 5em;
+    border: 1em solid $grey;
+  }
+  
+  // .gameListName {
+
+  // }
+
+  // .gameListSessions {
+  
+  // }
 }

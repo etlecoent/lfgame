@@ -3,14 +3,14 @@ import "./GamesListItem.scss";
 const GamesListItem = (props) => {
 
   return(
-    <article>
-      <header>
+    <article className="gameListItem" >
+      <header className="gameListName">
         {props.name}
       </header>
       <div>
-        <img className="game_image" src={props.imageSource}></img>
+        <img className="gameImage" src={props.imageSource}></img>
       </div>
-      <footer>
+      <footer className="gameListSessions">
         Number of sessions: {props.numOfSessions}
       </footer>
     </article>
