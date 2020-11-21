@@ -8,5 +8,10 @@ nav {
 
   div {
     padding: 0.5em 1.5em;
+
+    a {
+      color: $white;
+      text-decoration: none;
+    }
   }
 }
