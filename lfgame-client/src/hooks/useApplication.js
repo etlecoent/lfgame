@@ -1,7 +1,4 @@
-import {
-  useEffect,
-  useReducer
-} from 'react';
+import { useEffect, useReducer } from 'react';
 
 import dataReducer, {
   SET_USERS
