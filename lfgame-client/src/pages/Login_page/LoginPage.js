@@ -20,7 +20,7 @@ const LoginPage = (props) => {
         password
       })
       .then(res => {
-        if (res.data) {
+        if (res.data && res.data.token) {
           localStorage.setItem("user", JSON.stringify(res.data));
           props.setCurrentUser(res.data)
         }

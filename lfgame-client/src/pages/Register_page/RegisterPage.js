@@ -21,7 +21,7 @@ const RegisterPage = (props) => {
         password
       })
       .then(res => {
-        if (res.data) {
+        if (res.data && res.data.token) {
           localStorage.setItem("user", JSON.stringify(res.data));
           props.setCurrentUser(res.data);
         }
@@ -45,9 +45,6 @@ const RegisterPage = (props) => {
     } else {
       setMessage("");
       register(username, email, password)
-      .then(res => console.log(res))
-      // .then(grab user info, store in somewhere, I don't know where, token? We haven't even figured out authentication yet.)
-      // .then(redirect to games)
       .catch(err => setMessage("Email already exists, please use a different one!"));
     }
   }
