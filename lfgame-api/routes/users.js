@@ -37,7 +37,10 @@ module.exports = ({
                     return addUser(username, email, password)
                 }
             })
-            .then(newUser => res.json(newUser))
+            .then(newUser => res.json({
+                username: newUser.username,
+                token: jsonwebtoken.sign({ username: newUser.username }, process.env.JWT_SECRET)
+            }))
             .catch(err => res.json({
                 error: err.message
             }));
