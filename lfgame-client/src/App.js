@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useState } from "react";
 
 import NavBar from './pages/Nav_bar/NavBar';
 import GamesPage from './pages/Games_page/GamesPage';
@@ -22,10 +23,13 @@ const App = () => {
     </li>
   ));
 
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [username, setUsername] = useState(localStorage.getItem('name') || null);
+
   return (
     <div className="App" >
       <Router>
-        <NavBar />
+        <NavBar username={username}/>
         <Switch>
           <Route exact path="/">
             <GamesPage />      
@@ -35,14 +39,14 @@ const App = () => {
             <h1>
               This is the register page
             </h1>
-            <RegisterPage />
+            <RegisterPage setToken={setToken}/>
           </Route>
           
           <Route path ="/login">
             <h1>
               This is the login page
             </h1>
-            <LoginPage />
+            <LoginPage setToken={setToken} setUsername={setUsername}/>
           </Route>
 
           <Route path="/profile">
