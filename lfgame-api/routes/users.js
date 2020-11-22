@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const jsonwebtoken = require('jsonwebtoken');
+
 const { getPostsByUsers } = require('../helpers/dataHelpers.js');
 
 module.exports = ({
@@ -56,8 +58,8 @@ module.exports = ({
                 if (user) {
                     if (user.password === password) {
                         res.json({
-                            // Also send the token
-                            msg: 'Signed in!'
+                            username: user.username,
+                            token: jsonwebtoken.sign({ username: user.username }, process.env.JWT_SECRET)
                         });
                     } else {
                         res.status(401).json({ error: 'Wrong password'})
