@@ -14,18 +14,18 @@ const NavBar = (props) => {
         <img className="logo" src={logo}/>  
         </Link> 
       </div>
-      {/* If the user is connected, display his name */}
+      
       <div className="username"> 
         <Link to="/profile" />
           {props.currentUser ? props.currentUser.username : null}
 
           {props.currentUser ? 
             
-          <Link to="/login">
-            <button onClick={props.logout}>
-              Logout
-            </button>
-          </Link>
+            <Link to="/login">
+              <button onClick={props.logout}>
+                Logout
+              </button>
+            </Link>
           
           : null}
 
