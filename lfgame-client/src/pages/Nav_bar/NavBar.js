@@ -4,8 +4,8 @@ import './NavBar.scss';
 
 const NavBar = (props) => {
 
-  const userName = 'XSlayerX';
   const logo = "https://i.pinimg.com/originals/16/1c/ff/161cff19e668e270ccb1b98856ebd81e.png";
+
 
   return (
     <nav>
@@ -16,9 +16,19 @@ const NavBar = (props) => {
       </div>
       {/* If the user is connected, display his name */}
       <div className="username"> 
-        <Link to="/profile">
+        <Link to="/profile" />
           {props.currentUser ? props.currentUser.username : null}
-        </Link>
+
+          {props.currentUser ? 
+            
+          <Link to="/login">
+            <button onClick={props.logout}>
+              Logout
+            </button>
+          </Link>
+          
+          : null}
+
       </div>
     </nav>
   )
