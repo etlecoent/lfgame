@@ -17,7 +17,7 @@ const NavBar = (props) => {
       {/* If the user is connected, display his name */}
       <div className="username"> 
         <Link to="/profile">
-          {userName}
+          {props.username}
         </Link>
       </div>
     </nav>
