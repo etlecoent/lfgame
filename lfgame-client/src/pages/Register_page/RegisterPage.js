@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { isEmail } from 'validator';
 
 import './RegisterPage.scss'
 
-const RegisterPage = () => {
+const RegisterPage = (props) => {
   const API_URL = "/api/users/register"
 
   const [username, setUsername] = useState("");
@@ -19,11 +20,12 @@ const RegisterPage = () => {
         email,
         password
       })
-      .then(response => {
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+      .then(res => {
+        if (res.data) {
+          localStorage.setItem("user", JSON.stringify(res.data));
+          props.setCurrentUser(res.data);
         }
-        return response.data;
+        return res.data;
       });
   }
 
@@ -66,6 +68,13 @@ const RegisterPage = () => {
         </div>
         <button type='button' onClick={validate}>Submit</button>
       </form>
+      <div>
+        <Link to="/login">
+          <button>
+            Have an account? Log in here
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

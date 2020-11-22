@@ -20,10 +20,9 @@ const LoginPage = (props) => {
         password
       })
       .then(res => {
-        if (res.data.token) {
+        if (res.data) {
           localStorage.setItem("user", JSON.stringify(res.data));
-          props.setUsername(res.data.username)
-          props.setToken(res.data.token)
+          props.setCurrentUser(res.data)
         }
         return res.data;
       });
@@ -42,10 +41,6 @@ const LoginPage = (props) => {
     } else {
       setMessage("");
       login(email, password)
-      .then(res => {
-        // redirect to "/"
-        
-      })
       .catch(err => setMessage("Invalid email or password, please try again!"));
     }
   }
