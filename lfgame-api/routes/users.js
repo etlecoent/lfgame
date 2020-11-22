@@ -61,13 +61,10 @@ module.exports = ({
                             msg: 'Signed in!'
                         });
                     } else {
-                        res.json({
-                            // Also send the token
-                            msg: 'Wrong password!'
-                        });
+                        res.status(401).json({ error: 'Wrong password'})
                     }
                 } else {
-                    res.json({msg: 'Wrong email adress'})
+                    res.status(401).json({ error: 'Wrong email adress'})
                 }
             })
             .catch(err => res.json({
