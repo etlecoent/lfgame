@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { useState } from "react";
 
 import NavBar from './pages/Nav_bar/NavBar';
@@ -22,39 +22,48 @@ const App = () => {
       {user.first_name} {user.last_name}  {user.email} 
     </li>
   ));
+  
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+  
+  const redirectLogin = () => {
+    if (!currentUser) {
+      return <Redirect to="/login" />;
+    }
+  }
 
-  const [token, setToken] = useState(localStorage.getItem('token') || null);
-  const [username, setUsername] = useState(localStorage.getItem('name') || null);
+  const redirectGames = () => {
+    if (currentUser) {
+      return <Redirect to="/" />;
+    }
+  }
 
   return (
     <div className="App" >
       <Router>
-        <NavBar username={username}/>
+        <NavBar currentUser={currentUser}/>
         <Switch>
-          <Route exact path="/">
-            <GamesPage />      
-          </Route>
 
-          <Route path ="/register">
-            <h1>
-              This is the register page
-            </h1>
-            <RegisterPage setToken={setToken}/>
-          </Route>
-          
-          <Route path ="/login">
-            <h1>
-              This is the login page
-            </h1>
-            <LoginPage setToken={setToken} setUsername={setUsername}/>
+          <Route exact path="/">
+            {redirectLogin() || <GamesPage /> }
           </Route>
 
           <Route path="/profile">
+            {redirectLogin() || 
+            
             <h1>
               This is the profile page
             </h1>
+            }
           </Route>
 
+          <Route path ="/register">
+            {redirectGames() || <RegisterPage setCurrentUser={setCurrentUser}/>}
+          </Route>
+        
+          <Route path ="/login">
+            {redirectGames() || <LoginPage setCurrentUser={setCurrentUser}/>}         
+          </Route>
+          
           <Route path="*">
             <h1>404 - Not Found</h1>
           </Route>
