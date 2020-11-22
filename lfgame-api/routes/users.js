@@ -28,7 +28,7 @@ module.exports = ({
             .then(user => {
 
                 if (user) {
-                    res.json({
+                    res.status(401).json({
                         msg: 'Sorry, a user account with this email already exists'
                     });
                 } else {
@@ -43,7 +43,6 @@ module.exports = ({
     })
 
     router.post('/login', (req, res) => {
-        console.log("CHECK HERE TOO!!!!!!!")
 
         const {
             email,
