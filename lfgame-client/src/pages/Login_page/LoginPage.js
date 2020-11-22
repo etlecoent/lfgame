@@ -5,7 +5,7 @@ import { isEmail } from 'validator';
 
 import './LoginPage.scss'
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const API_URL = "/api/users/login"
 
   const [email, setEmail] = useState("");
@@ -19,12 +19,13 @@ const LoginPage = () => {
         email,
         password
       })
-      .then(response => {
-        console.log(response)
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+      .then(res => {
+        if (res.data.token) {
+          localStorage.setItem("user", JSON.stringify(res.data));
+          props.setUsername(res.data.username)
+          props.setToken(res.data.token)
         }
-        return response.data;
+        return res.data;
       });
   }
   
@@ -41,8 +42,10 @@ const LoginPage = () => {
     } else {
       setMessage("");
       login(email, password)
-      // .then(grab user info, store in somewhere, I don't know where, token? We haven't even figured out authentication yet.)
-      // .then(redirect to games)
+      .then(res => {
+        // redirect to "/"
+        
+      })
       .catch(err => setMessage("Invalid email or password, please try again!"));
     }
   }
