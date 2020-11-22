@@ -24,6 +24,11 @@ const App = () => {
   ));
   
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+
+  const logout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem("user");
+  };
   
   const redirectLogin = () => {
     if (!currentUser) {
@@ -40,7 +45,7 @@ const App = () => {
   return (
     <div className="App" >
       <Router>
-        <NavBar currentUser={currentUser}/>
+        <NavBar currentUser={currentUser} logout={() => logout()}/>
         <Switch>
 
           <Route exact path="/">
