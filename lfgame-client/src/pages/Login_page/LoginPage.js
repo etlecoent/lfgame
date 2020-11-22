@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { isEmail } from 'validator';
 
@@ -59,6 +60,14 @@ const LoginPage = () => {
         </div>
         <button type='button' onClick={validate}>Submit</button>
       </form>
+
+      <div>
+        <Link to="/register">
+          <button>
+            Register Now
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
