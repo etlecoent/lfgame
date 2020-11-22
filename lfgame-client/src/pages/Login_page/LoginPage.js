@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from 'axios';
-
 import { isEmail } from 'validator';
 
 import './LoginPage.scss'
