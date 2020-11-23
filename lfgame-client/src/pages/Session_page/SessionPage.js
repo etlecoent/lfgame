@@ -6,27 +6,33 @@ import './SessionPage.scss'
 const SessionPage = (props) => {
   
   const NEW_USER_EVENT = "newUser"; // Name of the event
-  const SOCKET_SERVER_URL = "http://localhost:3001/sessions";
 
   const [users, setUsers] = useState([]);
-  // const socketRef = useRef();
+  const socketRef = useRef();
 
   useEffect(() => {
     
-    const socket = io({
+    socketRef.current = io({
       path: '/socket.io',  
-      query: {sessionId: 1}
+      query: {sessionId: 1},
+      // auth: { token: "abc" }
     });
 
     // Listens for incoming users
-    socket.on("Hello", (data) => {
+    socketRef.current.on("Hello", (data) => {
       console.log(data);
     });
 
-    socket.on("users", (users) => {
+    socketRef.current.on("users", (users) => {
       console.log(users);
       const newUsers = JSON.parse(users);
-      setUsers(users => [...users, ...newUsers]);
+      setUsers([...newUsers]);
+    });
+
+    socketRef.current.on("user has left", (users) => {
+      console.log(users);
+      const newUsers = JSON.parse(users);
+      setUsers([...newUsers]);
     });
 
   }, []);
@@ -35,9 +41,9 @@ const SessionPage = (props) => {
   // Destroys the socket reference
   // when the connection is closed
   
-  // const leaveSession = () => {
-  //   socketRef.current.disconnect();
-  // };
+  const leaveSession = () => {
+    socketRef.current.disconnect();
+  };
   
 
   return (
@@ -53,6 +59,9 @@ const SessionPage = (props) => {
         {users.map(user => <li>{user.username}</li>)}
         {/* <GamerList users={users}/> */}
       </ul>
+      <button onClick={() => leaveSession()}>
+        Leave session
+      </button>
     </div>
   )
 
