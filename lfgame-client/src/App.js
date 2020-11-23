@@ -53,11 +53,11 @@ const App = () => {
             {redirectLogin() || <GamesPage /> }
           </Route>
 
-          <Route path="/sessions">
-            <SessionsPage />
+          <Route exact path="/sessions">
+          {redirectLogin() || <SessionsPage /> }
           </Route>
 
-          <Route path="/profile">
+          <Route exact path="/profile">
             {redirectLogin() || 
             
             <h1>
@@ -66,11 +66,11 @@ const App = () => {
             }
           </Route>
 
-          <Route path ="/register">
+          <Route exact path ="/register">
             {redirectGames() || <RegisterPage setCurrentUser={setCurrentUser}/>}
           </Route>
         
-          <Route path ="/login">
+          <Route exact path ="/login">
             {redirectGames() || <LoginPage setCurrentUser={setCurrentUser}/>}         
           </Route>
           
