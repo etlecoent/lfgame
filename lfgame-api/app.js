@@ -1,12 +1,24 @@
-let express = require('express');
-let path = require('path');
-let cookieParser = require('cookie-parser');
-let logger = require('morgan');
+const { port, onError, onListening }= require("./bin/www");
 
-let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-let app = express();
+
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const sessionsRouter = require('./routes/sessions');
+
+app.set('port', port);
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', () => onListening(server));
 
 const db = require('./db');
 const dbHelpers = require('./helpers/dbHelpers')(db);
@@ -19,5 +31,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
-
-module.exports = app;
+app.use('/api/sessions', sessionsRouter(io, dbHelpers));
