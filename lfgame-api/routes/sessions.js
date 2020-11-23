@@ -21,9 +21,8 @@ module.exports = (io, {
 
   /* Check for available sessions */
   router.get('/', (req, res) => {
-    const { /*Game ID*/ } = req.body;  
     
-    checkForSessionWithSpace( /*Game ID*/ )
+    checkForSessionWithSpace( 1 )
           .then((session) => res.json(session))
           .catch((err) => res.json({
               error: err.message
@@ -34,19 +33,19 @@ module.exports = (io, {
 
   io.on("connection", (socket) => {
     
-    // each socket has a unique id accessible with socket.id
-    // you can check the socket's rooms with socket.rooms
-    // { <socket.id>, "room1" }
 
     const { sessionId } = socket.handshake.query;
-    console.log(`Socket with id: ${socket.id} connected`);
+    console.log(`${socket.id} has connected`);
+    socket.sessionId = sessionId;
     
-    
-    socket.join(sessionId);
+    socket.join(socket.sessionId);
 
-    // // Join a conversation
-    io.to(sessionId).emit("Hello", `Room ${sessionId} joined`);
-    io.to(sessionId).emit("users", JSON.stringify(newUsers));
+    io.to(sessionId).emit("user has joined", JSON.stringify(newUsers));
+
+    socket.on("sending message", (message) => {
+      console.log("HIT");
+      io.to(socket.sessionId).emit("incoming message", message);
+    });
 
     socket.on("disconnecting", (reason) => {
       console.log(`${socket.id} has left ${socket.rooms}`) 
