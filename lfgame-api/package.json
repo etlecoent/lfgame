@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node app.js",
     "dev": "nodemon --legacy-watch",
     "db:reset": "node ./db/reset.js"
   },
@@ -15,7 +15,8 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "pg": "^8.5.1",
-    "pg-native": "^3.0.0"
+    "pg-native": "^3.0.0",
+    "socket.io": "^3.0.3"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
