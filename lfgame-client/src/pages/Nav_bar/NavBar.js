@@ -16,20 +16,20 @@ const NavBar = (props) => {
       </div>
       
       <div className="username"> 
-        <Link to="/profile" />
+        <Link to="/profile" >
           {props.currentUser ? props.currentUser.username : null}
-
-          {props.currentUser ? 
-            
-            <Link to="/login">
-              <button onClick={props.logout}>
-                Logout
-              </button>
-            </Link>
-          
-          : null}
-
+        </Link>
       </div>
+      <div>
+        <Link to="/login" >
+          {props.currentUser ? 
+            <button onClick={props.logout}>
+              Logout
+            </button>          
+          : null}
+        </Link>
+      </div>
+
     </nav>
   )
 }
