@@ -36,18 +36,23 @@ module.exports = (db) => {
 
   const checkForSessionWithSpace = (gameID) => {
       const query = {
-          text: `SELECT * FROM sessions WHERE game_id = $1 RETURNING *`,
+          text: `SELECT id FROM sessions WHERE game_id = $1 AND population < 10 LIMIT 1`,
           values: [gameID]
-      }
+      };
 
       return db.query(query)
-        .then(result => {
-            if (result && result.rows[0].population < 10) {
-                result.rows[0].id;
-            } else {
-                false;
-            }
-        })
+        .then(result => result.rows)
+        .catch(err => err);
+  };
+
+  const findUserIdByUsername = (username) => {
+      const query = {
+          text: `SELECT id FROM users WHERE username = $1`,
+          values: [username]
+      };
+
+      return db.query(query)
+        .then(result => result.rows[0])
         .catch(err => err);
   };
 
