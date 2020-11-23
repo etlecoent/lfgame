@@ -5,6 +5,7 @@ import NavBar from './pages/Nav_bar/NavBar';
 import GamesPage from './pages/Games_page/GamesPage';
 import LoginPage from './pages/Login_page/LoginPage';
 import RegisterPage from './pages/Register_page/RegisterPage';
+import SessionsPage from './pages/Session_page/SessionPage';
 
 import './App.scss';
 
@@ -50,6 +51,10 @@ const App = () => {
 
           <Route exact path="/">
             {redirectLogin() || <GamesPage /> }
+          </Route>
+
+          <Route path="/sessions">
+            <SessionsPage />
           </Route>
 
           <Route path="/profile">
