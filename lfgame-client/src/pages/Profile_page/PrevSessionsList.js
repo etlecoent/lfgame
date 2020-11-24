@@ -2,8 +2,6 @@ import PrevSessionItem from './PrevSessionItem';
 
 const PrevSessionsList = (props) => {
 
-  console.log(props);
-
   return props.sessionsList.map(session => {
     return (
 
