@@ -8,7 +8,7 @@ const GameInfo = (props) => {
         {props.gameInfo.name}
       </header>
       <div>
-        <img className="gameImage" src={props.imageSource}></img>
+        <img className="gameImage" src={props.gameInfo.picture_url}></img>
       </div>
     </article>
   )
