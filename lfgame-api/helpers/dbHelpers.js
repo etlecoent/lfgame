@@ -129,14 +129,14 @@ const removeUserFromSession = (userID, sessionID) => {
       .catch(err => err);
 }
 
-const getProfileInfo = (username) => {
+const getPreviousSessions = (userID) => {
     const query = {
-        text: `SELECT * FROM users WHERE users.username = $1`,
-        values: [username]
+        text: `SELECT users.username AS username, joined_sessions.id AS joinedID, sessions.id AS sessionID FROM sessions INNER JOIN joined_sessions ON joined_sessions.session_id = sessions.id INNER JOIN users ON joined_sessions.user_id = users.id WHERE users.id = $1;`,
+        values: [userID]
     }
 
     return db.query(query)
-    .then(result => result.rows[0])
+    .then(result => result.rows)
     .catch(err => err);
 
 }
@@ -152,6 +152,6 @@ const getProfileInfo = (username) => {
       getGames,
       getUserByUsername,
       removeUserFromSession,
-      getProfileInfo
+      getPreviousSessions
   };
 };
