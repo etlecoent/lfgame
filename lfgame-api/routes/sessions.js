@@ -2,24 +2,15 @@ const express = require('express');
 const router = express.Router();
 const jsonwebtoken = require('jsonwebtoken');
 
-const newUsers = [
-  {id: 1, username: "user1"},
-  {id: 2, username: "user2"},
-  {id: 3, username: "user3"},
-  {id: 4, username: "user4"}
-]
-const upDatedUsers = [
-  {id: 2, username: "user2"},
-  {id: 3, username: "user3"},
-  {id: 4, username: "user4"}
-]
 
 module.exports = (io, {
   checkForSessionWithSpace,
   addUserToAvailableSession,
   createNewSession,
   usersInSession,
-  removeUserFromSession
+  removeUserFromSession,
+  getGameBySession,
+  getGameByID
 }) => {
 
 
@@ -53,6 +44,17 @@ module.exports = (io, {
               error: err.message
           }));
 
+  router.get(`/:sessionID/games`, (req, res) => {
+    const { sessionID } = req.params;
+    getGameBySession(sessionID)
+    .then((game) => {
+      res.json(game)
+    })
+    .catch((err) => res.json({
+      error: err.message
+    }));
+   })
+
   });
 
   io.on("connection", (socket) => {
@@ -72,7 +74,7 @@ module.exports = (io, {
 
     // Sends all the users inside the session to the newly joined user
     usersInSession(socket.sessionId).then(res => {
-      io.to(socket.sessionId).emit("user has joined", res)  
+      io.to(socket.sessionId).emit("user has joined", {users: res, joiningUser: socket.username})  
     });
   
 
@@ -87,7 +89,7 @@ module.exports = (io, {
       //sends back the updated list of users in the session
       removeUserFromSession(socket.userId, socket.sessionId).then( res => {
         usersInSession(socket.sessionId).then(updatedUsers => {
-          io.to(sessionId).emit("user has left", JSON.stringify(updatedUsers));
+          io.to(sessionId).emit("user has left", {users: updatedUsers, leavingUser: socket.username});
           socket.leave(socket.sessionId);
         });
       })

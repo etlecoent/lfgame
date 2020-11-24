@@ -39,6 +39,15 @@ const App = () => {
     }
   }
 
+  const checkForSession = () => {
+
+    if (!currentUser) {
+      return redirectLogin();
+    } else if (currentUser && !currentSession) {
+      return <Redirect to="/" />;
+    }
+  }
+
   return (
     <div className="App" >
       <Router>
@@ -50,7 +59,7 @@ const App = () => {
           </Route>
 
           <Route exact path="/sessions">
-          {redirectLogin() || <SessionsPage currentSession={currentSession} currentUser={currentUser}/> }
+          {!currentSession ? checkForSession() : <SessionsPage currentSession={currentSession} currentUser={currentUser}/>}
           </Route>
 
           <Route exact path="/profile">

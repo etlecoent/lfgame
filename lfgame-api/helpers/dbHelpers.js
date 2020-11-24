@@ -138,7 +138,32 @@ const getPreviousSessions = (userID) => {
     return db.query(query)
     .then(result => result.rows)
     .catch(err => err);
+}
 
+const getGameByID = gameID => {
+
+    const query = {
+        text: `SELECT * FROM games WHERE id = $1`,
+        values: [gameID]
+    }
+
+    return db
+        .query(query)
+        .then(result => result.rows[0])
+        .catch((err) => err);
+}
+
+const getGameBySession = sessionID => {
+
+    const query = {
+        text: `SELECT game_id FROM sessions WHERE id = $1`,
+        values: [sessionID]
+    }
+
+    return db
+        .query(query)
+        .then(result => getGameByID(result.rows[0].game_id))
+        .catch((err) => err);
 }
 
   return {
@@ -152,6 +177,8 @@ const getPreviousSessions = (userID) => {
       getGames,
       getUserByUsername,
       removeUserFromSession,
-      getPreviousSessions
+      getPreviousSessions,
+      getGameBySession,
+      getGameByID
   };
 };

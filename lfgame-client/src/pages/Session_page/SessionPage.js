@@ -1,15 +1,21 @@
 import { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import { io } from "socket.io-client";
 
-import './SessionPage.scss'
+import GameInfo from "./GameInfos";
+import GamersList from "./GamerList";
+import MessagesList from "./MessagesList";
+
+import './SessionPage.scss';
 
 const SessionPage = (props) => {
   
   const { currentSession, currentUser } = props;
 
+  const socketRef = useRef();
+  const [gameInfo, setGameInfo] = useState({});
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
-  const socketRef = useRef();
   const [msg, setMsg] = useState("");
 
   const leaveSession = () => {
@@ -27,25 +33,30 @@ const SessionPage = (props) => {
 
   useEffect(() => {
     
+    // get the session's game infos when the page loads
+    axios.get(`/api/sessions/${currentSession.session_id}/games`).then(res => {
+      setGameInfo(res.data);
+    })
+    
+
     socketRef.current = io({
       path: '/socket.io',
       query: {sessionId: currentSession.session_id, username: currentUser.username, userId: currentUser.id},
     });
 
     
-    socketRef.current.on("user has joined", (users) => {
-      setMessages(messages => [...messages, {username: "System", content: "User X has joined the channel"}])
-    
+    socketRef.current.on("user has joined", ({users, joiningUser}) => {
+      
+      setMessages(messages => [...messages, {username: "System", content: `User ${joiningUser} has joined the channel`}])
+      
       setUsers([...users]);
     });
 
-    socketRef.current.on("user has left", (users) => {
-
-      setMessages(messages => [...messages, {username: "System", content: "User X has left the channel"}])
-
+    socketRef.current.on("user has left", ({users , leavingUser}) => {
       
-      const newUsers = JSON.parse(users);
-      setUsers([...newUsers]);
+      setMessages(messages => [...messages, {username: "System", content: `User ${leavingUser} has left the channel`}])
+      
+      setUsers([...users]);
     });
 
     socketRef.current.on("incoming message", (message) => {
@@ -64,24 +75,18 @@ const SessionPage = (props) => {
         This is the sessions page.
       </h1>
 
+      <GameInfo gameInfo={gameInfo} />
+
       <h2>
         Users
       </h2>
-      <ul>
-        {users.map(user => <li>{user.username}</li>)}
-      </ul>
+      <GamersList users={users} />
+      
       <h2>
         Messages
       </h2>
-      <div>
-        {messages.map(message => {
-        
-        return (<div>
-          <p>{message.username} says: {message.content}</p>
-        </div>)
-        })}
-        {/* <GamerList users={users}/> */}
-      </div>
+      <MessagesList messages={messages} />
+
       <button onClick={() => leaveSession()}>
         Leave session
       </button>

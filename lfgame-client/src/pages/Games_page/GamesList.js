@@ -10,7 +10,7 @@ const GamesList = (props) => {
         gameID={game.id}
         name={game.name} 
         userID={props.currentUser.id}
-        imageSource={game.imageURL} 
+        imageSource={game.picture_url} 
         numOfSessions={game.sessionsNum}
         findSession={props.findSession}
       />
