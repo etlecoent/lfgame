@@ -11,7 +11,8 @@ module.exports = ({
     getUsers,
     getUserByEmail,
     addUser,
-    getUserByUsername
+    getUserByUsername,
+    getProfileInfo
 }) => {
     
     /* GET users listing. */
@@ -82,6 +83,24 @@ module.exports = ({
             .catch(err => res.json({
                 error: err.message
             }));
+    })
+
+    router.get('/:id', (req, res) => {
+
+        const username = req.query.data;
+
+        getProfileInfo(username)
+            .then(info => {
+                res.json({
+                    username: info.username,
+                    id: info.id,
+                    email: info.email
+                })
+            })
+            .catch((err) => res.json({
+                error: err.message
+        }));
+
     })
 
     return router;
