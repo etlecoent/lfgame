@@ -17,14 +17,9 @@ const App = () => {
     state,
     dispatch
   } = useApplicationData();
-    
-  const userList = state.users.map((user) => (
-    <li key={user.id} > 
-      {user.first_name} {user.last_name}  {user.email} 
-    </li>
-  ));
   
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+  const [currentSession, setCurrentSession] = useState(null);
 
   const logout = () => {
     setCurrentUser(null);
@@ -50,11 +45,11 @@ const App = () => {
         <Switch>
 
           <Route exact path="/">
-            {redirectLogin() || <GamesPage /> }
+            {redirectLogin() || <GamesPage currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
           </Route>
 
           <Route exact path="/sessions">
-          {redirectLogin() || <SessionsPage /> }
+          {redirectLogin() || <SessionsPage currentSession={currentSession} currentUser={currentUser}/> }
           </Route>
 
           <Route exact path="/profile">

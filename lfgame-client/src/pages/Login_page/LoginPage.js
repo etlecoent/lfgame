@@ -49,7 +49,7 @@ const LoginPage = (props) => {
     <div>
       <header>Login</header>
       {message && <div>{message}</div>}
-      <form onSubmit={event => event.preventDefault}>
+      <form onSubmit={event => event.preventDefault()}>
         <div>
           <input type="email" placeholder="Email" value={email} onChange={event => setEmail(event.target.value)} />
         </div>

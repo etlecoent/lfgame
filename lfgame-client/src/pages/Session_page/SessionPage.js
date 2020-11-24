@@ -5,51 +5,45 @@ import './SessionPage.scss'
 
 const SessionPage = (props) => {
   
-  const NEW_USER_EVENT = "newUser"; // Name of the event
-
-  const messageExample = {
-    username: 'XSlayerX',
-    content: 'fast BOIZZZZZZZZZ'
-  }
+  const { currentSession, currentUser } = props;
 
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   const socketRef = useRef();
-
+  const [msg, setMsg] = useState("");
 
   const leaveSession = () => {
     socketRef.current.disconnect();
   };
 
-  const sendMessage = (username, content) => {
+  const sendMessage = () => {
     const outgoingMessage = {
-      username: 'XSlayerX',
-      content: 'fast BOIZZZZZZZZZ'
+      username: currentUser.username,
+      content: msg
     }
-    socketRef.current.emit("sending message", outgoingMessage)
+    socketRef.current.emit("sending message", outgoingMessage);
+    setMsg("");
   } 
 
   useEffect(() => {
     
     socketRef.current = io({
       path: '/socket.io',
-      query: {sessionId: 1},
-      // auth: { token: "abc" }
+      query: {sessionId: currentSession.session_id, username: currentUser.username, userId: currentUser.id},
     });
 
     
     socketRef.current.on("user has joined", (users) => {
       setMessages(messages => [...messages, {username: "System", content: "User X has joined the channel"}])
-      
-      const newUsers = JSON.parse(users);
-      setUsers([...newUsers]);
+    
+      setUsers([...users]);
     });
 
     socketRef.current.on("user has left", (users) => {
-      console.log(users);
 
       setMessages(messages => [...messages, {username: "System", content: "User X has left the channel"}])
 
+      
       const newUsers = JSON.parse(users);
       setUsers([...newUsers]);
     });
@@ -57,6 +51,10 @@ const SessionPage = (props) => {
     socketRef.current.on("incoming message", (message) => {
       setMessages(messages => [...messages, message])
     })
+
+    return () => {
+      socketRef.current.disconnect();
+    };
 
   }, []);
 
@@ -71,21 +69,30 @@ const SessionPage = (props) => {
       </h2>
       <ul>
         {users.map(user => <li>{user.username}</li>)}
-        {/* <GamerList users={users}/> */}
       </ul>
       <h2>
         Messages
       </h2>
-      <ul>
-        {messages.map(message => <li>{message.content}</li>)}
+      <div>
+        {messages.map(message => {
+        
+        return (<div>
+          <p>{message.username} says: {message.content}</p>
+        </div>)
+        })}
         {/* <GamerList users={users}/> */}
-      </ul>
+      </div>
       <button onClick={() => leaveSession()}>
         Leave session
       </button>
-      <button onClick={() => sendMessage()}>
-        Send Message
-      </button>
+      <form onSubmit={event => event.preventDefault()}>
+        <div>
+          <input type="text" placeholder="Enter message" value={msg} onChange={event => setMsg(event.target.value)} />
+        </div>
+        <button onClick={sendMessage}>
+          Send Message
+        </button>
+      </form>
     </div>
   )
 

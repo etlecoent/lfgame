@@ -53,7 +53,7 @@ const RegisterPage = (props) => {
     <div>
       <header>Register</header>
       {message && <div>{message}</div>}
-      <form onSubmit={event => event.preventDefault}>
+      <form onSubmit={event => event.preventDefault()}>
         <div>
           <input type="text" placeholder="Username" value={username} onChange={event => setUsername(event.target.value)} />
         </div>

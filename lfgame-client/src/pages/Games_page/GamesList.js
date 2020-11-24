@@ -6,9 +6,13 @@ const GamesList = (props) => {
     return (
 
       <GamesListItem 
+        key={game.id}
+        gameID={game.id}
         name={game.name} 
+        userID={props.currentUser.id}
         imageSource={game.imageURL} 
         numOfSessions={game.sessionsNum}
+        findSession={props.findSession}
       />
     );
   });

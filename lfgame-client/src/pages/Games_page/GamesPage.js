@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
+
 
 import "./GamePage.scss";
 
@@ -7,7 +10,7 @@ import GameList from './GamesList';
 
 const imageURL = 'https://preview.redd.it/w0lmb8i7odo51.png?width=960&crop=smart&auto=webp&s=94f47357a899ebb7be0fb9f655ca71cef3f53edc';
 
-const games = [
+const gamesArray = [
   { name: "Among Us", imageURL: imageURL, sessionsNum: 100 },
   { name: "Monster Hunter World", imageURL: imageURL, sessionsNum: 80 },
   { name: "Final Fanatasy 14", imageURL: imageURL, sessionsNum: 100 },
@@ -18,25 +21,54 @@ const games = [
   { name: "Monopoly", imageURL: imageURL, sessionsNum: 150 }
 ];
 
-const GamesPage = () => {
+const GamesPage = (props) => {
 
   const [term, setTerm] = useState("");
-  const [results, setResults] = useState(games);
-  
+  const [games, setGames] = useState([]);
+  const [results, setResults] = useState([]);
+  const [redirect, setRedirect] = useState(null);
+
   useEffect(() => {
+    if (games.length === 0) {
+      axios.get("/api/games").then((res) => {
+        setGames(res.data)
+        setResults(res.data)
+      })
+    }
     
     const test = games.filter((game) => game.name.includes(term));
     setResults(test);
+
   }, [term])
 
-  return(
+  const findSession = (gameID, userID) => {
+    // set mode to loading or something 
+    // 
+    console.log(gameID, userID);
+    axios.post("/api/sessions", {gameID, userID} ).then((res) => {
+      props.setCurrentSession({session_id: res.data.session_id});
+      setRedirect(true);
+    })
+  }
+
+  const redirectSessions = () => {
+    if (redirect) {
+      return <Redirect to='/sessions'/>
+    }
+  }
+
+  return (
     <div>
-      <div className="searchBar">
-        <SearchBar onSearch={term => setTerm(term)}/>
-      </div>
-      <div className="gameList">
-        <GameList games={results}/>
-      </div>
+    { redirectSessions() ||
+      <div>
+        <div className="searchBar">
+          <SearchBar onSearch={term => setTerm(term)}/>
+        </div>
+        <div className="gameList">
+          <GameList currentUser={props.currentUser} games={results} findSession={findSession}/>
+        </div>
+      </div> 
+    }
     </div>
   )
 }
