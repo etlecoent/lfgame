@@ -44,7 +44,6 @@ const GamesPage = (props) => {
   const findSession = (gameID, userID) => {
     // set mode to loading or something 
     // 
-    console.log(gameID, userID);
     axios.post("/api/sessions", {gameID, userID} ).then((res) => {
       props.setCurrentSession({session_id: res.data.session_id});
       setRedirect(true);
