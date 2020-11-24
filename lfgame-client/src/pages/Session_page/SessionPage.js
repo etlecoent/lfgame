@@ -36,8 +36,7 @@ const SessionPage = (props) => {
 
     
     socketRef.current.on("user has joined", ({users, joiningUser}) => {
-      console.log(users)
-      console.log(joiningUser)
+      
       setMessages(messages => [...messages, {username: "System", content: `User ${joiningUser} has joined the channel`}])
     
       setUsers([...users]);
@@ -75,8 +74,8 @@ const SessionPage = (props) => {
       </h2>
       <div>
         {messages.map((message, i) => (
-        <div>
-          <p key={i}>
+        <div key={i}>
+          <p>
             {message.username} says: {message.content}
           </p>
         </div>)
