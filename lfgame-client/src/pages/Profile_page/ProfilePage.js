@@ -3,11 +3,14 @@ import axios from 'axios';
 
 import './ProfilePage.scss';
 
+import PrevSessionsList from "./PrevSessionsList";
+
 const ProfilePage = (props) => {
 
 
   const [currentProfile, setCurrentProfile] = useState({});
   const [previousSessions, setPreviousSessions] = useState([]);
+  const [showSessions, setShowSessions] = useState(false);
   const currentUser = props.currentUser;
 
 
@@ -22,9 +25,6 @@ const ProfilePage = (props) => {
     })
     
   }, [])
-  
-  console.log(currentProfile);
-  console.log(previousSessions);
 
   return (
 
@@ -35,7 +35,8 @@ const ProfilePage = (props) => {
         <p>Email: {currentProfile.email}</p>
       </div>
       <div>
-      <p>Number of Previous Sessions: {previousSessions.length}</p>
+      <p onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</p>
+      {showSessions && <PrevSessionsList sessionsList={previousSessions}/>}
       </div>
     </div>
   )
