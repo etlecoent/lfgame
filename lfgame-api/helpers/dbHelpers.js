@@ -41,7 +41,7 @@ module.exports = (db) => {
       };
 
       return db.query(query)
-        .then(result => result.rows)
+        .then(result => result.rows[0])
         .catch(err => err);
   };
 
@@ -79,11 +79,12 @@ module.exports = (db) => {
         .catch(err => err);
   }
 
-  const gamersInSession = (sessionID) => {
+  const usersInSession = (sessionID) => {
       const query = {
           text:`SELECT username FROM users
-                JOIN joined_sessions ON users.id = user_id
+                JOIN joined_sessions ON user_id = users.id
                 WHERE joined_sessions.session_id = $1
+                AND joined_sessions.in_session = true
                 GROUP BY users.id`,
           values: [sessionID]
       }
@@ -93,6 +94,41 @@ module.exports = (db) => {
         .catch(err => err);
   }
 
+  const getGames = () => {
+    const query = {
+        text:`SELECT * FROM games`
+    }
+
+    return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
+  }
+
+  const getUserByUsername = username => {
+
+    const query = {
+        text: `SELECT * FROM users WHERE users.username = $1`,
+        values: [username]
+    }
+
+    return db
+        .query(query)
+        .then(result => result.rows[0])
+        .catch((err) => err);
+}
+
+const removeUserFromSession = (userID, sessionID) => {
+    const query = {
+        text: `UPDATE joined_sessions SET in_session = false WHERE user_id = $1 AND session_id = $2`,
+        values: [userID, sessionID]     
+    }
+
+    // need to find out how to add 1 to the population of a session after it is updated
+    return db.query(query) 
+      .then(result => result.rows[0])
+      .catch(err => err);
+}
+
   return {
       getUsers,
       getUserByEmail,
@@ -100,6 +136,9 @@ module.exports = (db) => {
       checkForSessionWithSpace,
       addUserToAvailableSession,
       createNewSession,
-      gamersInSession
+      usersInSession,
+      getGames,
+      getUserByUsername,
+      removeUserFromSession
   };
 };
