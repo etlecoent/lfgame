@@ -131,7 +131,7 @@ const removeUserFromSession = (userID, sessionID) => {
 
 const getPreviousSessions = (userID) => {
     const query = {
-        text: `SELECT users.username AS username, joined_sessions.id AS joinedID, sessions.id AS sessionID FROM sessions INNER JOIN joined_sessions ON joined_sessions.session_id = sessions.id INNER JOIN users ON joined_sessions.user_id = users.id WHERE users.id = $1;`,
+        text: `SELECT users.username AS username, joined_sessions.id AS joinedID, sessions.id AS sessionID, games.name FROM sessions INNER JOIN joined_sessions ON joined_sessions.session_id = sessions.id INNER JOIN users ON joined_sessions.user_id = users.id INNER JOIN games ON games.id = sessions.game_id WHERE users.id = $1;`,
         values: [userID]
     }
 
