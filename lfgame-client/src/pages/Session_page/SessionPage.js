@@ -1,17 +1,21 @@
 import { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import { io } from "socket.io-client";
 
+import GameInfo from "./GameInfos";
 import GamersList from "./GamerList";
+import MessagesList from "./MessagesList";
 
-import './SessionPage.scss'
+import './SessionPage.scss';
 
 const SessionPage = (props) => {
   
   const { currentSession, currentUser } = props;
 
+  const socketRef = useRef();
+  const [gameInfo, setGameInfo] = useState({});
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
-  const socketRef = useRef();
   const [msg, setMsg] = useState("");
 
   const leaveSession = () => {
@@ -29,6 +33,12 @@ const SessionPage = (props) => {
 
   useEffect(() => {
     
+    // get the session's game infos when the page loads
+    axios.get(`/api/sessions/${currentSession.session_id}/games`).then(res => {
+      setGameInfo(res.data);
+    })
+    
+
     socketRef.current = io({
       path: '/socket.io',
       query: {sessionId: currentSession.session_id, username: currentUser.username, userId: currentUser.id},
@@ -65,22 +75,18 @@ const SessionPage = (props) => {
         This is the sessions page.
       </h1>
 
+      <GameInfo gameInfo={gameInfo} />
+
       <h2>
         Users
       </h2>
-        <GamersList users={users} />
+      <GamersList users={users} />
+      
       <h2>
         Messages
       </h2>
-      <div>
-        {messages.map((message, i) => (
-        <div key={i}>
-          <p>
-            {message.username} says: {message.content}
-          </p>
-        </div>)
-        )}
-      </div>
+      <MessagesList messages={messages} />
+
       <button onClick={() => leaveSession()}>
         Leave session
       </button>
