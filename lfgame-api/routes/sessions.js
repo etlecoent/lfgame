@@ -8,7 +8,9 @@ module.exports = (io, {
   addUserToAvailableSession,
   createNewSession,
   usersInSession,
-  removeUserFromSession
+  removeUserFromSession,
+  getGameBySession,
+  getGameByID
 }) => {
 
 
@@ -41,6 +43,17 @@ module.exports = (io, {
           .catch((err) => res.json({
               error: err.message
           }));
+
+  router.get(`/:sessionID/games`, (req, res) => {
+    const { sessionID } = req.params;
+    getGameBySession(sessionID)
+    .then((game) => {
+      res.json(game)
+    })
+    .catch((err) => res.json({
+      error: err.message
+    }));
+   })
 
   });
 
