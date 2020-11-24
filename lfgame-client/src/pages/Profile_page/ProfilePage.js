@@ -7,6 +7,7 @@ const ProfilePage = (props) => {
 
 
   const [currentProfile, setCurrentProfile] = useState({});
+  const [previousSessions, setPreviousSessions] = useState([]);
   const currentUser = props.currentUser;
 
 
@@ -16,12 +17,14 @@ const ProfilePage = (props) => {
         data: currentUser.username
       }
     }).then(res => {
-      setCurrentProfile(res.data)
+      setCurrentProfile(res.data.user)
+      setPreviousSessions(res.data.sessionsList)
     })
     
   }, [])
   
   console.log(currentProfile);
+  console.log(previousSessions);
 
   return (
 
@@ -30,6 +33,9 @@ const ProfilePage = (props) => {
       <div>
         <p>Username: {currentProfile.username}</p>
         <p>Email: {currentProfile.email}</p>
+      </div>
+      <div>
+      <p>Number of Previous Sessions: {previousSessions.length}</p>
       </div>
     </div>
   )

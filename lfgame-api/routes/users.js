@@ -12,7 +12,7 @@ module.exports = ({
     getUserByEmail,
     addUser,
     getUserByUsername,
-    getProfileInfo
+    getPreviousSessions
 }) => {
     
     /* GET users listing. */
@@ -88,13 +88,13 @@ module.exports = ({
     router.get('/:id', (req, res) => {
 
         const username = req.query.data;
-
-        getProfileInfo(username)
-            .then(info => {
-                res.json({
-                    username: info.username,
-                    id: info.id,
-                    email: info.email
+        getUserByUsername(username)
+            .then(user => {
+                const result = { user }
+                getPreviousSessions(user.id)
+                .then(sessions => {
+                    result.sessionsList = sessions;
+                    res.json(result);
                 })
             })
             .catch((err) => res.json({
@@ -105,3 +105,9 @@ module.exports = ({
 
     return router;
 };
+
+// res.json({
+//     username: info.username,
+//     id: info.id,
+//     email: info.email
+// })
