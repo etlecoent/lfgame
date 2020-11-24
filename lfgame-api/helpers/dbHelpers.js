@@ -129,6 +129,18 @@ const removeUserFromSession = (userID, sessionID) => {
       .catch(err => err);
 }
 
+const getProfileInfo = (username) => {
+    const query = {
+        text: `SELECT * FROM users WHERE users.username = $1`,
+        values: [username]
+    }
+
+    return db.query(query)
+    .then(result => result.rows[0])
+    .catch(err => err);
+
+}
+
   return {
       getUsers,
       getUserByEmail,
@@ -139,6 +151,7 @@ const removeUserFromSession = (userID, sessionID) => {
       usersInSession,
       getGames,
       getUserByUsername,
-      removeUserFromSession
+      removeUserFromSession,
+      getProfileInfo
   };
 };
