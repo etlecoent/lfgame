@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 
+import GamersList from "./GamerList";
+
 import './SessionPage.scss'
 
 const SessionPage = (props) => {
@@ -33,19 +35,19 @@ const SessionPage = (props) => {
     });
 
     
-    socketRef.current.on("user has joined", (users) => {
-      setMessages(messages => [...messages, {username: "System", content: "User X has joined the channel"}])
+    socketRef.current.on("user has joined", ({users, joiningUser}) => {
+      console.log(users)
+      console.log(joiningUser)
+      setMessages(messages => [...messages, {username: "System", content: `User ${joiningUser} has joined the channel`}])
     
       setUsers([...users]);
     });
 
-    socketRef.current.on("user has left", (users) => {
-
-      setMessages(messages => [...messages, {username: "System", content: "User X has left the channel"}])
-
+    socketRef.current.on("user has left", ({users , leavingUser}) => {
       
-      const newUsers = JSON.parse(users);
-      setUsers([...newUsers]);
+      setMessages(messages => [...messages, {username: "System", content: `User ${leavingUser} has left the channel`}])
+      
+      setUsers([...users]);
     });
 
     socketRef.current.on("incoming message", (message) => {
@@ -67,20 +69,18 @@ const SessionPage = (props) => {
       <h2>
         Users
       </h2>
-      <ul>
-        {users.map(user => <li>{user.username}</li>)}
-      </ul>
+        <GamersList users={users} />
       <h2>
         Messages
       </h2>
       <div>
-        {messages.map(message => {
-        
-        return (<div>
-          <p>{message.username} says: {message.content}</p>
+        {messages.map((message, i) => (
+        <div>
+          <p key={i}>
+            {message.username} says: {message.content}
+          </p>
         </div>)
-        })}
-        {/* <GamerList users={users}/> */}
+        )}
       </div>
       <button onClick={() => leaveSession()}>
         Leave session
