@@ -12,7 +12,9 @@ const io = require('socket.io')(server);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const gamesRouter = require('./routes/games');
 const sessionsRouter = require('./routes/sessions');
+
 
 app.set('port', port);
 
@@ -31,4 +33,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
+app.use('/api/games', gamesRouter(dbHelpers));
 app.use('/api/sessions', sessionsRouter(io, dbHelpers));
