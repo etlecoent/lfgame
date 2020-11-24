@@ -10,6 +10,7 @@ import SessionsPage from './pages/Session_page/SessionPage';
 import './App.scss';
 
 import useApplicationData from "./hooks/useApplication.js"
+import ProfilePage from './pages/Profile_page/ProfilePage';
 
 const App = () => {
   
@@ -17,7 +18,7 @@ const App = () => {
     state,
     dispatch
   } = useApplicationData();
-  
+
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
   const [currentSession, setCurrentSession] = useState(null);
 
@@ -53,12 +54,7 @@ const App = () => {
           </Route>
 
           <Route exact path="/profile">
-            {redirectLogin() || 
-            
-            <h1>
-              This is the profile page
-            </h1>
-            }
+            {redirectLogin() || <ProfilePage currentUser={currentUser} />}
           </Route>
 
           <Route exact path ="/register">
