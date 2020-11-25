@@ -23,7 +23,7 @@ const GamesPage = (props) => {
       })
     }
     
-    const test = games.filter((game) => game.name.includes(term));
+    const test = games.filter((game) => game.name.toLowerCase().includes(term.toLowerCase()));
     setResults(test);
 
   }, [term])

@@ -56,15 +56,27 @@ module.exports = (db) => {
         .catch(err => err);
   };
 
+  const editSessionPopulation = (sessionID, number) => {
+    const query = {
+        text: `UPDATE sessions SET population = population + $2 WHERE id = $1`,
+        values: [sessionID, number]     
+    }
+
+    // need to find out how to add 1 to the population of a session after it is updated
+    return db.query(query) 
+      .catch(err => err);
+    }
+
   const addUserToAvailableSession = (userID, sessionID) => {
       const query = {
           text: `INSERT INTO joined_sessions (user_id, session_id) VALUES ($1, $2) RETURNING *`,
-          values: [userID, sessionID]     
+          values: [userID, sessionID]
       }
 
       // need to find out how to add 1 to the population of a session after it is updated
       return db.query(query) 
         .then(result => result.rows[0])
+        .then(editSessionPopulation(sessionID, 1))
         .catch(err => err);
   }
 
@@ -126,6 +138,7 @@ const removeUserFromSession = (userID, sessionID) => {
     // need to find out how to add 1 to the population of a session after it is updated
     return db.query(query) 
       .then(result => result.rows[0])
+      .then(editSessionPopulation(sessionID, -1))
       .catch(err => err);
 }
 
