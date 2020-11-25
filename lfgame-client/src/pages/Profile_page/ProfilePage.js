@@ -17,7 +17,7 @@ const ProfilePage = (props) => {
   useEffect(() => {
     axios.get(`/api/users/${currentUser.username}`, {
       params: {
-        data: currentUser.username
+        username: currentUser.username
       }
     }).then(res => {
       setCurrentProfile(res.data.user)
@@ -36,7 +36,7 @@ const ProfilePage = (props) => {
       </div>
       <div>
       <p onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</p>
-      {showSessions && <PrevSessionsList sessionsList={previousSessions}/>}
+      {showSessions && <PrevSessionsList sessionsList={previousSessions} currentUser={currentUser}/>}
       </div>
     </div>
   )
