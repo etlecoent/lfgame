@@ -14,6 +14,7 @@ module.exports = ({
     getUserByUsername,
     getPreviousSessions,
     usersInPrevSession,
+    favouriteGame,
 }) => {
     
     /* GET users listing. */
@@ -92,9 +93,13 @@ module.exports = ({
         getUserByUsername(username)
             .then(user => {
                 const result = { user }
-                getPreviousSessions(user.id)
-                .then(sessions => {
-                    result.sessionsList = sessions;
+
+                Promise.all([
+                    getPreviousSessions(user.id),
+                    favouriteGame(user.id)
+                ]).then(all => {
+                    result.sessionsList = all[0];
+                    result.favourite = all[1];
                     res.json(result);
                 })
             })
