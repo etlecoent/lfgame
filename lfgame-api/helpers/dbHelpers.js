@@ -186,6 +186,27 @@ const usersInPrevSession = (sessionID) => {
       .catch(err => err);
 }
 
+const favouriteGame = (userID) => {
+    const query = {
+        text:`
+            SELECT games.picture_url, COUNT(*) AS counted
+            FROM games
+            INNER JOIN sessions ON sessions.game_id = games.id
+            INNER JOIN joined_sessions ON joined_sessions.session_id = sessions.id
+            INNER JOIN users ON joined_sessions.user_id = users.id
+            WHERE users.id = $1
+            GROUP BY games.picture_url
+            ORDER BY counted DESC
+            LIMIT 1;`,
+        values: [userID]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+
+}
+
   return {
       getUsers,
       getUserByEmail,
@@ -200,6 +221,7 @@ const usersInPrevSession = (sessionID) => {
       getPreviousSessions,
       getGameBySession,
       getGameByID,
-      usersInPrevSession
+      usersInPrevSession,
+      favouriteGame,
   };
 };

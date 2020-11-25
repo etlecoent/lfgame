@@ -8,26 +8,20 @@ const PrevSessionItem = (props) => {
   const sessionID = props.sessionID;
   const [userList, setUserList] = useState([])
 
-  // useEffect(() => {
-  //   axios.get(`api/users/${currentUser.username}/${sessionID}`).then(res => {
-  //     console.log("Nonsense ", res)
-  //     setUserList(["Jason", "Jeremy"]);
-  //   })
-  // }, [])
 
   const populatePeople = () => {
     if (userList.length > 0) {
       setUserList([]);
     } else {
       axios.get(`api/users/${currentUser.username}/${sessionID}`).then(res => {
-        console.log("Nonsense ", res.data[0])
         const parsedList = res.data.map(user => user.username);
         setUserList([...parsedList]);
 
       })
     }
   }
-
+  
+  console.log("Userlist state: ", userList);
   
   return (
     <div onClick={populatePeople}>
