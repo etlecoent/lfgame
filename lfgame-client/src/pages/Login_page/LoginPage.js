@@ -66,7 +66,7 @@ const LoginPage = (props) => {
 
       <div className="registerButton">
         <Link to="/register">
-          <button className="btn btn-primary">
+          <button className="btn btn-outline-primary">
             Register Now
           </button>
         </Link>
