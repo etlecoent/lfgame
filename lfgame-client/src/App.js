@@ -6,6 +6,7 @@ import GamesPage from './pages/Games_page/GamesPage';
 import LoginPage from './pages/Login_page/LoginPage';
 import RegisterPage from './pages/Register_page/RegisterPage';
 import SessionPage from './pages/Session_page/SessionPage';
+import MenuBar from './pages/Menu_bar/MenuBar';
 
 import './App.scss';
 
@@ -52,6 +53,7 @@ const App = () => {
     <div id="App" >
       <Router>
         <NavBar currentUser={currentUser} logout={() => logout()}/>
+        <MenuBar currentUser={currentUser} logout={() => logout()}/>
         <Switch>
           
           <Route exact path="/">
