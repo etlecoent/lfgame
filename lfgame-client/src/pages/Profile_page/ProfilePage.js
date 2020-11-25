@@ -11,6 +11,7 @@ const ProfilePage = (props) => {
   const [currentProfile, setCurrentProfile] = useState({});
   const [previousSessions, setPreviousSessions] = useState([]);
   const [showSessions, setShowSessions] = useState(false);
+  const [favouriteGame, setFavouriteGame] = useState({});
   const currentUser = props.currentUser;
 
 
@@ -20,6 +21,7 @@ const ProfilePage = (props) => {
         username: currentUser.username
       }
     }).then(res => {
+      setFavouriteGame(res.data.favourite)
       setCurrentProfile(res.data.user)
       setPreviousSessions(res.data.sessionsList)
     })
@@ -33,6 +35,7 @@ const ProfilePage = (props) => {
       <div>
         <p>Username: {currentProfile.username}</p>
         <p>Email: {currentProfile.email}</p>
+        <p>Favourite Game: </p><img src={favouriteGame.picture_url} alt="Favourite Game"/>
       </div>
       <div>
       <p onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</p>
