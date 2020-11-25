@@ -47,9 +47,7 @@ const GamesPage = (props) => {
     <Fragment>
     { redirectSessions() ||
       <section className="page">
-        <div className="searchBar">
-          <SearchBar onSearch={term => setTerm(term)}/>
-        </div>
+        <SearchBar onSearch={term => setTerm(term)}/>
         <div className="gameList">
           <GameList currentUser={props.currentUser} games={results} findSession={findSession}/>
         </div>
