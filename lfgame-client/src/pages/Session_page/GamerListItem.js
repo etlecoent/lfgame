@@ -1,4 +1,3 @@
-import "./GamerListItem.scss";
 
 const GamerListItem = (props) => {
   

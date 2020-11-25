@@ -1,5 +1,7 @@
 import GamerListItem from "./GamerListItem";
 
+import "./GamerList.scss";
+
 const GamerList = (props) => {
 
   return (

@@ -1,5 +1,6 @@
 import MessagesListItem from "./MessagesListItem";
 
+import "./MessagesList.scss";
 
 const MessagesList = (props) => {
 

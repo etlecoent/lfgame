@@ -27,31 +27,4 @@
       border: .1em solid $grey;
     }
   }
-
-  .gamerList {
-    
-    width: 100%;
-    font-size: xx-large;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    h1 {
-      margin-block-end: 0;
-    }
-
-    ul {
-      width: 100%;
-      border-bottom: 1px solid $white;
-      border-top: 1px solid $white;
-
-      padding-inline-start: 0;
-
-      li {
-        list-style-type: none;
-        padding: 0.5em 0;
-        margin-left: 3em;
-      }
-    }
-  }
 }
