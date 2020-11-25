@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
@@ -70,8 +70,8 @@ const SessionPage = (props) => {
   }, []);
 
   return (
-    <div>
-
+    
+    <section id="sessionPage">
       <GameInfo gameInfo={gameInfo} />
 
       <h2>
@@ -87,6 +87,7 @@ const SessionPage = (props) => {
       <button onClick={() => leaveSession()}>
         Leave session
       </button>
+
       <form onSubmit={event => event.preventDefault()}>
         <div>
           <input type="text" placeholder="Enter message" value={msg} onChange={event => setMsg(event.target.value)} />
@@ -95,7 +96,8 @@ const SessionPage = (props) => {
           Send Message
         </button>
       </form>
-    </div>
+      
+    </section>
   )
 
 };

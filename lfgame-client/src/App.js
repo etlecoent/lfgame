@@ -5,7 +5,7 @@ import NavBar from './pages/Nav_bar/NavBar';
 import GamesPage from './pages/Games_page/GamesPage';
 import LoginPage from './pages/Login_page/LoginPage';
 import RegisterPage from './pages/Register_page/RegisterPage';
-import SessionsPage from './pages/Session_page/SessionPage';
+import SessionPage from './pages/Session_page/SessionPage';
 
 import './App.scss';
 
@@ -49,7 +49,7 @@ const App = () => {
   }
 
   return (
-    <div className="App" >
+    <div id="App" >
       <Router>
         <NavBar currentUser={currentUser} logout={() => logout()}/>
         <Switch>
@@ -59,7 +59,7 @@ const App = () => {
           </Route>
 
           <Route exact path="/sessions">
-          {!currentSession ? checkForSession() : <SessionsPage currentSession={currentSession} currentUser={currentUser}/>}
+          {!currentSession ? checkForSession() : <SessionPage currentSession={currentSession} currentUser={currentUser}/>}
           </Route>
 
           <Route exact path="/profile">

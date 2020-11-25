@@ -1,4 +1,3 @@
-import "./GameInfo.scss";
 
 const GameInfo = (props) => {
 

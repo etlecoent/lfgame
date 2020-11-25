@@ -1,0 +1,22 @@
+@import "./../../styles/variables.scss";
+
+#sessionPage {
+  
+  padding-top: 81px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .gameInfo {
+    padding: 1em;
+    flex-grow: 1;
+    flex-basis: 30%;
+  
+    .gameInfoImage {
+      height: 69px;
+      width: 184px;
+      border: .1em solid $grey;
+    }
+  }
+}

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 
-import "./GamePage.scss";
+import "./GamesPage.scss";
 
 import SearchBar from './SearchBar';
 import GameList from './GamesList';
@@ -44,18 +44,18 @@ const GamesPage = (props) => {
   }
 
   return (
-    <div>
+    <Fragment>
     { redirectSessions() ||
-      <div>
+      <section id="gamesPage">
         <div className="searchBar">
           <SearchBar onSearch={term => setTerm(term)}/>
         </div>
         <div className="gameList">
           <GameList currentUser={props.currentUser} games={results} findSession={findSession}/>
         </div>
-      </div> 
+      </section> 
     }
-    </div>
+    </Fragment>
   )
 }
 
