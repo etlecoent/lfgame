@@ -1,26 +1,34 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./styles/variables.scss";
 
-body {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  background-color: $backgroundBlue;
-  color: $white;
-  font-family: $font-family;
-  margin: 0;
+html {
   
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
 
-  #root {
+  body {
+    height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+  
+    background-color: $backgroundBlue;
+    color: $white;
+    font-family: $font-family;
+    margin: 0;
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  
+    #root {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+  
   }
-
 }
+

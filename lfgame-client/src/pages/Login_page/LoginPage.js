@@ -47,21 +47,26 @@ const LoginPage = (props) => {
 
   return(
     <section className="page">
+      
       <header>Login</header>
+      
       {message && <div>{message}</div>}
+      
       <form onSubmit={event => event.preventDefault()}>
-        <div>
-          <input type="email" placeholder="Email" value={email} onChange={event => setEmail(event.target.value)} />
+        <div className="form-group">
+          <label htmlFor="exampleInputEmail1">Email address</label>
+          <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={email} onChange={event => setEmail(event.target.value)}/>
         </div>
-        <div>
-          <input type="password" placeholder="Password" value={password} onChange={event => setPassword(event.target.value)} />
+        <div className="form-group">
+          <label htmlFor="exampleInputPassword1">Password</label>
+          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={event => setPassword(event.target.value)}/>
         </div>
-        <button type='button' onClick={validate}>Submit</button>
+        <button type="button" className="btn btn-primary" onClick={validate}>Submit</button>
       </form>
 
-      <div>
+      <div className="registerButton">
         <Link to="/register">
-          <button>
+          <button className="btn btn-primary">
             Register Now
           </button>
         </Link>
