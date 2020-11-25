@@ -3,15 +3,20 @@ import GamerListItem from "./GamerListItem";
 const GamerList = (props) => {
 
   return (
-    <ul>
-      {props.users.map((user, i) => ( 
-      
-        <GamerListItem 
-          key={i} 
-          username={user.username}
-        /> 
-      ))}
-    </ul>
+    
+    <section className="gamerList">
+      <h1>Users</h1>
+    
+      <ul>
+        {props.users.map((user, i) => ( 
+        
+          <GamerListItem 
+            key={i} 
+            username={user.username}
+          /> 
+        ))}
+      </ul>
+    </section>
   )
 };
 

@@ -7,9 +7,7 @@ const GamerListItem = (props) => {
       {/* <div> image for later 
         <img className="userImage" src={props.imageSource}></img>
       </div> */}
-      <div className="gamerListName">
-        {props.username}
-      </div>
+      {props.username}
     </li>
   )
 }

@@ -74,9 +74,6 @@ const SessionPage = (props) => {
     <section id="sessionPage">
       <GameInfo gameInfo={gameInfo} />
 
-      <h2>
-        Users
-      </h2>
       <GamersList users={users} />
       
       <h2>
@@ -96,7 +93,7 @@ const SessionPage = (props) => {
           Send Message
         </button>
       </form>
-      
+
     </section>
   )
 
