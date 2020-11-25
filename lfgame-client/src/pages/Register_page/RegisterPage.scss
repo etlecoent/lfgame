@@ -1,11 +1,81 @@
 
 #registerPage {
 
-  padding-top: 81px;
-  width: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+
+  header {
+    font-size: xxx-large;
+  }
+  
+  .alert {
+    margin: 1em 0;
+  }
+
+  form {
+    
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0;
+
+    .form-group {
+      padding-top: 0.5em;
+    }
+  
+    .btn-primary {
+      margin-top: 1em;
+    }
+
+  }
+
+  .loginButton {
+    padding: 2em 0;
+  }
+
+
+  
 }
+
+// #loginPage {
+  
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100%;
+//   height: 100%;
+
+//   header {
+//     font-size: xxx-large;
+//   }
+  
+//   .alert {
+//     margin: 1em 0;
+//   }
+
+//   form {
+    
+//     width: 50%;
+//     display: flex;
+//     flex-direction: column;
+//     margin: 1em 0;
+
+//     .form-group {
+//       padding-top: 0.5em;
+//     }
+  
+//     .btn-primary {
+//       margin-top: 1em;
+//     }
+
+//   }
+
+//   .loginButton {
+//     padding: 2em 0;
+//   }
+// }
