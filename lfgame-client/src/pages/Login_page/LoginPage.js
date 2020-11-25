@@ -47,29 +47,30 @@ const LoginPage = (props) => {
 
   return(
     <section className="page">
-      
-      <header>Login</header>
-      
-      {message && <div>{message}</div>}
-      
-      <form onSubmit={event => event.preventDefault()}>
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email address</label>
-          <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={email} onChange={event => setEmail(event.target.value)}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={event => setPassword(event.target.value)}/>
-        </div>
-        <button type="button" className="btn btn-primary" onClick={validate}>Submit</button>
-      </form>
+      <div id="loginPage">
+        <header>Login</header>
+        
+        {message && <div className="alert alert-danger">{message}</div>}
+        
+        <form onSubmit={event => event.preventDefault()}>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Email address</label>
+            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={email} onChange={event => setEmail(event.target.value)}/>
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1">Password</label>
+            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={password} onChange={event => setPassword(event.target.value)}/>
+          </div>
+          <button type="button" className="btn btn-primary" onClick={validate}>Submit</button>
+        </form>
 
-      <div className="registerButton">
-        <Link to="/register">
-          <button className="btn btn-outline-primary">
-            Register Now
-          </button>
-        </Link>
+        <div className="registerButton">
+          <Link to="/register">
+            <button className="btn btn-outline-primary">
+              Register Now
+            </button>
+          </Link>
+        </div>
       </div>
     </section>
   );
