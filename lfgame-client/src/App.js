@@ -53,7 +53,7 @@ const App = () => {
       <Router>
         <NavBar currentUser={currentUser} logout={() => logout()}/>
         <Switch>
-
+        <div className="pages">
           <Route exact path="/">
             {redirectLogin() || <GamesPage currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
           </Route>
@@ -73,11 +73,11 @@ const App = () => {
           <Route exact path ="/login">
             {redirectGames() || <LoginPage setCurrentUser={setCurrentUser}/>}         
           </Route>
-          
+        </div>
+
           <Route path="*">
             <h1>404 - Not Found</h1>
           </Route>
-
         </Switch>
       </Router>
     </div>

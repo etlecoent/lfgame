@@ -13,7 +13,7 @@ const SearchBar = (props) => {
   }, [term, onSearch]);
 
   return (
-    <form className="search__form" onSubmit={event => event.preventDefault()}>
+    <form onSubmit={event => event.preventDefault()}>
       <input
         spellCheck="false"
         placeholder="Search Game"
@@ -21,6 +21,7 @@ const SearchBar = (props) => {
         type="text"
         value={value}
         onChange={event => setValue(event.target.value)}
+        autoFocus
       />
     </form>
   );
