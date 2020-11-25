@@ -46,7 +46,7 @@ const LoginPage = (props) => {
   }
 
   return(
-    <section id="loginPage">
+    <section className="page">
       <header>Login</header>
       {message && <div>{message}</div>}
       <form onSubmit={event => event.preventDefault()}>

@@ -13,7 +13,7 @@ const SearchBar = (props) => {
   }, [term, onSearch]);
 
   return (
-    <form onSubmit={event => event.preventDefault()}>
+    <form id= "searchBar" onSubmit={event => event.preventDefault()}>
       <input
         spellCheck="false"
         placeholder="Search Game"

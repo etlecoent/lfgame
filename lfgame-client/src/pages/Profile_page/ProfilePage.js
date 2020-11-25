@@ -30,7 +30,7 @@ const ProfilePage = (props) => {
 
   return (
 
-    <div>
+    <section className="page">
       <header>Profile</header>
       <div>
         <p>Username: {currentProfile.username}</p>
@@ -41,7 +41,7 @@ const ProfilePage = (props) => {
       <p onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</p>
       {showSessions && <PrevSessionsList sessionsList={previousSessions} currentUser={currentUser}/>}
       </div>
-    </div>
+    </section>
   )
 
 }

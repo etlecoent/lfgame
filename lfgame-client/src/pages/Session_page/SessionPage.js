@@ -71,7 +71,7 @@ const SessionPage = (props) => {
 
   return (
     
-    <section id="sessionPage">
+    <section class="page">
       <GameInfo gameInfo={gameInfo} />
 
       <GamersList users={users} />
