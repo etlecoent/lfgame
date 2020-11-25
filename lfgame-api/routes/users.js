@@ -12,7 +12,8 @@ module.exports = ({
     getUserByEmail,
     addUser,
     getUserByUsername,
-    getPreviousSessions
+    getPreviousSessions,
+    usersInPrevSession,
 }) => {
     
     /* GET users listing. */
@@ -85,9 +86,9 @@ module.exports = ({
             }));
     })
 
-    router.get('/:id', (req, res) => {
+    router.get('/:username', (req, res) => {
 
-        const username = req.query.data;
+        const username = req.query.username;
         getUserByUsername(username)
             .then(user => {
                 const result = { user }
@@ -103,11 +104,19 @@ module.exports = ({
 
     })
 
+    router.get('/:username/:id', (req, res) => {
+
+        usersInPrevSession(req.params.id)
+            .then(list => {
+                res.json(list);
+            })
+            .catch((err) => res.json({
+                error: err.message
+            }))
+        
+    })
+
+
+
     return router;
 };
-
-// res.json({
-//     username: info.username,
-//     id: info.id,
-//     email: info.email
-// })
