@@ -50,7 +50,7 @@ const RegisterPage = (props) => {
   }
 
   return(
-    <section id="registerPage">
+    <section className="page">
       <header>Register</header>
       {message && <div>{message}</div>}
       <form onSubmit={event => event.preventDefault()}>

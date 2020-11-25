@@ -6,4 +6,14 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+
+  .page {
+
+    padding-top: 81px;
+    width: 100%;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
