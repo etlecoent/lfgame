@@ -52,7 +52,9 @@ const RegisterPage = (props) => {
   return(
     <section className="page">
       <div id="registerPage">
+
         <header>Register</header>
+
           {message && <div className="alert alert-danger">{message}</div>}
           <form onSubmit={event => event.preventDefault()}>
             <div className="form-group">
@@ -70,7 +72,6 @@ const RegisterPage = (props) => {
             <button type="button" className="btn btn-primary" onClick={validate}>Submit</button>
           </form>
         
-
         <div className="loginButton">
           <Link to="/login">
             <button className ="btn btn-outline-primary">

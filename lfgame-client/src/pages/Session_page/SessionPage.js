@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
@@ -38,13 +38,11 @@ const SessionPage = (props) => {
       setGameInfo(res.data);
     })
     
-
     socketRef.current = io({
       path: '/socket.io',
       query: {sessionId: currentSession.session_id, username: currentUser.username, userId: currentUser.id},
     });
 
-    
     socketRef.current.on("user has joined", ({users, joiningUser}) => {
       
       setMessages(messages => [...messages, {username: "System", content: `User ${joiningUser} has joined the channel`}])
@@ -71,7 +69,7 @@ const SessionPage = (props) => {
 
   return (
     
-    <section class="page">
+    <section className="page">
       <GameInfo gameInfo={gameInfo} />
 
       <GamersList users={users} />
