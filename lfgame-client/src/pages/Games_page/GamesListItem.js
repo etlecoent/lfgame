@@ -7,7 +7,7 @@ const GamesListItem = (props) => {
   return(
     <article className="gameListItem" onClick={() => props.findSession(gameID, userID)}>
       <header className="gameListName">
-        {props.name}
+        <h1>{props.name}</h1>
       </header>
       <div>
         <img className="gameImage" alt={props.id} src={props.imageSource}></img>

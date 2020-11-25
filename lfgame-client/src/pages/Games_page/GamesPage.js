@@ -8,19 +8,6 @@ import "./GamePage.scss";
 import SearchBar from './SearchBar';
 import GameList from './GamesList';
 
-const imageURL = 'https://preview.redd.it/w0lmb8i7odo51.png?width=960&crop=smart&auto=webp&s=94f47357a899ebb7be0fb9f655ca71cef3f53edc';
-
-const gamesArray = [
-  { name: "Among Us", imageURL: imageURL, sessionsNum: 100 },
-  { name: "Monster Hunter World", imageURL: imageURL, sessionsNum: 80 },
-  { name: "Final Fanatasy 14", imageURL: imageURL, sessionsNum: 100 },
-  { name: "Team Fortress 2", imageURL: imageURL, sessionsNum: 100 },
-  { name: "Destiny 2", imageURL: imageURL, sessionsNum: 100 },
-  { name: "draw.io", imageURL: imageURL, sessionsNum: 1 },
-  { name: "League of Legends", imageURL: imageURL, sessionsNum: 100 },
-  { name: "Monopoly", imageURL: imageURL, sessionsNum: 150 }
-];
-
 const GamesPage = (props) => {
 
   const [term, setTerm] = useState("");

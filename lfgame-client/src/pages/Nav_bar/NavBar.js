@@ -1,31 +1,31 @@
 import { Link } from 'react-router-dom';
 
+import logo from  "./../../styles/logo.png";
 import './NavBar.scss';
+
 
 const NavBar = (props) => {
 
-  const logo = "https://i.pinimg.com/originals/16/1c/ff/161cff19e668e270ccb1b98856ebd81e.png";
-
-
   return (
-    <nav>
+    <nav className="topNav">
       <div> 
         <Link to="/">
-        <img className="logo" src={logo}/>  
+        <img className="logo" alt= "logo" src={logo}/>  
         </Link> 
       </div>
       
       <div className="username"> 
         <Link to="/profile" >
-          {props.currentUser ? props.currentUser.username : null}
+          {props.currentUser && props.currentUser.username}
         </Link>
       </div>
+
       <div>
         <Link to="/login" >
           {props.currentUser ? 
-            <button onClick={props.logout}>
+            <p onClick={props.logout}>
               Logout
-            </button>          
+            </p>          
           : null}
         </Link>
       </div>

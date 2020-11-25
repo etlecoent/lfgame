@@ -1,13 +1,16 @@
 @import "./styles/variables.scss";
 
 body {
-  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: $backgroundBlue;
+  color: $white;
   font-family: $font-family;
+  margin: 0;
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

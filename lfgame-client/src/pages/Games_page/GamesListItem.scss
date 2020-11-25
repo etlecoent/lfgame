@@ -1,8 +1,13 @@
 @import "./../../styles/variables.scss";
 
 .gameListItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 1em;
   border-top: 1px solid $white;
+  
   flex-grow: 1;
   flex-basis: 30%;
 
@@ -12,11 +17,8 @@
     border: .1em solid $grey;
   }
   
-  // .gameListName {
-
-  // }
-
-  // .gameListSessions {
-  
-  // }
+  h1 { 
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
 }

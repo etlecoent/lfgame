@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-import GameInfo from "./GameInfos";
+import GameInfo from "./GameInfo";
 import GamersList from "./GamerList";
 import MessagesList from "./MessagesList";
 
@@ -71,9 +71,6 @@ const SessionPage = (props) => {
 
   return (
     <div>
-      <h1>
-        This is the sessions page.
-      </h1>
 
       <GameInfo gameInfo={gameInfo} />
 
