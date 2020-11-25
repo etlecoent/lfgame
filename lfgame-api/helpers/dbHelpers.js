@@ -131,7 +131,13 @@ const removeUserFromSession = (userID, sessionID) => {
 
 const getPreviousSessions = (userID) => {
     const query = {
-        text: `SELECT users.username AS username, joined_sessions.id AS joinedID, sessions.id AS sessionID, games.name FROM sessions INNER JOIN joined_sessions ON joined_sessions.session_id = sessions.id INNER JOIN users ON joined_sessions.user_id = users.id INNER JOIN games ON games.id = sessions.game_id WHERE users.id = $1;`,
+        text: `
+        SELECT users.username AS username, joined_sessions.id AS joinedID, sessions.id AS sessionID, games.name 
+        FROM sessions 
+        INNER JOIN joined_sessions ON joined_sessions.session_id = sessions.id 
+        INNER JOIN users ON joined_sessions.user_id = users.id 
+        INNER JOIN games ON games.id = sessions.game_id 
+        WHERE users.id = $1;`,
         values: [userID]
     }
 
@@ -166,6 +172,20 @@ const getGameBySession = sessionID => {
         .catch((err) => err);
 }
 
+const usersInPrevSession = (sessionID) => {
+    const query = {
+        text:`SELECT username FROM users
+              JOIN joined_sessions ON user_id = users.id
+              WHERE joined_sessions.session_id = $1
+              GROUP BY users.id`,
+        values: [sessionID]
+    }
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+}
+
   return {
       getUsers,
       getUserByEmail,
@@ -179,6 +199,7 @@ const getGameBySession = sessionID => {
       removeUserFromSession,
       getPreviousSessions,
       getGameBySession,
-      getGameByID
+      getGameByID,
+      usersInPrevSession
   };
 };
