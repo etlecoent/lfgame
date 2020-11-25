@@ -50,7 +50,7 @@ const RegisterPage = (props) => {
   }
 
   return(
-    <div>
+    <section id="registerPage">
       <header>Register</header>
       {message && <div>{message}</div>}
       <form onSubmit={event => event.preventDefault()}>
@@ -72,7 +72,7 @@ const RegisterPage = (props) => {
           </button>
         </Link>
       </div>
-    </div>
+    </section>
   );
 };
 
