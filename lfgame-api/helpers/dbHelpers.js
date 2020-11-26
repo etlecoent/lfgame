@@ -47,7 +47,8 @@ module.exports = (db) => {
 
   const checkForSessionWithSpace = (gameID) => {
       const query = {
-          text: `SELECT id FROM sessions WHERE game_id = $1 AND population < 10 LIMIT 1`,
+          text: `SELECT id FROM sessions WHERE game_id = $1 AND population < 10 AND created_at > now() - interval '1 day'
+          LIMIT 1`,
           values: [gameID]
       };
 
@@ -161,7 +162,7 @@ const userRejoinSession = (userID, sessionID) => {
     // need to find out how to add 1 to the population of a session after it is updated
     return db.query(query) 
       .then(result => result.rows[0])
-      .then(editSessionPopulation(sessionID, +1))
+      .then(editSessionPopulation(sessionID, 1))
       .catch(err => err);
 }
 
