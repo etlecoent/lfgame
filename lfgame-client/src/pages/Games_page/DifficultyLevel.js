@@ -20,19 +20,19 @@ function DifficultyLevel(props) {
 
       <Modal.Body>
 
-        <div className="difficultyLevel" onClick={() => props.findSession("beginner")}>
+        <div className="difficultyLevel" onClick={() => props.findSession("Beginner")}>
           Beginner
         </div>
 
-        <div className="difficultyLevel" onClick={() => props.findSession("intermediate")}>
+        <div className="difficultyLevel" onClick={() => props.findSession("Intermediate")}>
           Intermediate
         </div>
 
-        <div className="difficultyLevel" onClick={() => props.findSession("advanced")}>
+        <div className="difficultyLevel" onClick={() => props.findSession("Advanced")}>
           Advanced
         </div>
 
-        <div className="difficultyLevel" onClick={() => props.findSession("competitive")}>
+        <div className="difficultyLevel" onClick={() => props.findSession("Competitive")}>
           Competitive
         </div>
 
