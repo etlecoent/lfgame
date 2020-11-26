@@ -10,7 +10,9 @@ module.exports = (io, {
   usersInSession,
   removeUserFromSession,
   getGameBySession,
-  getGameByID
+  getGameByID,
+  checkForJoinedSession, 
+  userRejoinSession
 }) => {
 
 
@@ -18,31 +20,33 @@ module.exports = (io, {
   router.post('/', (req, res) => {
     console.log(req.body)
     const { gameID, userID } = req.body;
-    // req.userID
-    // req.gameID
-    // maybe this is how we'll get the shit
+  
     checkForSessionWithSpace(gameID)
           .then((session) => {
             // if there is a session with space, add them to the session
             if (session) {
-              return addUserToAvailableSession(userID, session.id)
-
-              // then go to that session
+              return checkForJoinedSession(userID, session.id)
+              .then(result => {
+                if (result) {
+                  return userRejoinSession(userID, session.id)
+                } else {
+                  return addUserToAvailableSession(userID, session.id)
+                }
+              })
+              
             } else {
               // if there is not a session with space, create a new session with the game id and add them to that session
               return createNewSession(gameID)
+              // set timeout for 12 hours, change status to f after 12 hours 
               .then(newSession => {
                 return addUserToAvailableSession(userID, newSession.id)
               })
             }
           })
-          // then go to that session
           .then(joinedSession => {
             res.json({session_id: joinedSession.session_id})
           })
-          .catch((err) => res.json({
-              error: err.message
-          }));
+          .catch((err) => res.json({ error: err.message }));
 
   router.get(`/:sessionID/games`, (req, res) => {
     const { sessionID } = req.params;
