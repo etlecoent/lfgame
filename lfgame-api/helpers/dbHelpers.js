@@ -45,11 +45,11 @@ module.exports = (db) => {
         .catch(err => err);
     }
 
-  const checkForSessionWithSpace = (gameID) => {
+  const checkForSessionWithSpace = (gameID, difficultyLevel) => {
       const query = {
-          text: `SELECT id FROM sessions WHERE game_id = $1 AND population < 10 AND created_at > now() - interval '1 day'
+          text: `SELECT id FROM sessions WHERE game_id = $1 AND population < 10 AND difficulty_level = $2 AND created_at > now() - interval '1 day'
           LIMIT 1`,
-          values: [gameID]
+          values: [gameID, difficultyLevel]
       };
 
       return db.query(query)
@@ -92,10 +92,10 @@ module.exports = (db) => {
         .catch(err => err);
   }
 
-  const createNewSession = (gameID) => {
+  const createNewSession = (gameID, difficultyLevel) => {
       const query = {
-          text: `INSERT INTO sessions (game_id) VALUES ($1) RETURNING *`,
-          values: [gameID]
+          text: `INSERT INTO sessions (game_id, difficulty_level) VALUES ($1, $2) RETURNING *`,
+          values: [gameID, difficultyLevel]
       }
 
       return db.query(query)

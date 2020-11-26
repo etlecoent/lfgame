@@ -8,11 +8,10 @@ const GamesList = (props) => {
       <GamesListItem 
         key={game.id}
         gameID={game.id}
-        name={game.name} 
-        userID={props.currentUser.id}
+        name={game.name}
         imageSource={game.picture_url} 
         numCurrentGamers={game.number_current_gamers}
-        findSession={props.findSession}
+        setModalState={props.setModalState}
       />
     );
   });

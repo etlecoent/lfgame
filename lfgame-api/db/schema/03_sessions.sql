@@ -5,5 +5,6 @@ CREATE TABLE sessions(
     -- play_level VARCHAR(255) NOT NULL, commented out for now, until we impliment this
     created_at TIMESTAMP NOT NULL DEFAULT now(),
     population smallint DEFAULT 0,
+    difficulty_level VARCHAR(255) NOT NULL,
     status boolean DEFAULT true
 );

@@ -7,7 +7,7 @@
   justify-content: space-around;
   align-content: center;
   flex-wrap: wrap;
-  padding-bottom: 65px;
+  padding-bottom: 60px;
 }
 
 #searchBar {
@@ -17,7 +17,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-top: 81px;
 
   input {
     height: 2em;
@@ -36,6 +35,26 @@
   }
 }
 
+.modal-content {
+  background-color: $black;
 
+
+  .modal-body {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+    .difficultyLevel {
+      padding: 1em;
+    }
+  }
+
+
+  .close {
+    opacity: 100;
+    color: $white;
+    text-shadow: none;
+  }
+}
 
 

@@ -31,24 +31,33 @@ const ProfilePage = (props) => {
   return (
 
     <section className="page">
-      <header>Profile</header>
-      <div>
-        <img src={currentProfile.image}/>
-        <p>Username: {currentProfile.username}</p>
-        <p>Email: {currentProfile.email}</p>
-      </div>
-      <div>
-      {/* {message && <div className="alert alert-danger">{message}</div>} */}
-        {favouriteGame && 
-        <div>
-          <p>Favourite Game: </p>
-          <img src={favouriteGame.picture_url} alt="Favourite Game"/>
+      <div className="profile-page">
+        <header className="profile-header">Profile</header>
+        <img className="avatar" src={currentProfile.image}/>
+        <div className="user-info">
+          <span className="profile-user-header">
+            Username:
+          </span>
+          <span className="profile-user-info">
+            {currentProfile.username}
+          </span>
+          <span className="profile-user-header">
+            Email:
+          </span>
+          <span className="profile-user-info">
+            {currentProfile.email}
+          </span>
         </div>
-        }
-      </div>
-      <div>
-      <p onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</p>
-      {showSessions && <PrevSessionsList sessionsList={previousSessions} currentUser={currentUser}/>}
+          {favouriteGame && 
+          <div className="favourite-game">
+            <span>Favourite Game: </span>
+            <img className="favourite-game-img" src={favouriteGame.picture_url} alt="Favourite Game"/>
+          </div>
+          }
+        <div className="previous-sessions">
+          <span className="session-num" onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</span>
+          {showSessions && <PrevSessionsList sessionsList={previousSessions}    currentUser={currentUser}/>}
+        </div>
       </div>
     </section>
   )

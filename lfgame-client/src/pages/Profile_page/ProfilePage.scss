@@ -1,0 +1,81 @@
+@import "./../../styles/variables.scss";
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .profile-header {
+    font-size: 3em;
+    padding-top: 0.1em;
+
+  }
+
+  .avatar {
+    box-shadow: 0 0 30px $black;
+    border: 3px solid $backgroundBlue;
+    border-radius: 50%;
+    height: 30%;
+    width: 30%;
+    margin: 0.5em;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em 0;
+    width: 50%;
+
+    .profile-user-header {
+      font-size: 1.4em;
+      padding-bottom: 0.2em;
+    }
+
+    .profile-user-info {
+      padding-bottom: 0.7em;
+    }
+  }
+
+  .favourite-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2em;
+
+    .favourite-game-img {
+      height: 69px;
+      width: 184px;
+      border: .1em solid $grey;
+    }
+  }
+
+  .previous-sessions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 0.2em 0 5.5em 0;
+
+    .session-num {
+      padding: 1em;
+      margin-bottom: 1em;
+      align-self: center;
+      border: 1px solid $white;
+      border-radius: 3%;
+      // box-shadow: 0 0 3px #9ecaed;
+    }
+
+    .session-item {
+      padding: 0.5em 0 0 1.5em;
+      margin-top: 10px;
+      // height: 40px;
+      border: 1px solid $white;
+      // border-radius: 1%;
+      // box-shadow: 0 0 2px $grey;
+    }
+  }
+}
