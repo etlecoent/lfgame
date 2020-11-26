@@ -1,4 +1,4 @@
 INSERT INTO
 sessions(game_id, difficulty_level)
 VALUES
-    (1, 'beginner');
+    (1, 'Beginner');
