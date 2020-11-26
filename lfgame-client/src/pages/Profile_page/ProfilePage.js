@@ -33,9 +33,18 @@ const ProfilePage = (props) => {
     <section className="page">
       <header>Profile</header>
       <div>
+        <img src={currentProfile.image}/>
         <p>Username: {currentProfile.username}</p>
         <p>Email: {currentProfile.email}</p>
-        <p>Favourite Game: </p><img src={favouriteGame.picture_url} alt="Favourite Game"/>
+      </div>
+      <div>
+      {/* {message && <div className="alert alert-danger">{message}</div>} */}
+        {favouriteGame && 
+        <div>
+          <p>Favourite Game: </p>
+          <img src={favouriteGame.picture_url} alt="Favourite Game"/>
+        </div>
+        }
       </div>
       <div>
       <p onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</p>
