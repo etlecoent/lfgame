@@ -8,7 +8,6 @@
 
   .profile-header {
     font-size: 3em;
-    padding-top: 0.1em;
 
   }
 
@@ -18,7 +17,7 @@
     border-radius: 50%;
     height: 30%;
     width: 30%;
-    margin: 0.5em;
+    margin: 0.4em;
   }
 
   .user-info {
@@ -26,12 +25,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0.5em 0;
+    padding: 0.5em 0 1em 0;
     width: 50%;
 
     .profile-user-header {
       font-size: 1.4em;
-      padding-bottom: 0.2em;
     }
 
     .profile-user-info {
@@ -66,16 +64,44 @@
       align-self: center;
       border: 1px solid $white;
       border-radius: 3%;
-      // box-shadow: 0 0 3px #9ecaed;
     }
 
-    .session-item {
-      padding: 0.5em 0 0 1.5em;
+    .session-component {
+      padding: 0.2em 0 0 0;
       margin-top: 10px;
-      // height: 40px;
       border: 1px solid $white;
-      // border-radius: 1%;
-      // box-shadow: 0 0 2px $grey;
+      display: flex;
+      flex-direction: column;
+
+      .session-item {
+        padding: 0.3em 0.3em 0 0.3em;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+        .prev-session-text {
+          display: flex;
+          flex-direction: column;
+          padding-left: 0.2em;
+        }
+
+        .game-logo {
+          display: flex;
+          justify-content: center;
+          
+          .game-logo-img {
+            width: 75%;
+            height: 75%;
+            align-self: center;
+          }
+
+        }
+
+      }
+
+
+
+
     }
   }
 }
