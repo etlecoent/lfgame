@@ -1,5 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+
 import axios from "axios";
 
 
@@ -7,6 +8,7 @@ import "./GamesPage.scss";
 
 import SearchBar from './SearchBar';
 import GameList from './GamesList';
+import DifficultyLevel from './DifficultyLevel';
 
 const GamesPage = (props) => {
 
@@ -14,6 +16,10 @@ const GamesPage = (props) => {
   const [games, setGames] = useState([]);
   const [results, setResults] = useState([]);
   const [redirect, setRedirect] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
+
+  // pass the setModal to the gameListItem for it to show on click
+  // pass the findSession event to the modal 
 
   useEffect(() => {
     if (games.length === 0) {
@@ -49,8 +55,13 @@ const GamesPage = (props) => {
       <section className="page">
         <SearchBar onSearch={term => setTerm(term)}/>
         <div className="gameList">
-          <GameList currentUser={props.currentUser} games={results} findSession={findSession}/>
+          <GameList currentUser={props.currentUser} games={results} setModalShow={setModalShow}/>
         </div>
+        <DifficultyLevel
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+
+        />
       </section> 
     }
     </Fragment>

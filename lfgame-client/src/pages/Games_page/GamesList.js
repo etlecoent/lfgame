@@ -12,7 +12,7 @@ const GamesList = (props) => {
         userID={props.currentUser.id}
         imageSource={game.picture_url} 
         numCurrentGamers={game.number_current_gamers}
-        findSession={props.findSession}
+        setModalShow={props.setModalShow}
       />
     );
   });
