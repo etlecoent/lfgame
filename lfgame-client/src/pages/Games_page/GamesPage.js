@@ -66,6 +66,7 @@ const GamesPage = (props) => {
         <DifficultyLevel
         show={modalState.show}
         onHide={() => setModalState(state => ({...state, show:false}))}
+        animation={false}
         findSession={findSession}
         />
       </section> 

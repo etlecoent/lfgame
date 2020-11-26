@@ -36,7 +36,25 @@
 }
 
 .modal-content {
-  background-color: $backgroundBlue;
+  background-color: $black;
+
+
+  .modal-body {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+    .difficultyLevel {
+      padding: 1em;
+    }
+  }
+
+
+  .close {
+    opacity: 100;
+    color: $white;
+    text-shadow: none;
+  }
 }
 
 

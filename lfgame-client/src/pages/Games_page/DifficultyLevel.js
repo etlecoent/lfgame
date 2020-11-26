@@ -1,34 +1,41 @@
-import {Modal, Button} from "react-bootstrap/";
+import {Modal} from "react-bootstrap/";
 
 function DifficultyLevel(props) {
   
+  const {show, onHide, animation } = props;
 
-  
   return (
     <Modal
-      {...props}
+      {...{show, onHide, animation }}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton>
+
         <Modal.Title id="contained-modal-title-vcenter">
           Choose a difficulty
         </Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
-        <div onClick={() => props.findSession("beginner")}>
+
+        <div className="difficultyLevel" onClick={() => props.findSession("beginner")}>
           Beginner
         </div>
-        <div onClick={() => props.findSession("intermediate")}>
+
+        <div className="difficultyLevel" onClick={() => props.findSession("intermediate")}>
           Intermediate
         </div>
-        <div onClick={() => props.findSession("advanced")}>
+
+        <div className="difficultyLevel" onClick={() => props.findSession("advanced")}>
           Advanced
         </div>
-        <div onClick={() => props.findSession("competitive")}>
+
+        <div className="difficultyLevel" onClick={() => props.findSession("competitive")}>
           Competitive
         </div>
+
       </Modal.Body>
     </Modal>
   );
