@@ -120,7 +120,17 @@ module.exports = (db) => {
 
   const getGames = () => {
     const query = {
-        text:`SELECT * FROM games`
+        text:`SELECT games.*, COUNT(users.id) AS number_current_gamers FROM games 
+        LEFT JOIN sessions ON 
+          sessions.game_id = games.id
+          AND sessions.created_at > now() - interval '1 day'
+        LEFT JOIN joined_sessions ON
+          joined_sessions.session_id = sessions.id
+          AND joined_sessions.in_session
+        LEFT JOIN users ON 
+          joined_sessions.user_id = users.id
+        GROUP BY games.id
+        ORDER BY number_current_gamers DESC,  games.id`
     }
 
     return db.query(query)

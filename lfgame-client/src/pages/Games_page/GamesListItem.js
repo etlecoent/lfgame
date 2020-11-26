@@ -13,7 +13,7 @@ const GamesListItem = (props) => {
         <img className="gameImage" alt={props.id} src={props.imageSource}></img>
       </div>
       <footer className="gameListSessions">
-        Number of sessions: {props.numOfSessions}
+        Current gamers: {props.numCurrentGamers}
       </footer>
     </article>
   )
