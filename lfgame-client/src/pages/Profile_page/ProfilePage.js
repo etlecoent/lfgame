@@ -10,23 +10,21 @@ const ProfilePage = (props) => {
 
   const [currentProfile, setCurrentProfile] = useState({});
   const [previousSessions, setPreviousSessions] = useState([]);
-  const [showSessions, setShowSessions] = useState(false);
   const [favouriteGame, setFavouriteGame] = useState({});
+  const [showSessions, setShowSessions] = useState(false);
   const currentUser = props.currentUser;
 
 
   useEffect(() => {
-    axios.get(`/api/users/${currentUser.username}`, {
-      params: {
-        username: currentUser.username
-      }
-    }).then(res => {
+    axios.get(`/api/users/${currentUser.username}`)
+    .then(res => {
       setFavouriteGame(res.data.favourite)
       setCurrentProfile(res.data.user)
       setPreviousSessions(res.data.sessionsList)
     })
     
   }, [])
+
 
   return (
 
