@@ -16,19 +16,33 @@ const PrevSessionItem = (props) => {
       axios.get(`api/users/${currentUser.username}/${sessionID}`).then(res => {
         const parsedList = res.data.map(user => user.username);
         setUserList([...parsedList]);
-
       })
     }
   }
-  
-  console.log("Userlist state: ", userList);
+
+
+  console.log("SessionID: ", sessionID);
+
+  const dateString = new Date(props.date);
   
   return (
-    <div className="session-item" onClick={populatePeople}>
-      <p>
-        Game: {props.game}, 
-        Session ID: {props.sessionID}, 
-      </p>
+    <div className="session-component">
+      <div className="session-item" onClick={populatePeople}>
+        <div className="prev-session-text">
+          <span className="prev-session-name">
+            Game: {props.game}
+          </span>
+          <span className="prev-session-date">
+            Date: {dateString.toDateString()}
+          </span>
+          <span className="prev-session-difficulty">
+            Difficulty: {props.difficulty}
+          </span>
+        </div>
+        <span className="game-logo">
+          <img className="game-logo-img" src={props.gameLogo} alt="Game Logo"/>
+        </span>
+      </div>
       <ul>
         {userList && userList.map(username => <li>{username}</li>)}
       </ul>
