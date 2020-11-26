@@ -8,8 +8,8 @@ const GameInfo = (props) => {
           {props.gameInfo.name}
         </h1>
       </header>
-      <div className="gameInfoImage" >
-        <img alt={props.gameInfo.id} src={props.gameInfo.picture_url}></img>
+      <div>
+        <img className="gameInfoImage" alt={props.gameInfo.id} src={props.gameInfo.picture_url}></img>
       </div>
     </article>
   )
