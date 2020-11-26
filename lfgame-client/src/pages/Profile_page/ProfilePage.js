@@ -35,8 +35,18 @@ const ProfilePage = (props) => {
         <header className="profile-header">Profile</header>
         <img className="avatar" src={currentProfile.image}/>
         <div className="user-info">
-          <span className="profile-user-info">Username: {currentProfile.username}</span>
-          <span className="profile-user-info">Email: {currentProfile.email}</span>
+          <span className="profile-user-header">
+            Username:
+          </span>
+          <span className="profile-user-info">
+            {currentProfile.username}
+          </span>
+          <span className="profile-user-header">
+            Email:
+          </span>
+          <span className="profile-user-info">
+            {currentProfile.email}
+          </span>
         </div>
           {favouriteGame && 
           <div className="favourite-game">

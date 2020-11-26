@@ -8,6 +8,7 @@
 
   .profile-header {
     font-size: 3em;
+    padding-top: 0.1em;
 
   }
 
@@ -17,18 +18,24 @@
     border-radius: 50%;
     height: 30%;
     width: 30%;
-    margin: 1em;
+    margin: 0.5em;
   }
 
   .user-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 0.5em 0;
     width: 50%;
 
+    .profile-user-header {
+      font-size: 1.4em;
+      padding-bottom: 0.2em;
+    }
+
     .profile-user-info {
-      padding: 3px;
+      padding-bottom: 0.7em;
     }
   }
 
@@ -37,7 +44,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1em;
+    padding-bottom: 2em;
 
     .favourite-game-img {
       height: 69px;
