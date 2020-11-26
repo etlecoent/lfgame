@@ -32,20 +32,20 @@ const ProfilePage = (props) => {
 
     <section className="page">
       <div className="profile-page">
-        <header>Profile</header>
+        <header className="profile-header">Profile</header>
+        <img className="avatar" src={currentProfile.image}/>
         <div className="user-info">
-          <img className="avatar" src={currentProfile.image}/>
-          <span>Username: {currentProfile.username}</span>
-          <span>Email: {currentProfile.email}</span>
+          <span className="profile-user-info">Username: {currentProfile.username}</span>
+          <span className="profile-user-info">Email: {currentProfile.email}</span>
         </div>
           {favouriteGame && 
           <div className="favourite-game">
             <span>Favourite Game: </span>
-            <img src={favouriteGame.picture_url} alt="Favourite Game"/>
+            <img className="favourite-game-img" src={favouriteGame.picture_url} alt="Favourite Game"/>
           </div>
           }
         <div className="previous-sessions">
-          <span className="session-num" onClick={() => setShowSessions  (!showSessions)}>Number of Previous   Sessions: {previousSessions.  length}</span>
+          <span className="session-num" onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</span>
           {showSessions && <PrevSessionsList sessionsList={previousSessions}    currentUser={currentUser}/>}
         </div>
       </div>
