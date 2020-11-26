@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import NavBar from './pages/Nav_bar/NavBar';
 import GamesPage from './pages/Games_page/GamesPage';
@@ -25,6 +25,7 @@ const App = () => {
 
   const logout = () => {
     setCurrentUser(null);
+    setCurrentSession(null)
     localStorage.removeItem("user");
   };
   
@@ -53,33 +54,34 @@ const App = () => {
     <div id="App" >
       <Router>
         <NavBar currentUser={currentUser} logout={() => logout()}/>
-        <MenuBar currentUser={currentUser} logout={() => logout()}/>
         <Switch>
           
-          <Route exact path="/">
-            {redirectLogin() || <GamesPage currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
-          </Route>
+            <Route exact path="/">
+              {redirectLogin() || <GamesPage currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
+            </Route>
 
-          <Route exact path="/sessions">
-          {!currentSession ? checkForSession() : <SessionPage currentSession={currentSession} currentUser={currentUser}/>}
-          </Route>
+            <Route exact path="/sessions">
+            {!currentSession ? checkForSession() : <SessionPage currentSession={currentSession} currentUser={currentUser}/>}
+            </Route>
 
-          <Route exact path="/profile">
-            {redirectLogin() || <ProfilePage currentUser={currentUser} />}
-          </Route>
+            <Route exact path="/profile">
+              {redirectLogin() || <ProfilePage currentUser={currentUser} />}
+            </Route>
 
-          <Route exact path ="/register">
-            {redirectGames() || <RegisterPage setCurrentUser={setCurrentUser}/>}
-          </Route>
-        
-          <Route exact path ="/login">
-            {redirectGames() || <LoginPage setCurrentUser={setCurrentUser}/>}         
-          </Route>
+            <Route exact path ="/register">
+              {redirectGames() || <RegisterPage setCurrentUser={setCurrentUser}/>}
+            </Route>
+          
+            <Route exact path ="/login">
+              {redirectGames() || <LoginPage setCurrentUser={setCurrentUser}/>}         
+            </Route>
+          
 
           <Route path="*">
             <h1>404 - Not Found</h1>
           </Route>
         </Switch>
+        <MenuBar currentUser={currentUser} logout={() => logout()}/>
       </Router>
     </div>
   );

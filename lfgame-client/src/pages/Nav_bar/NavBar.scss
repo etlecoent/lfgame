@@ -2,20 +2,19 @@
 
 .topNav {
   display: flex;
-  // justify-content: space-around;
+  justify-content: space-around;
   align-items: center;
   background-color: $black;
   color: $white;
-  position: fixed;
   width: 100%;
   height: 81px;
+  position: fixed;
 
   .username {
-    font-size: xxx-large;
+    font-size: xx-large;
   }
 
   div {
-    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,11 +35,14 @@
   }
 
   .logo {
+    
     height: 50px;
     width: 50px;
-    border-radius: 50%;
     font-size: larger;
+  }
 
+  .logo-container {
+    padding: 1em;
   }
 
   @media (prefers-reduced-motion: no-preference) {

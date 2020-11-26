@@ -8,7 +8,7 @@ const NavBar = (props) => {
 
   return (
     <nav className="topNav">
-      <div> 
+      <div className="logo-container"> 
         <Link to="/">
         <img className="logo" alt= "logo" src={logo}/>  
         </Link> 
@@ -17,16 +17,6 @@ const NavBar = (props) => {
       <div className="username"> 
         <Link to="/profile" >
           {props.currentUser && props.currentUser.username}
-        </Link>
-      </div>
-
-      <div>
-        <Link to="/login" >
-          {props.currentUser ? 
-            <p onClick={props.logout}>
-              Logout
-            </p>          
-          : null}
         </Link>
       </div>
 
