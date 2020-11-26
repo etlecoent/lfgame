@@ -18,10 +18,10 @@ module.exports = (io, {
 
   /* Check for available sessions */
   router.post('/', (req, res) => {
-    console.log(req.body)
-    const { gameID, userID } = req.body;
+    
+    const { gameID, userID, difficultyLevel } = req.body;
   
-    checkForSessionWithSpace(gameID)
+    checkForSessionWithSpace(gameID, difficultyLevel)
           .then((session) => {
             // if there is a session with space, add them to the session
             if (session) {
@@ -36,7 +36,7 @@ module.exports = (io, {
               
             } else {
               // if there is not a session with space, create a new session with the game id and add them to that session
-              return createNewSession(gameID)
+              return createNewSession(gameID, difficultyLevel)
               // set timeout for 12 hours, change status to f after 12 hours 
               .then(newSession => {
                 return addUserToAvailableSession(userID, newSession.id)
@@ -63,15 +63,13 @@ module.exports = (io, {
 
   io.on("connection", (socket) => {
   
-
-
     const { sessionId, username, userId } = socket.handshake.query;
 
-    console.log(`${socket.id} has connected`);
     socket.sessionId = sessionId;
     socket.username = username;
     socket.userId = userId;
-    // socket.userId = userId;
+  
+    console.log(`${socket.id} has joined session ${socket.sessionId}`);
     
     // Adds the user to the according sessions
     socket.join(socket.sessionId);
@@ -81,13 +79,12 @@ module.exports = (io, {
       io.to(socket.sessionId).emit("user has joined", {users: res, joiningUser: socket.username})  
     });
   
-
     socket.on("sending message", (message) => {
       io.to(socket.sessionId).emit("incoming message", message);
     });
 
     socket.on("disconnecting", (reason) => {
-      console.log(`${socket.id} has left ${socket.rooms}`) 
+      console.log(`${socket.id} has left session ${socket.sessionId}`) 
       
       //removes the user from the session
       //sends back the updated list of users in the session

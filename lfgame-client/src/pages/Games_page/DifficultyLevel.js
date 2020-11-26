@@ -1,6 +1,9 @@
 import {Modal, Button} from "react-bootstrap/";
 
 function DifficultyLevel(props) {
+  
+
+  
   return (
     <Modal
       {...props}
@@ -14,11 +17,19 @@ function DifficultyLevel(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {"Difficulties in here"}
+        <div onClick={() => props.findSession("beginner")}>
+          Beginner
+        </div>
+        <div onClick={() => props.findSession("intermediate")}>
+          Intermediate
+        </div>
+        <div onClick={() => props.findSession("advanced")}>
+          Advanced
+        </div>
+        <div onClick={() => props.findSession("competitive")}>
+          Competitive
+        </div>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   );
 }

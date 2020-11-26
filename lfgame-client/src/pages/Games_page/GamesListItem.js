@@ -2,10 +2,8 @@ import "./GamesListItem.scss";
 
 const GamesListItem = (props) => {
 
-  const {gameID, userID} = props;
-  
   return(
-    <article className="gameListItem" onClick={() => props.setModalShow(true)}>
+    <article className="gameListItem" onClick={() => props.setModalState(state => ({...state, show:true, gameID:props.gameID}))}>
       <header className="gameListName">
         <h1>{props.name}</h1>
       </header>
