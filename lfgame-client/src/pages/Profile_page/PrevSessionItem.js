@@ -24,11 +24,10 @@ const PrevSessionItem = (props) => {
   console.log("Userlist state: ", userList);
   
   return (
-    <div onClick={populatePeople}>
+    <div className="session-item" onClick={populatePeople}>
       <p>
         Game: {props.game}, 
         Session ID: {props.sessionID}, 
-        Players: 
       </p>
       <ul>
         {userList && userList.map(username => <li>{username}</li>)}
