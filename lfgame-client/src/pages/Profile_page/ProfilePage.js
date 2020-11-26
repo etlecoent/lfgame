@@ -31,7 +31,7 @@ const ProfilePage = (props) => {
     <section className="page">
       <div className="profile-page">
         <header className="profile-header">Profile</header>
-        <img className="avatar" src={currentProfile.image}/>
+        <img className="avatar" alt="User Avatar" src={currentProfile.image}/>
         <div className="user-info">
           <span className="profile-user-header">
             Username:
@@ -54,7 +54,7 @@ const ProfilePage = (props) => {
           }
         <div className="previous-sessions">
           <span className="session-num" onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</span>
-          {showSessions && <PrevSessionsList sessionsList={previousSessions}    currentUser={currentUser}/>}
+          {showSessions && <PrevSessionsList sessionsList={previousSessions} currentUser={currentUser}/>}
         </div>
       </div>
     </section>
