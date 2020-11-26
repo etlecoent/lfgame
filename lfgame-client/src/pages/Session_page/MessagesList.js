@@ -1,6 +1,7 @@
 import MessagesListItem from "./MessagesListItem";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 import "./MessagesList.scss";
 
@@ -20,18 +21,23 @@ const MessagesList = (props) => {
             <div className="scrollable" id="scrollable">
             <Card.Body className="chatWindow">
               {messages.map((message, i) => (
-                <MessagesListItem key={i} message={message} />
+                <MessagesListItem key={i} message={message} currentUser={props.currentUser}/>
               ))}
             </Card.Body>
             </div>
             <Card.Footer className="textBox">
               <form onSubmit={event => event.preventDefault()}>
                 <div>
-                  <input onSubmit={props.sendMessage} type="text" placeholder="Enter message" value={props.msg} onChange={props.onChange} />
+                  <textarea
+                    onSubmit={props.sendMessage} 
+                    type="text" placeholder="Enter message" 
+                    value={props.msg} 
+                    onChange={props.onChange} 
+                  />
                 </div>
-                <button onClick={props.sendMessage}>
+                <Button onClick={props.sendMessage}>
                   Send Message
-                </button>
+                </Button>
               </form>
             </Card.Footer>
           </div>
@@ -44,16 +50,3 @@ const MessagesList = (props) => {
 
 
 export default MessagesList;
-
-{/* <Accordion defaultActiveKey="0">
-  <Card>
-    <Accordion.Toggle as={Card.Header} eventKey="0">
-      Click me!
-    </Accordion.Toggle>
-    <Accordion.Collapse eventKey="0">
-      <Card.Body>Hello! I'm the body</Card.Body>
-    </Accordion.Collapse>
-  </Card>
-</Accordion> 
-    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle> for usernames?, No I think I will just fix it in css, so have like name above message or something
-*/}

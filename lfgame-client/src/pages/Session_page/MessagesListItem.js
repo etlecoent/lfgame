@@ -1,18 +1,17 @@
-// import "./MessagesListItem.scss";
-import Card from "react-bootstrap/Card";
+import "./MessagesListItem.scss";
 
 const MessagesListItem = (props) => {
-  const checkForSystem = () => {
-    if (props.message.username !== 'System') {
-      return <p> {props.message.username} says: {props.message.content} </p>
+  const checkForCurrentUser = () => {
+    if (props.currentUser === props.message.username) {
+      return "currentUser"
     } else {
-      return <p> {props.message.content} </p>
+      return "otherUser"
     }
   }
   
   return(
     
-      <article>
+      <article className={checkForCurrentUser()}>
         <header>
           {props.message.username}:
         </header>

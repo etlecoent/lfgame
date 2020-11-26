@@ -1,6 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
+import Button from "react-bootstrap/Button";
+import { Link } from 'react-router-dom';
+
 
 import GameInfo from "./GameInfo";
 import GamersList from "./GamerList";
@@ -54,7 +57,6 @@ const SessionPage = (props) => {
       setMessages(messages => [...messages, {username: "System", content: `User ${joiningUser} has joined the channel`}])
       
       setUsers([...users]);
-      updateScroll();
     });
 
     socketRef.current.on("user has left", ({users , leavingUser}) => {
@@ -62,7 +64,6 @@ const SessionPage = (props) => {
       setMessages(messages => [...messages, {username: "System", content: `User ${leavingUser} has left the channel`}])
       
       setUsers([...users]);
-      updateScroll();
     });
 
     socketRef.current.on("incoming message", (message) => {
@@ -83,19 +84,19 @@ const SessionPage = (props) => {
 
       <GamersList users={users} />
 
-      <button onClick={() => leaveSession()}>
-        Leave session
-      </button>
+      <MessagesList 
+        className="messages"  
+        sendMessage={sendMessage} msg={msg} 
+        onChange={event => setMsg(event.target.value)}
+        currentUser={currentUser.username}
+        messages={messages}
+      />
+      <Link to="/">
+        <Button className="leaveSession" onClick={() => leaveSession()}>
+          Leave session
+        </Button>
+      </Link>
 
-      <form onSubmit={event => event.preventDefault()}>
-        <div>
-          <input type="text" placeholder="Enter message" value={msg} onChange={event => setMsg(event.target.value)} />
-        </div>
-        <button onClick={sendMessage}>
-          Send Message
-        </button>
-      </form>
-      <MessagesList className="messages" leaveSession={() => leaveSession()} sendMessage={sendMessage} msg={msg} onChange={event => setMsg(event.target.value)} messages={messages} />
     </section>
 
   )

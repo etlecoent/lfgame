@@ -24,3 +24,13 @@
   bottom: 0;
   right: 0;
 }
+
+.leaveSession {
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: $black;
+  color: $white;
+  height: 56px
+}

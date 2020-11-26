@@ -10,6 +10,7 @@
 }
 
 .scrollable {
+  background-color: $black;
   overflow-y: scroll;
   max-height: 300px;
   height: 300px
@@ -23,3 +24,20 @@
   flex-direction: column-reverse;
 }
 
+.chatButton {
+  text-align: center;
+  background-color: $black;
+  color: $white;
+}
+
+.textBox{
+  background-color: $black;
+
+  border-top: 1px solid $grey;
+  border-bottom: 1px solid $grey;
+  text-align: center;
+}
+
+textarea {
+  width: 90%;
+}

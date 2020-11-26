@@ -1,0 +1,26 @@
+@import "./../../styles/variables.scss";
+
+.otherUser {
+  margin-right: 35%;
+  margin-top: 5%;
+  padding-left: 25px;
+  padding-right: 15px;
+  padding-top: 10px;
+  border: 1px solid $menuBlue;
+  background-color: $menuBlue;
+  color: $white;
+  border-radius: 50px 50px 50px 5px;
+}
+
+.currentUser {
+  margin-left: 35%;
+  margin-top: 5%;
+  padding-left: 25px;
+  padding-right: 15px;
+  padding-top: 10px;
+  border: 1px solid $red;
+  background-color: $red;
+  color: $white;
+  border-radius: 50px 50px 5px 50px;
+}
+
