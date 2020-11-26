@@ -4,5 +4,6 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
+    image TEXT DEFAULT 'https://www.artifacting.com/blog/wp-content/uploads/2010/11/Spiderman-150x126.png',
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
