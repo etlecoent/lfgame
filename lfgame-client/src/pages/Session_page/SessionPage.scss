@@ -18,3 +18,9 @@
     border: .1em solid $grey;
   }
 }
+
+.messages {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}

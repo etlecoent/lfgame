@@ -1,4 +1,5 @@
 // import "./MessagesListItem.scss";
+import Card from "react-bootstrap/Card";
 
 const MessagesListItem = (props) => {
   const checkForSystem = () => {
@@ -10,16 +11,16 @@ const MessagesListItem = (props) => {
   }
   
   return(
-    <li>
+    
       <article>
         <header>
-          {props.message.username}
+          {props.message.username}:
         </header>
         <p>
           {props.message.content}
         </p>
       </article>
-    </li>
+    
   )
 }
 

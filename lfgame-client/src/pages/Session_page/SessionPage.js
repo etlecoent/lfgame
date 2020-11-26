@@ -22,6 +22,11 @@ const SessionPage = (props) => {
     socketRef.current.disconnect();
   };
 
+  const updateScroll = () => {
+    const element = document.getElementById("scrollable");
+    element.scrollTop = element.scrollHeight - element.clientHeight;
+  }
+
   const sendMessage = () => {
     const outgoingMessage = {
       username: currentUser.username,
@@ -29,7 +34,8 @@ const SessionPage = (props) => {
     }
     socketRef.current.emit("sending message", outgoingMessage);
     setMsg("");
-  } 
+    updateScroll();
+  }
 
   useEffect(() => {
     
@@ -48,6 +54,7 @@ const SessionPage = (props) => {
       setMessages(messages => [...messages, {username: "System", content: `User ${joiningUser} has joined the channel`}])
       
       setUsers([...users]);
+      updateScroll();
     });
 
     socketRef.current.on("user has left", ({users , leavingUser}) => {
@@ -55,10 +62,12 @@ const SessionPage = (props) => {
       setMessages(messages => [...messages, {username: "System", content: `User ${leavingUser} has left the channel`}])
       
       setUsers([...users]);
+      updateScroll();
     });
 
     socketRef.current.on("incoming message", (message) => {
       setMessages(messages => [...messages, message])
+      updateScroll();
     })
 
     return () => {
@@ -73,11 +82,6 @@ const SessionPage = (props) => {
       <GameInfo gameInfo={gameInfo} />
 
       <GamersList users={users} />
-      
-      <h2>
-        Messages
-      </h2>
-      <MessagesList messages={messages} />
 
       <button onClick={() => leaveSession()}>
         Leave session
@@ -91,8 +95,9 @@ const SessionPage = (props) => {
           Send Message
         </button>
       </form>
-
+      <MessagesList className="messages" leaveSession={() => leaveSession()} sendMessage={sendMessage} msg={msg} onChange={event => setMsg(event.target.value)} messages={messages} />
     </section>
+
   )
 
 };

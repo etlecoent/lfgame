@@ -1,0 +1,25 @@
+@import "./../../styles/variables.scss";
+
+.chat {
+  color: $black;
+  background-color: $white;
+  width: 100%;
+  position: absolute;
+  bottom: 60px;
+  z-index: 0;
+}
+
+.scrollable {
+  overflow-y: scroll;
+  max-height: 300px;
+  height: 300px
+}
+
+.card { 
+  width: 100%;
+}
+
+.chat .card {
+  flex-direction: column-reverse;
+}
+
