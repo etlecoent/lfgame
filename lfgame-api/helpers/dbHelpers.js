@@ -179,7 +179,14 @@ const userRejoinSession = (userID, sessionID) => {
 const getPreviousSessions = (userID) => {
     const query = {
         text: `
-        SELECT users.username AS username, joined_sessions.id AS joinedID, sessions.id AS sessionID, games.name 
+        SELECT 
+            users.username AS username,
+            joined_sessions.id AS joinedID,
+            sessions.id AS sessionID,
+            sessions.difficulty_level AS difficulty,
+            sessions.created_at AS date,
+            games.picture_url AS logo,
+            games.name
         FROM sessions 
         INNER JOIN joined_sessions ON joined_sessions.session_id = sessions.id 
         INNER JOIN users ON joined_sessions.user_id = users.id 

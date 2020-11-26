@@ -89,7 +89,7 @@ module.exports = ({
 
     router.get('/:username', (req, res) => {
 
-        const username = req.query.username;
+        const username = req.params.username;
         getUserByUsername(username)
             .then(user => {
                 const result = { user }
