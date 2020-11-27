@@ -9,7 +9,7 @@ const GamerList = (props) => {
     <section className="gamerList">
       <h1>Users</h1>
     
-      <ul>
+      <div className="gamerListDiv">
         {props.users.map((user, i) => ( 
         
           <GamerListItem 
@@ -18,7 +18,7 @@ const GamerList = (props) => {
             username={user.username}
           /> 
         ))}
-      </ul>
+      </div>
     </section>
   )
 };

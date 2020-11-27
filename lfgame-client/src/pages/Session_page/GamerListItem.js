@@ -2,10 +2,12 @@
 const GamerListItem = (props) => {
   
   return(
-    <li className="gamerListItem">
+    <div className="gamerListItem">
       <img src={props.avatar}/>
-      <span>{props.username}</span>
-    </li>
+      <div className="gamerName">
+        {props.username}
+        </div>
+    </div>
   )
 }
 
