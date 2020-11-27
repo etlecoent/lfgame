@@ -27,23 +27,14 @@
       text-decoration: none;
     }
 
-    button {
-      background-color: $red;
-      color: $white;
-      border: none;
-      font-family: $font-family;
-      // font-size: larger;
-    }
-
   }
 
   .logo {
     
-    height: 50px;
-    width: 50px;
-    font-size: larger;
+    height: 60px;
+    width: 60px;
     position: absolute;
-    top: 15px;
+    top: 10px;
     left: 7%;
   }
 
