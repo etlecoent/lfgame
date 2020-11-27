@@ -25,7 +25,7 @@ const HomePage = (props) => {
         </span>
 
         <span className="testimony">
-          C-J: "I made so much friends thanks to this App!"
+          C-J: "I made so many friends thanks to this App!"
         </span>
 
 

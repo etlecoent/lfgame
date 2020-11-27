@@ -8,16 +8,17 @@ const { getPostsByUsers } = require('../helpers/dataHelpers.js');
 
 
 module.exports = ({
-  getUsers,
-  getUserByEmail,
-  addUser,
-  getUserByUsername,
-  getPreviousSessions,
-  usersInPrevSession,
-  favouriteGame,
+    getUsers,
+    getUserByEmail,
+    addUser,
+    getUserByUsername,
+    getPreviousSessions,
+    usersInPrevSession,
+    favouriteGame,
+    updateUserProfile,
 }) => {
-    
-  router.post('/register', (req, res) => {
+
+    router.post('/register', (req, res) => {
 
     const {
       username,
@@ -38,6 +39,8 @@ module.exports = ({
         addUser(username, email, hashedPassword)
           .then(user => res.json({
             username: user.username,
+            email: user.email,
+            image: user.image,
             id: user.id,
             token: jsonwebtoken.sign({ username: user.username }, process.env.JWT_SECRET)
           }));
@@ -63,6 +66,8 @@ module.exports = ({
           if (bcrypt.compareSync(password, user.password)) {
             res.json({
               username: user.username,
+              email: user.email,
+              image: user.image,
               id: user.id,
               token: jsonwebtoken.sign({ username: user.username }, process.env.JWT_SECRET)
             });
@@ -85,6 +90,7 @@ module.exports = ({
         res.sendStatus(403);
       } else {
         const username = req.params.username;
+        console.log("username: ", username)
         getUserByUsername(username)
           .then(user => {
             const result = { user };
@@ -122,6 +128,24 @@ module.exports = ({
     });
   });
 
+    router.post('/:username', (req, res) => {
+
+        const {id, avatar, username, email} = req.body;
+
+        updateUserProfile(avatar, username, email, id)
+        .then(result => {
+            console.log("UPDATE USER RESULT: ", result);
+            res.json({
+                username: result.username,
+                email: result.email,
+                image: result.image,
+                id: result.id,
+                token: jsonwebtoken.sign({ username: result.username }, process.env.JWT_SECRET)
+            })
+        }).catch(err => res.json({
+            error: err.message
+        }));
+    })
 
 
   return router;

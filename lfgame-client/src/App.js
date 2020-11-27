@@ -8,6 +8,7 @@ import RegisterPage from './pages/Register_page/RegisterPage';
 import SessionPage from './pages/Session_page/SessionPage';
 import MenuBar from './pages/Menu_bar/MenuBar';
 import HomePage from './pages/Home_page/HomePage';
+import UpdatePage from './pages/Update_page/UpdatePage';
 
 import './App.scss';
 
@@ -23,6 +24,7 @@ const App = () => {
 
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
   const [currentSession, setCurrentSession] = useState(null);
+  const [currentProfile, setCurrentProfile] = useState({});
 
   const logout = () => {
     setCurrentUser(null);
@@ -70,7 +72,11 @@ const App = () => {
             </Route>
 
             <Route exact path="/profile">
-              {redirectHome() || <ProfilePage currentUser={currentUser} />}
+              {redirectHome() || <ProfilePage currentUser={currentUser} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile}/>}
+            </Route>
+
+            <Route exact path="/update">
+              {redirectHome() || <UpdatePage currentUser={currentUser} setCurrentUser={setCurrentUser} setCurrentProfile={setCurrentProfile}/>}
             </Route>
 
             <Route exact path ="/register">

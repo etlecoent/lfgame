@@ -15,7 +15,6 @@ const PrevSessionsList = (props) => {
         difficulty={session.difficulty}
         gameLogo={session.logo}
         currentUser={currentUser}
-        currentProfile={props.currentProfile}
         setCurrentProfile={props.setCurrentProfile}
         setFavouriteGame={props.setFavouriteGame}
         setPreviousSessions={props.setPreviousSessions}

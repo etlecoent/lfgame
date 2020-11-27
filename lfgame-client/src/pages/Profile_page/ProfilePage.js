@@ -8,11 +8,10 @@ import PrevSessionsList from "./PrevSessionsList";
 const ProfilePage = (props) => {
 
 
-  const [currentProfile, setCurrentProfile] = useState({});
   const [previousSessions, setPreviousSessions] = useState([]);
   const [favouriteGame, setFavouriteGame] = useState({});
   const [showSessions, setShowSessions] = useState(false);
-  const currentUser = props.currentUser;
+  const {currentUser, currentProfile, setCurrentProfile} = props;
 
   const isEmpty = (object) => {
     return Object.keys(object).length === 0;
