@@ -21,7 +21,6 @@
 
     .gamerListItem {
       width: 100%;
-      list-style-type: none;
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -30,9 +29,8 @@
       
       .gamerName {
         display: flex;
-        // justify-content: center;
         align-items: center;
-        width: 100%;
+        max-width: 50px;
         height: 100%;
         color: $red;
         margin-left: 2.5em;
