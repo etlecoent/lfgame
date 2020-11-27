@@ -100,8 +100,13 @@
 
       }
 
+      .userlist {
+        padding-top: 0.3em;
 
-
+        .userlist-item {
+          text-decoration: underline;
+        }
+      }
 
     }
   }
