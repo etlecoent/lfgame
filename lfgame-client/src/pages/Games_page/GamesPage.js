@@ -27,7 +27,7 @@ const GamesPage = (props) => {
 
   useEffect(() => {
     if (games.length === 0) {
-      axios.get("/api/games").then((res) => {
+      axios.get("/api/games", { headers: {"Authorization" : props.currentUser.token} }).then((res) => {
         setGames(res.data)
         setResults(res.data)
       })
@@ -43,7 +43,7 @@ const GamesPage = (props) => {
       gameID: modalState.gameID,
       userID: modalState.userID,
       difficultyLevel
-    }).then((res) => {
+    }, { headers: {"Authorization" : props.currentUser.token} }).then((res) => {
       props.setCurrentSession({session_id: res.data.session_id});
       setRedirect(true);
     })
