@@ -18,8 +18,8 @@ const ProfilePage = (props) => {
   useEffect(() => {
     axios.get(`/api/users/${currentUser.username}`)
     .then(res => {
-      setFavouriteGame(res.data.favourite)
       setCurrentProfile(res.data.user)
+      setFavouriteGame(res.data.favourite)
       setPreviousSessions(res.data.sessionsList)
     })
     
