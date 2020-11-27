@@ -14,17 +14,20 @@ const ProfilePage = (props) => {
   const [showSessions, setShowSessions] = useState(false);
   const currentUser = props.currentUser;
 
+  const isEmpty = (object) => {
+    return Object.keys(object).length === 0;
+  }
 
-  useEffect(() => {
-    axios.get(`/api/users/${currentUser.username}`)
-    .then(res => {
-      setCurrentProfile(res.data.user)
-      setFavouriteGame(res.data.favourite)
-      setPreviousSessions(res.data.sessionsList)
-    })
-    
-  }, [])
-
+  useEffect(() => {  
+    if (isEmpty(currentProfile)) {
+      axios.get(`/api/users/${currentUser.username}`)
+      .then(res => {
+        setCurrentProfile(res.data.user)
+        setFavouriteGame(res.data.favourite)
+        setPreviousSessions(res.data.sessionsList)
+      })
+    }
+  }, [currentProfile])
 
   return (
 
@@ -53,8 +56,23 @@ const ProfilePage = (props) => {
           </div>
           }
         <div className="previous-sessions">
-          <span className="session-num" onClick={() => setShowSessions(!showSessions)}>Number of Previous Sessions: {previousSessions.length}</span>
-          {showSessions && <PrevSessionsList sessionsList={previousSessions} currentUser={currentUser}/>}
+          <span 
+            className="session-num" 
+            onClick={() => setShowSessions(!showSessions)}>
+            Previous Sessions
+          </span>
+          {showSessions && 
+            <PrevSessionsList 
+              sessionsList={previousSessions}
+              currentUser={currentUser}
+              currentProfile={currentProfile}
+              setCurrentProfile={setCurrentProfile}
+              setFavouriteGame={setFavouriteGame}
+              setPreviousSessions={setPreviousSessions}
+              showSessions={showSessions}
+              setShowSessions={setShowSessions}
+            />
+          }
         </div>
       </div>
     </section>

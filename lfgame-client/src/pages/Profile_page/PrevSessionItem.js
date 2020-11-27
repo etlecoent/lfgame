@@ -6,7 +6,8 @@ const PrevSessionItem = (props) => {
 
   const currentUser = props.currentUser;
   const sessionID = props.sessionID;
-  const [userList, setUserList] = useState([])
+  const {setCurrentProfile, setFavouriteGame, setPreviousSessions, setShowSessions, showSessions} = props;
+  const [userList, setUserList] = useState([]);
 
 
   const populatePeople = () => {
@@ -20,8 +21,14 @@ const PrevSessionItem = (props) => {
     }
   }
 
-
-  console.log("SessionID: ", sessionID);
+  const goToFriend = (username) => {
+    axios.get(`/api/users/${username}`)
+    .then(res => {
+      setCurrentProfile(res.data.user)
+      setFavouriteGame(res.data.favourite)
+      setPreviousSessions(res.data.sessionsList)
+    })
+  }
 
   const dateString = new Date(props.date);
   
@@ -44,7 +51,13 @@ const PrevSessionItem = (props) => {
         </span>
       </div>
       <ul>
-        {userList && userList.map(username => <li>{username}</li>)}
+        {userList && userList.map(username => 
+          <li className="userlist-item" onClick={() => {
+            setShowSessions(!showSessions);
+            goToFriend(username)
+          }}>
+          {username}
+          </li>)}
       </ul>
     </div>
 
