@@ -5,13 +5,13 @@ const bcrypt = require('bcrypt');
 
 
 module.exports = ({
-    getGames
+  getGames
 }) => {
     
   router.get("/", (req, res) => {
     getGames()
       .then((games) => res.json(games))
-      .catch((err) => res.json ({
+      .catch((err) => res.json({
         error: err.message
       }));
   });
