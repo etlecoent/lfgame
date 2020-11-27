@@ -21,7 +21,7 @@
     
     width: 80%;
     height: 30%;
-    margin-top: 2em;
+    margin-top: 1em;
     border-radius: 5px 5px 5px 5px;
     
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), $connectImage;
@@ -37,22 +37,34 @@
   }
   
   #about {
+    margin-top: 1em;
     font-size: 2vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 80%;
-    height: 30%;
+    // height: 30%;
+  }
+
+  .testimony {
+    font-size: 1.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    margin: 1em 0;
+    font-style: oblique;
   }
 
   .buttons {
 
-    
+    margin-top: 1em;
     display: flex;
     flex-direction: row;
-    align-items: space-around;
     justify-content: space-around;
+    align-items: center;
     width: 80%;
 
   }
