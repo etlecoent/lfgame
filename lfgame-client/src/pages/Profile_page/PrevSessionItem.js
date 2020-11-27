@@ -50,7 +50,7 @@ const PrevSessionItem = (props) => {
           <img className="game-logo-img" src={props.gameLogo} alt="Game Logo"/>
         </span>
       </div>
-      <ul>
+      <ul className="userlist">
         {userList && userList.map(username => 
           <li className="userlist-item" onClick={() => {
             setShowSessions(!showSessions);
