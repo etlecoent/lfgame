@@ -26,11 +26,15 @@
 
 .dropdown-item {
   color: $white;
-  
+  padding-bottom: 1.5em;
 }
 
-
 .menuItem {
+  color: $white;
+}
+
+.menuItem:active {
+  background-color: $black;
   color: $white;
 }
 
@@ -38,7 +42,7 @@
   color: $white;
   background-color: $black;
   border: none;
-  height: 100px;
+  height: 10em;
   width: 100%;
 }
 

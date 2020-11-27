@@ -35,6 +35,9 @@ const SessionPage = (props) => {
       username: currentUser.username,
       content: msg
     }
+    if (!msg) {
+      return;
+    }
     socketRef.current.emit("sending message", outgoingMessage);
     setMsg("");
     updateScroll();
