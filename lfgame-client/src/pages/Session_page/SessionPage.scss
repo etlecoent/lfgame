@@ -30,7 +30,13 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background-color: $black;
+  background-color: $red;
+  border: none;
   color: $white;
-  height: 56px
+  height: 60px;
+  box-shadow: none;
+}
+
+.leaveSession:hover {
+  background-color: $red;
 }

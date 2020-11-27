@@ -17,6 +17,7 @@ const MenuBar = (props) => {
         drop={"up"}
         title={"Menu"}
       >
+      <Dropdown.Item className="menuItem" href="/games" >Games</Dropdown.Item>
       <Dropdown.Item className="menuItem" href="/profile" >Profile</Dropdown.Item>
       <Dropdown.Item className="menuItem" onClick={props.logout}>Logout</Dropdown.Item>
       </DropdownButton>
