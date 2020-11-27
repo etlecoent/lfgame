@@ -39,6 +39,9 @@ const RegisterPage = (props) => {
     } else if (!username) {
       setMessage("Username cannot be blank");
       return;
+    } else if (username.length > 20) {
+      setMessage("Username must be less than 20 chars long");
+      return;
     } else if (!password) {
       setMessage("Password cannot be blank");
       return;
