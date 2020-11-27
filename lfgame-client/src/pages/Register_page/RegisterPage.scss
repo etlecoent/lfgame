@@ -1,3 +1,4 @@
+@import "./../../styles/variables.scss";
 
 #registerPage {
 
@@ -34,6 +35,13 @@
   }
 
   .loginButton {
-    padding: 1em 0;
+    
+    padding-top: 0.5em;    
+    padding-bottom: 1em;
+    
+    .btn {
+      color: $white;
+    }
+      
   }
 }

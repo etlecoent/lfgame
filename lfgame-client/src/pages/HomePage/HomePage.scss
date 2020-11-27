@@ -1,3 +1,5 @@
+@import "./../../styles/variables.scss";
+
 #homePage {
   
   display: flex;
@@ -13,10 +15,10 @@
   }
 
   #connect {
-    // height: 171px;
     width: 80%;
-    padding: 2em 0;
-    // width: 1em;
+    margin: 2em 0;
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid $white;
   }
   
   .buttons {
@@ -28,5 +30,9 @@
     justify-content: space-around;
     width: 100%;
 
+  }
+
+  .btn {
+    color: $white;
   }
 }
