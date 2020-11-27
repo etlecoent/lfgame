@@ -13,17 +13,28 @@
   }
 
   ul {
+    
     width: 100%;
     border-bottom: 1px solid $white;
     border-top: 1px solid $white;
-
     padding-inline-start: 0;
 
     li {
-      list-style-type: katakana-iroha;
+      list-style-type: none;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
       color: $red; 
       padding: 0.5em 0;
-      margin-left: 3em;
+      
+      img {
+        height: auto;
+        width: 25%;
+        box-shadow: 0 0 30px $black;
+        border: 3px solid $backgroundBlue;
+        border-radius: 50%;
+      }
+
     }
   }
 }

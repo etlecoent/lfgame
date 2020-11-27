@@ -105,7 +105,7 @@ module.exports = (db) => {
 
   const usersInSession = (sessionID) => {
     const query = {
-      text:`SELECT username FROM users
+      text:`SELECT username, image FROM users
                 JOIN joined_sessions ON user_id = users.id
                 WHERE joined_sessions.session_id = $1
                 AND joined_sessions.in_session = true

@@ -14,6 +14,7 @@ const GamerList = (props) => {
         
           <GamerListItem 
             key={i} 
+            avatar={user.image}
             username={user.username}
           /> 
         ))}
