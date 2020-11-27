@@ -17,15 +17,6 @@ module.exports = ({
   favouriteGame,
 }) => {
     
-  /* GET users listing. */
-  // router.get('/', (req, res) => {
-  //   // getUsers()
-  //   //   .then((users) => res.json(users))
-  //   //   .catch((err) => res.json({
-  //   //     error: err.message
-  //   //   }));
-  // });
-
   router.post('/register', (req, res) => {
 
     const {
