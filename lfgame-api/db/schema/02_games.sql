@@ -2,6 +2,5 @@ DROP TABLE IF EXISTS games CASCADE;
 CREATE TABLE games(
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
-    -- platform VARCHAR(255) NOT NULL,
     picture_url VARCHAR(255)
 );

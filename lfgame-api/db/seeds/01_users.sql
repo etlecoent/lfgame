@@ -1,16 +1,27 @@
 INSERT INTO
 users(username, email, password)
 VALUES
-    ('Mario', 'mario@nintendo.com', 'test'),
-    ('Luigi', 'luigi@nintendo.com', 'test'),
-    (
-        'Princess',
-        'peach@nintendo.com',
-        'test'
-    ),
-    (
-        'Princess',
-        'daisy@nintendo.com',
-        'test'
-    ),
-    ('Donkey', 'donkey@nintendo.com', 'test');
+    ('Noah', 'noah@noah.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Jason', 'jason@jason.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Etienne', 'etienne@etienne.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Francis', 'francis@francis.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Jess', 'jess@jess.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('David', 'david@david.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Alex', 'alex@alex.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Erik', 'erik@erik.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Jen', 'jen@jen.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Jacqueline', 'jacqueline@jacqueline.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Daniel', 'daniel@daniel.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Ian', 'ian@ian.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Chris', 'chris@chris.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Rajdeep', 'rajdeep@rajdeep.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Sean', 'sean@sean.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Vasily', 'vasily@vasily.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Chetna', 'Chetna@Chetna.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Janelle', 'janelle@janelle.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Dom', 'dom@dom.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Mad', 'mad@mad.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Spiderman', 'spiderman@spiderman.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Megaman', 'megaman@megaman.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('XSlayerX', 'slayer@slayer.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6'),
+    ('Gazoo', 'gazoo@gazoo.com', '$2b$10$SQ0xAgiw64O6cvoHrfB5sehfIItqOArMWXbRT0FJu3JaAK/LEXOC6');
