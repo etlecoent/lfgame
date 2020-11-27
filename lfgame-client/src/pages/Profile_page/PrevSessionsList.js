@@ -4,13 +4,11 @@ const PrevSessionsList = (props) => {
 
   const currentUser = props.currentUser;
 
-
-  console.log("CHECK HERE FOR PROPS: ", props);
   return props.sessionsList.map(session => {
     return (
 
       <PrevSessionItem 
-        key={session.id}
+        key={session.sessionid}
         game={session.name}
         sessionID={session.sessionid}
         date={session.date}

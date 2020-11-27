@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 
 
@@ -51,8 +51,8 @@ const PrevSessionItem = (props) => {
         </span>
       </div>
       <ul className="userlist">
-        {userList && userList.map(username => 
-          <li className="userlist-item" onClick={() => {
+        {userList && userList.map((username, i) => 
+          <li key={i} className="userlist-item" onClick={() => {
             setShowSessions(!showSessions);
             goToFriend(username)
           }}>
