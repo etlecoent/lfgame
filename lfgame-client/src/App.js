@@ -7,6 +7,7 @@ import LoginPage from './pages/Login_page/LoginPage';
 import RegisterPage from './pages/Register_page/RegisterPage';
 import SessionPage from './pages/Session_page/SessionPage';
 import MenuBar from './pages/Menu_bar/MenuBar';
+import HomePage from './pages/HomePage/HomePage';
 
 import './App.scss';
 
@@ -29,24 +30,24 @@ const App = () => {
     localStorage.removeItem("user");
   };
   
-  const redirectLogin = () => {
+  const redirectHome = () => {
     if (!currentUser) {
-      return <Redirect to="/login" />;
+      return <Redirect to="/" />;
     }
   }
 
   const redirectGames = () => {
     if (currentUser) {
-      return <Redirect to="/" />;
+      return <Redirect to="/games" />;
     }
   }
 
   const checkForSession = () => {
 
     if (!currentUser) {
-      return redirectLogin();
+      return redirectHome();
     } else if (currentUser && !currentSession) {
-      return <Redirect to="/" />;
+      return <Redirect to="/games" />;
     }
   }
 
@@ -55,9 +56,13 @@ const App = () => {
       <Router>
         <NavBar currentUser={currentUser} logout={() => logout()}/>
         <Switch>
-          
+
             <Route exact path="/">
-              {redirectLogin() || <GamesPage currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
+              {redirectGames() || <HomePage/> }
+            </Route>
+
+            <Route exact path="/games">
+              {redirectHome() || <GamesPage currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
             </Route>
 
             <Route exact path="/sessions">
@@ -65,7 +70,7 @@ const App = () => {
             </Route>
 
             <Route exact path="/profile">
-              {redirectLogin() || <ProfilePage currentUser={currentUser} />}
+              {redirectHome() || <ProfilePage currentUser={currentUser} />}
             </Route>
 
             <Route exact path ="/register">
