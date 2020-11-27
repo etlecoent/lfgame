@@ -7,7 +7,7 @@ import LoginPage from './pages/Login_page/LoginPage';
 import RegisterPage from './pages/Register_page/RegisterPage';
 import SessionPage from './pages/Session_page/SessionPage';
 import MenuBar from './pages/Menu_bar/MenuBar';
-import HomePage from './pages/HomePage/HomePage';
+import HomePage from './pages/Home_page/HomePage';
 
 import './App.scss';
 
