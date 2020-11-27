@@ -15,16 +15,8 @@ module.exports = ({
     getPreviousSessions,
     usersInPrevSession,
     favouriteGame,
+    updateUserProfile,
 }) => {
-    
-    /* GET users listing. */
-    router.get('/', (req, res) => {
-        getUsers()
-            .then((users) => res.json(users))
-            .catch((err) => res.json({
-                error: err.message
-            }));
-    });
 
     router.post('/register', (req, res) => {
 
@@ -47,6 +39,8 @@ module.exports = ({
                 addUser(username, email, hashedPassword)
                 .then(user => res.json({
                     username: user.username,
+                    email: user.email,
+                    image: user.image,
                     id: user.id,
                     token: jsonwebtoken.sign({ username: user.username }, process.env.JWT_SECRET)
                 }));
@@ -72,6 +66,8 @@ module.exports = ({
                     if (bcrypt.compareSync(password, user.password)) {
                         res.json({
                             username: user.username,
+                            email: user.email,
+                            image: user.image,
                             id: user.id,
                             token: jsonwebtoken.sign({ username: user.username }, process.env.JWT_SECRET)
                         });
@@ -90,9 +86,11 @@ module.exports = ({
     router.get('/:username', (req, res) => {
 
         const username = req.params.username;
+        console.log("username: ", username)
         getUserByUsername(username)
             .then(user => {
                 const result = { user }
+                console.log("USER: ", user);
 
                 Promise.all([
                     getPreviousSessions(user.id),
@@ -121,6 +119,24 @@ module.exports = ({
         
     })
 
+    router.post('/:username', (req, res) => {
+
+        const {id, avatar, username, email} = req.body;
+
+        updateUserProfile(avatar, username, email, id)
+        .then(result => {
+            console.log("UPDATE USER RESULT: ", result);
+            res.json({
+                username: result.username,
+                email: result.email,
+                image: result.image,
+                id: result.id,
+                token: jsonwebtoken.sign({ username: result.username }, process.env.JWT_SECRET)
+            })
+        }).catch(err => res.json({
+            error: err.message
+        }));
+    })
 
 
     return router;
