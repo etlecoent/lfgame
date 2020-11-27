@@ -15,9 +15,7 @@ const NavBar = (props) => {
       </div>
       
       <div className="username"> 
-        <Link to="/profile" >
-          {props.currentUser && props.currentUser.username}
-        </Link>
+        {props.currentUser && props.currentUser.username}
       </div>
 
     </nav>
