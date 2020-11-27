@@ -140,7 +140,7 @@ module.exports = (db) => {
 
   const getUserByUsername = username => {
     const query = {
-        text: `SELECT * FROM users WHERE users.username = $1`,
+        text: `SELECT id, username, email, image FROM users WHERE users.username = $1`,
         values: [username]
     }
 
@@ -251,7 +251,7 @@ const favouriteGame = (userID) => {
             WHERE users.id = $1
             GROUP BY games.picture_url
             ORDER BY counted DESC
-            LIMIT 1;`,
+            LIMIT 1`,
         values: [userID]
     }
 
@@ -259,6 +259,23 @@ const favouriteGame = (userID) => {
         .then(result => result.rows[0])
         .catch(err => err);
 
+}
+
+const updateUserProfile = (avatar, username, email, userID) => {
+    const query = {
+        text: `
+            UPDATE users 
+            SET image = $1,
+            username = $2,
+            email = $3
+            WHERE id = $4
+            RETURNING *`,
+        values: [avatar, username, email, userID]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
 }
 
   return {
@@ -278,6 +295,7 @@ const favouriteGame = (userID) => {
       usersInPrevSession,
       favouriteGame,
       checkForJoinedSession,
-      userRejoinSession
+      userRejoinSession,
+      updateUserProfile,
   };
 };
