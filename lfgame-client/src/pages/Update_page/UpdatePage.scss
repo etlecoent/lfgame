@@ -1,0 +1,50 @@
+@import "./../../styles/variables.scss";
+
+.update-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .update-header {
+    font-size: 3em;
+
+  }
+
+  .avatar {
+    box-shadow: 0 0 30px $black;
+    border: 3px solid $backgroundBlue;
+    border-radius: 50%;
+    height: 30%;
+    width: 30%;
+    margin: 0.4em;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em 0 1em 0;
+    width: 50%;
+
+    .update-user-header {
+      font-size: 1.4em;
+    }
+
+    .update-user-info {
+      padding-bottom: 0.7em;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+}
