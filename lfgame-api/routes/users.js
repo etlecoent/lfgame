@@ -19,11 +19,11 @@ module.exports = ({
     
   /* GET users listing. */
   router.get('/', (req, res) => {
-    getUsers()
-      .then((users) => res.json(users))
-      .catch((err) => res.json({
-        error: err.message
-      }));
+    // getUsers()
+    //   .then((users) => res.json(users))
+    //   .catch((err) => res.json({
+    //     error: err.message
+    //   }));
   });
 
   router.post('/register', (req, res) => {
@@ -89,36 +89,46 @@ module.exports = ({
 
   router.get('/:username', (req, res) => {
 
-    const username = req.params.username;
-    getUserByUsername(username)
-      .then(user => {
-        const result = { user };
+    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        const username = req.params.username;
+        getUserByUsername(username)
+          .then(user => {
+            const result = { user };
 
-        Promise.all([
-          getPreviousSessions(user.id),
-          favouriteGame(user.id)
-        ]).then(all => {
-          result.sessionsList = all[0];
-          result.favourite = all[1];
-          res.json(result);
-        });
-      })
-      .catch((err) => res.json({
-        error: err.message
-      }));
-
+            Promise.all([
+              getPreviousSessions(user.id),
+              favouriteGame(user.id)
+            ]).then(all => {
+              result.sessionsList = all[0];
+              result.favourite = all[1];
+              res.json(result);
+            });
+          })
+          .catch((err) => res.json({
+            error: err.message
+          }));
+      }
+    });
   });
 
   router.get('/:username/:id', (req, res) => {
-
-    usersInPrevSession(req.params.id)
-      .then(list => {
-        res.json(list);
-      })
-      .catch((err) => res.json({
-        error: err.message
-      }));
-        
+    
+    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        usersInPrevSession(req.params.id)
+          .then(list => {
+            res.json(list);
+          })
+          .catch((err) => res.json({
+            error: err.message
+          }));
+      }
+    });
   });
 
 
