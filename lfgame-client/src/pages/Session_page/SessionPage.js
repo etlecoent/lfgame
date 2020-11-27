@@ -35,6 +35,9 @@ const SessionPage = (props) => {
       username: currentUser.username,
       content: msg
     }
+    if (!msg) {
+      return;
+    }
     socketRef.current.emit("sending message", outgoingMessage);
     setMsg("");
     updateScroll();
@@ -43,7 +46,7 @@ const SessionPage = (props) => {
   useEffect(() => {
     
     // get the session's game infos when the page loads
-    axios.get(`/api/sessions/${currentSession.session_id}/games`).then(res => {
+    axios.get(`/api/sessions/${currentSession.session_id}/games`, { headers: {"Authorization" : currentUser.token} }).then(res => {
       setGameInfo(res.data);
     })
     

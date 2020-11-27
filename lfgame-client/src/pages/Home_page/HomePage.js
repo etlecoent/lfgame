@@ -9,11 +9,26 @@ const HomePage = (props) => {
   return (
     <section className="page">
       <div id="homePage">
+        
+        <h1 id="lfgame">Lfga.me</h1>
 
-        <header>Connect with gamers</header>
+        <div id="connect">
+          <header>Connect with gamers</header>
+        </div>
         
-        <img id="connect" alt="connect" src={connect}/>
-        
+        <p id="about">
+          A place where gamers can look for groups to play games with. Perfect for people who just bought a game but have no one to play it with.
+        </p>
+
+        <span className="testimony">
+          XSlayerX: "Way easier to find Among Us sessions here"
+        </span>
+
+        <span className="testimony">
+          C-J: "I made so much friends thanks to this App!"
+        </span>
+
+
         <div className="buttons">
 
           <div className="registerButton">

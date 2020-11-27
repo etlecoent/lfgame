@@ -13,7 +13,8 @@
   background-color: $black;
   overflow-y: scroll;
   max-height: 300px;
-  height: 300px
+  height: 300px;
+  background-image: $backgroundImage;
 }
 
 .card { 
@@ -36,6 +37,7 @@
   border-top: 1px solid $grey;
   border-bottom: 1px solid $grey;
   text-align: center;
+  background-image: $backgroundImage;
 }
 
 textarea {

@@ -8,7 +8,7 @@ const PrevSessionsList = (props) => {
     return (
 
       <PrevSessionItem 
-        key={session.id}
+        key={session.sessionid}
         game={session.name}
         sessionID={session.sessionid}
         date={session.date}

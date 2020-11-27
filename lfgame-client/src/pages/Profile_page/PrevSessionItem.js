@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 
 
@@ -14,7 +14,7 @@ const PrevSessionItem = (props) => {
     if (userList.length > 0) {
       setUserList([]);
     } else {
-      axios.get(`api/users/${currentUser.username}/${sessionID}`).then(res => {
+      axios.get(`api/users/${currentUser.username}/${sessionID}`, { headers: {"Authorization" : currentUser.token} }).then(res => {
         const parsedList = res.data.map(user => user.username);
         setUserList([...parsedList]);
       })
@@ -22,7 +22,7 @@ const PrevSessionItem = (props) => {
   }
 
   const goToFriend = (username) => {
-    axios.get(`/api/users/${username}`)
+    axios.get(`/api/users/${username}`, { headers: {"Authorization" : currentUser.token} })
     .then(res => {
       setCurrentProfile(res.data.user)
       setFavouriteGame(res.data.favourite)
@@ -51,8 +51,8 @@ const PrevSessionItem = (props) => {
         </span>
       </div>
       <ul className="userlist">
-        {userList && userList.map(username => 
-          <li className="userlist-item" onClick={() => {
+        {userList && userList.map((username, i) => 
+          <li key={i} className="userlist-item" onClick={() => {
             setShowSessions(!showSessions);
             goToFriend(username)
           }}>

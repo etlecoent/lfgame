@@ -2,12 +2,12 @@
 const GamerListItem = (props) => {
   
   return(
-    <li className="gamerListItem">
-      {/* <div> image for later 
-        <img className="userImage" src={props.imageSource}></img>
-      </div> */}
-      {props.username}
-    </li>
+    <div className="gamerListItem">
+      <img src={props.avatar}/>
+      <div className="gamerName">
+        {props.username}
+        </div>
+    </div>
   )
 }
 

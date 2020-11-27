@@ -11,7 +11,7 @@ module.exports = (io, {
   removeUserFromSession,
   getGameBySession,
   getGameByID,
-  checkForJoinedSession, 
+  checkForJoinedSession,
   userRejoinSession
 }) => {
 
@@ -20,45 +20,59 @@ module.exports = (io, {
   router.post('/', (req, res) => {
     
     const { gameID, userID, difficultyLevel } = req.body;
-  
-    checkForSessionWithSpace(gameID, difficultyLevel)
+    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err) => {
+      if (err) {
+
+        res.sendStatus(403);
+        
+      } else {
+
+        checkForSessionWithSpace(gameID, difficultyLevel)
           .then((session) => {
             // if there is a session with space, add them to the session
             if (session) {
               return checkForJoinedSession(userID, session.id)
-              .then(result => {
-                if (result) {
-                  return userRejoinSession(userID, session.id)
-                } else {
-                  return addUserToAvailableSession(userID, session.id)
-                }
-              })
-              
+                .then(result => {
+                  if (result) {
+                    return userRejoinSession(userID, session.id);
+                  } else {
+                    return addUserToAvailableSession(userID, session.id);
+                  }
+                });
+                  
             } else {
               // if there is not a session with space, create a new session with the game id and add them to that session
               return createNewSession(gameID, difficultyLevel)
-              // set timeout for 12 hours, change status to f after 12 hours 
-              .then(newSession => {
-                return addUserToAvailableSession(userID, newSession.id)
-              })
+              // set timeout for 12 hours, change status to f after 12 hours
+                .then(newSession => {
+                  return addUserToAvailableSession(userID, newSession.id);
+                });
             }
           })
           .then(joinedSession => {
-            res.json({session_id: joinedSession.session_id})
+            res.json({session_id: joinedSession.session_id});
           })
           .catch((err) => res.json({ error: err.message }));
 
-  router.get(`/:sessionID/games`, (req, res) => {
-    const { sessionID } = req.params;
-    getGameBySession(sessionID)
-    .then((game) => {
-      res.json(game)
-    })
-    .catch((err) => res.json({
-      error: err.message
-    }));
-   })
+        router.get(`/:sessionID/games`, (req, res) => {
 
+          jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err) => {
+            if (err) {
+              res.sendStatus(403);
+            } else {
+              const { sessionID } = req.params;
+              getGameBySession(sessionID)
+                .then((game) => {
+                  res.json(game);
+                })
+                .catch((err) => res.json({
+                  error: err.message
+                }));
+            }
+          });
+        });
+      }
+    });
   });
 
   io.on("connection", (socket) => {
@@ -76,7 +90,7 @@ module.exports = (io, {
 
     // Sends all the users inside the session to the newly joined user
     usersInSession(socket.sessionId).then(res => {
-      io.to(socket.sessionId).emit("user has joined", {users: res, joiningUser: socket.username})  
+      io.to(socket.sessionId).emit("user has joined", {users: res, joiningUser: socket.username});
     });
   
     socket.on("sending message", (message) => {
@@ -84,16 +98,16 @@ module.exports = (io, {
     });
 
     socket.on("disconnecting", (reason) => {
-      console.log(`${socket.id} has left session ${socket.sessionId}`) 
+      console.log(`${socket.id} has left session ${socket.sessionId}`);
       
       //removes the user from the session
       //sends back the updated list of users in the session
-      removeUserFromSession(socket.userId, socket.sessionId).then( res => {
+      removeUserFromSession(socket.userId, socket.sessionId).then(res => {
         usersInSession(socket.sessionId).then(updatedUsers => {
           io.to(sessionId).emit("user has left", {users: updatedUsers, leavingUser: socket.username});
           socket.leave(socket.sessionId);
         });
-      })
+      });
     });
 
   });

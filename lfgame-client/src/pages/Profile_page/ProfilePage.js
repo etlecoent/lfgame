@@ -19,7 +19,7 @@ const ProfilePage = (props) => {
 
   useEffect(() => {  
     if (isEmpty(currentProfile)) {
-      axios.get(`/api/users/${currentUser.username}`)
+      axios.get(`/api/users/${currentUser.username}`, { headers: {"Authorization" : currentUser.token} })
       .then(res => {
         setCurrentProfile(res.data.user)
         setFavouriteGame(res.data.favourite)

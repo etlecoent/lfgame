@@ -1,4 +1,4 @@
-const { port, onError, onListening }= require("./bin/www");
+const { port, onError, onListening } = require("./bin/www");
 
 const express = require('express');
 const path = require('path');
