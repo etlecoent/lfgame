@@ -4,8 +4,6 @@ const PrevSessionsList = (props) => {
 
   const currentUser = props.currentUser;
 
-
-  console.log("CHECK HERE FOR PROPS: ", props);
   return props.sessionsList.map(session => {
     return (
 
@@ -17,7 +15,6 @@ const PrevSessionsList = (props) => {
         difficulty={session.difficulty}
         gameLogo={session.logo}
         currentUser={currentUser}
-        currentProfile={props.currentProfile}
         setCurrentProfile={props.setCurrentProfile}
         setFavouriteGame={props.setFavouriteGame}
         setPreviousSessions={props.setPreviousSessions}
