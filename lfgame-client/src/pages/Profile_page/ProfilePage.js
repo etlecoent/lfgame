@@ -33,20 +33,22 @@ const ProfilePage = (props) => {
     <section className="page">
       <div className="profile-page">
         <header className="profile-header">Profile</header>
-        <img className="avatar" alt="User Avatar" src={currentProfile.image}/>
-        <div className="user-info">
-          <span className="profile-user-header">
-            Username:
-          </span>
-          <span className="profile-user-info">
-            {currentProfile.username}
-          </span>
-          <span className="profile-user-header">
-            Email:
-          </span>
-          <span className="profile-user-info">
-            {currentProfile.email}
-          </span>
+        <div className="profile-user">
+          <img className="avatar" alt="User Avatar" src={currentProfile.image}/>
+          <div className="user-info">
+            <span className="profile-user-header">
+              Username:
+            </span>
+            <span className="profile-user-info">
+              {currentProfile.username}
+            </span>
+            <span className="profile-user-header">
+              Email:
+            </span>
+            <span className="profile-user-info">
+              {currentProfile.email}
+            </span>
+          </div>
         </div>
           {favouriteGame && 
           <div className="favourite-game">
