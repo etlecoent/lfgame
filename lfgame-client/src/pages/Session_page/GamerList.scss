@@ -16,8 +16,10 @@
     
     width: 90%;
     border-bottom: 1px solid $white;
-    // border-top: 1px solid $white;
+    border-top: 1px solid $white;
     padding-inline-start: 0;
+    height: 40vh;
+    overflow: scroll;
 
     .gamerListItem {
       width: 100%;
