@@ -89,7 +89,7 @@ const App = () => {
           
 
           <Route path="*">
-            <h1>404 - Not Found</h1>
+            <h1 className="notFound">404 - Not Found</h1>
           </Route>
         </Switch>
         <MenuBar currentUser={currentUser} logout={() => logout()}/>
