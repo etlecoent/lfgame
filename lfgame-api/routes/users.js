@@ -3,12 +3,9 @@ const router = express.Router();
 const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const { getPostsByUsers } = require('../helpers/dataHelpers.js');
-
 
 
 module.exports = ({
-    getUsers,
     getUserByEmail,
     addUser,
     getUserByUsername,
@@ -41,6 +38,7 @@ module.exports = ({
             username: user.username,
             email: user.email,
             image: user.image,
+            steam_id: user.steam_id,
             id: user.id,
             token: jsonwebtoken.sign({ username: user.username }, process.env.JWT_SECRET)
           }));
@@ -61,13 +59,13 @@ module.exports = ({
     getUserByEmail(email)
       .then(user => {
 
-        if (user) {
-                
+        if (user) {            
           if (bcrypt.compareSync(password, user.password)) {
             res.json({
               username: user.username,
               email: user.email,
               image: user.image,
+              steam_id: user.steam_id,
               id: user.id,
               token: jsonwebtoken.sign({ username: user.username }, process.env.JWT_SECRET)
             });
@@ -90,7 +88,6 @@ module.exports = ({
         res.sendStatus(403);
       } else {
         const username = req.params.username;
-        console.log("username: ", username)
         getUserByUsername(username)
           .then(user => {
             const result = { user };
@@ -130,15 +127,15 @@ module.exports = ({
 
     router.post('/:username', (req, res) => {
 
-        const {id, avatar, username, email} = req.body;
+        const {id, avatar, username, email, steamID} = req.body;
 
-        updateUserProfile(avatar, username, email, id)
+        updateUserProfile(avatar, username, email, steamID, id)
         .then(result => {
-            console.log("UPDATE USER RESULT: ", result);
             res.json({
                 username: result.username,
                 email: result.email,
                 image: result.image,
+                steam_id: result.steam_id,
                 id: result.id,
                 token: jsonwebtoken.sign({ username: result.username }, process.env.JWT_SECRET)
             })
