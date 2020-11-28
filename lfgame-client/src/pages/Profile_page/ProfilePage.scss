@@ -8,24 +8,21 @@
 
   .profile-header {
     font-size: 3em;
-
   }
-
 
   .profile-user {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    padding: 1em 0;
-
+    padding: 1em 0.5em;
   }
 
   .avatar {
     box-shadow: 0 0 30px $black;
     border: 3px solid $backgroundBlue;
     border-radius: 50%;
-    height: 40%;
-    width: 40%;
+    height: 7.5em;
+    width: 7.5em;
     margin: 0.4em;
   }
 
@@ -34,7 +31,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0.5em 0 1em 0;
+    padding: 0 0 1em 0;
     width: 50%;
 
     .profile-user-header {
@@ -80,7 +77,6 @@
       padding: 0.2em 0 0 0;
       margin-top: 10px;
       border-top: 1px solid $white;
-      // border-bottom: 1px solid $white;
       display: flex;
       flex-direction: column;
 
@@ -107,9 +103,7 @@
             border-radius: 3%;
             border: 1px solid $grey;
           }
-
         }
-
       }
 
       .userlist {
@@ -120,20 +114,16 @@
         .userlist-item {
           text-decoration: underline;
           list-style-type: none;
-          // width: 100%;
           display: flex;
           align-items: center;
           padding: 0.5em 0 0 1em;
 
           .username {
-
             padding-left: 1em;
             margin-bottom: 0;
           }
-
         }
       }
-
     }
   }
 }

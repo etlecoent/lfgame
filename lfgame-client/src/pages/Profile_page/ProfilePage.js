@@ -21,6 +21,7 @@ const ProfilePage = (props) => {
     if (isEmpty(currentProfile)) {
       axios.get(`/api/users/${currentUser.username}`, { headers: {"Authorization" : currentUser.token} })
       .then(res => {
+        console.log("CHECK FOR THIS PLEASE!!!!!!!!!!!", res.data)
         setCurrentProfile(res.data.user)
         setFavouriteGame(res.data.favourite)
         setPreviousSessions(res.data.sessionsList)
@@ -43,10 +44,10 @@ const ProfilePage = (props) => {
               {currentProfile.username}
             </span>
             <span className="profile-user-header">
-              Email:
+              Steam ID:
             </span>
             <span className="profile-user-info">
-              {currentProfile.email}
+              {currentProfile.steam_id || "N/A"}
             </span>
           </div>
         </div>
