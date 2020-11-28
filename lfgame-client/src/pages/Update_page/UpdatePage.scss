@@ -5,36 +5,86 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 4.20em 0;
+  width: 100%;
+  height: 100%;
 
   .update-header {
     font-size: 3em;
 
   }
 
-  .avatar {
-    box-shadow: 0 0 30px $black;
-    border: 3px solid $backgroundBlue;
-    border-radius: 50%;
-    height: 30%;
-    width: 30%;
-    margin: 0.4em;
+  .update-avatar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    padding: 0.4em 0;
+
+
+    .avatar {
+      box-shadow: 0 0 30px $black;
+      border: 3px solid $backgroundBlue;
+      border-radius: 50%;
+      height: 6em;
+      width: auto;
+      margin: 0.4em;
+    }
+
+    .update-avatar-text {
+      display: flex;
+      flex-direction: column;
+      width: 55%;
+      padding-right: 0.5em;
+    }
   }
+
 
   .user-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0.5em 0 1em 0;
-    width: 50%;
+    padding: 0.4em 0 1em 0;
+    width: 70%;
 
-    .update-user-header {
-      font-size: 1.4em;
+    .form {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      
+      
+      .form-group {
+  
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+  
+        .update-user-header {
+          font-size: 1.2em;
+        }
+    
+        .update-user-info {
+          width: 100%
+        }
+    }
+    .update-button{
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      padding-top: 0.4em;
+
+      button {
+        flex-grow: 1;
+      }
     }
 
-    .update-user-info {
-      padding-bottom: 0.7em;
+
     }
+
   }
 
 

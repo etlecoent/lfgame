@@ -12,6 +12,7 @@ const UpdatePage = (props) => {
   const [avatar, setAvatar] = useState(currentUser.image);
   const [username, setUsername] = useState(currentUser.username);
   const [email, setEmail] = useState(currentUser.email);
+  const [steamID, setSteamID] = useState(currentUser.steam_id || null);
   const [message, setMessage] = useState("");
   const [redirect, setRedirect] = useState(false);
   
@@ -21,7 +22,8 @@ const UpdatePage = (props) => {
       id: currentUser.id,
       avatar,
       username,
-      email
+      email,
+      steamID
     })
     .then(res => {
       setCurrentProfile({})
@@ -52,7 +54,7 @@ const UpdatePage = (props) => {
       return;
     } else {
       setMessage("");
-      update(avatar, username, email)
+      update(avatar, username, email, steamID)
       .catch(err => setMessage("Error! We could not update your profile! Please try again later!"));
     }
   }
@@ -69,21 +71,27 @@ const UpdatePage = (props) => {
           <div className="update-avatar">
             <img className="avatar" alt="User Avatar" src={currentUser.image}/>
             <div className="update-avatar-text">
-              <label className="update-user-header">Update Avatar:</label>
+              <label className="update-user-header">Update Avatar URL:</label>
               <input type="text" placeholder="Enter new username" value={avatar} onChange={event => setAvatar(event.target.value)}/>
             </div>
           </div>
           <div className="user-info">
-            <form>
+            <form className="form">
             <div className="form-group">
               <label className="update-user-header">Update Username:</label>
-              <input type="text" placeholder="Enter new username" value={username} onChange={event => setUsername(event.target.value)}/>
+              <input className="update-user-info" type="text" placeholder="Enter new username" value={username} onChange={event => setUsername(event.target.value)}/>
             </div>
             <div className="form-group">
               <label className="update-user-header">Update Email Address:</label>
-              <input type="text" placeholder="Enter new Email Address" value={email} onChange={event => setEmail(event.target.value)}/>
+              <input className="update-user-info" type="text" placeholder="Enter new Email Address" value={email} onChange={event => setEmail(event.target.value)}/>
             </div>
-            <button type="button" className="btn btn-primary" onClick={validate}>Update Profile</button>
+            <div className="form-group">
+              <label className="update-user-header">Update Steam ID:</label>
+              <input className="update-user-info" type="text" placeholder="Enter Steam ID" value={steamID} onChange={event => setSteamID(event.target.value)}/>
+            </div>
+            <div className="update-button">
+              <button type="button" className="btn btn-primary" onClick={validate}>Update</ button>
+            </div>
             </form>
           </div>
         </div>
