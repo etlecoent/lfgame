@@ -140,7 +140,7 @@ module.exports = (db) => {
 
   const getUserByUsername = username => {
     const query = {
-        text: `SELECT id, username, email, image FROM users WHERE users.username = $1`,
+        text: `SELECT id, username, email, image, steam_id FROM users WHERE users.username = $1`,
         values: [username]
     }
 
@@ -261,16 +261,17 @@ module.exports = (db) => {
 
   };
 
-  const updateUserProfile = (avatar, username, email, userID) => {
+  const updateUserProfile = (avatar, username, email, steamID, userID) => {
     const query = {
         text: `
             UPDATE users 
             SET image = $1,
             username = $2,
-            email = $3
-            WHERE id = $4
+            email = $3,
+            steam_id = $4
+            WHERE id = $5
             RETURNING *`,
-        values: [avatar, username, email, userID]
+        values: [avatar, username, email, steamID, userID]
     }
 
     return db.query(query)
