@@ -42,6 +42,9 @@ const UpdatePage = (props) => {
     } else if (!avatar) {
       setMessage("Avatar cannot be blank");
       return;
+    } else if (email === currentUser.email && steamID === currentUser.steam_id && avatar === currentUser.image && username === currentUser.username){
+      setMessage("Please make a change before updating");
+      return;
     } else {
       setMessage("");
       update(avatar, username, email, steamID)
