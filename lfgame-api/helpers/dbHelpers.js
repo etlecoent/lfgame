@@ -23,6 +23,20 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getUserByID = userID => {
+
+    const query = {
+      text: `SELECT * FROM users WHERE id = $1` ,
+      values: [userID]
+    };
+
+    return db
+      .query(query)
+      .then(result => result.rows[0])
+      .catch((err) => err);
+  };
+
+
   const addUser = (username, email, password) => {
     const query = {
       text: `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *` ,
@@ -228,7 +242,7 @@ module.exports = (db) => {
 
   const usersInPrevSession = (sessionID) => {
     const query = {
-      text:`SELECT username FROM users
+      text:`SELECT users.id, username FROM users
               JOIN joined_sessions ON user_id = users.id
               WHERE joined_sessions.session_id = $1
               GROUP BY users.id`,
@@ -282,6 +296,7 @@ module.exports = (db) => {
   return {
       getUsers,
       getUserByEmail,
+      getUserByID,
       addUser,
       checkForSessionWithSpace,
       addUserToAvailableSession,
@@ -297,6 +312,6 @@ module.exports = (db) => {
       favouriteGame,
       checkForJoinedSession,
       userRejoinSession,
-      updateUserProfile,
+      updateUserProfile
   };
 };

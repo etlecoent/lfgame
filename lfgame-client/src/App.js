@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import axios from "axios";
 
 import NavBar from './pages/Nav_bar/NavBar';
@@ -21,13 +21,9 @@ const App = () => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')) || null);
   const [currentUser, setCurrentUser] = useState(null);
   const [currentSession, setCurrentSession] = useState(null);
-  const [currentProfile, setCurrentProfile] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    
-    console.log("UseEffect", 1);
-
     if (token) {
       
       axios.get("/api/users", {
@@ -36,7 +32,12 @@ const App = () => {
       .then((res) => {
         setCurrentUser(res.data);
         setLoading(false);
+      })
+      .catch(err => {
+        console.log(err)
       });
+    } else {
+      setLoading(false);
     }
   }, [token]);
 
@@ -63,7 +64,6 @@ const App = () => {
   }
 
   const checkForSession = () => {
-    console.log("CHECK FOR SESSION")
     if (!currentUser) {
       return redirectHome();
     } else if (currentUser && !currentSession) {
@@ -75,27 +75,11 @@ const App = () => {
     <div id="App" >
       <Router>
         <NavBar currentUser={currentUser} logout={() => logout()}/>
-        { !loading &&
-          <Switch>
-            
+          { !loading &&
+            <Switch>
+              
               <Route exact path="/">
-                {redirectGames() || <HomePage/> }
-              </Route>
-
-              <Route exact path="/games">
-                {redirectHome() || <GamesPage token={token} currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
-              </Route>
-
-              <Route exact path="/sessions">
-              {!currentSession ? checkForSession() : <SessionPage token={token} currentSession={currentSession} currentUser={currentUser}/>}
-              </Route>
-
-              <Route exact path="/profile">
-                {redirectHome() || <ProfilePage token={token} currentUser={currentUser} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile}/>}
-              </Route>
-
-              <Route exact path="/update">
-                {redirectHome() || <UpdatePage token={token} currentUser={currentUser} setCurrentUser={setCurrentUser}/>}
+                <div>{redirectGames() || <HomePage/> }</div>
               </Route>
 
               <Route exact path ="/register">
@@ -105,13 +89,29 @@ const App = () => {
               <Route exact path ="/login">
                 {redirectGames() || <LoginPage setToken={setToken}/>}
               </Route>
-            
+              
+              <Route exact path="/games">
+                { redirectHome() || <GamesPage token={token} currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
+              </Route>
 
-            <Route path="*">
-              <h1 className="notFound">404 - Not Found</h1>
-            </Route>
-          </Switch>
-        }
+              <Route exact path="/sessions">
+              {!currentSession ? checkForSession() : <SessionPage token={token} currentSession={currentSession} currentUser={currentUser}/>}
+              </Route>
+
+              <Route exact path="/profile">
+                {redirectHome() || <ProfilePage token={token} currentUser={currentUser} />}
+              </Route>
+
+              <Route exact path="/update">
+                {redirectHome() || <UpdatePage token={token} currentUser={currentUser} setToken={setToken}/>}
+              </Route>
+              
+              <Route path="*">
+                <h1 className="notFound">404 - Not Found</h1>
+              </Route>
+
+            </Switch>
+          }
         <MenuBar currentUser={currentUser} logout={() => logout()}/>
       </Router>
     </div>

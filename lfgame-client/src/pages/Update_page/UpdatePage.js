@@ -1,14 +1,14 @@
 
 import axios from 'axios';
 import { useState, Fragment } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { isEmail } from 'validator';
 
 import './UpdatePage.scss';
 
 const UpdatePage = (props) => {
 
-  const {currentUser, setCurrentUser, setCurrentProfile} = props;
+  const {currentUser, setToken} = props;
   const [avatar, setAvatar] = useState(currentUser.image);
   const [username, setUsername] = useState(currentUser.username);
   const [email, setEmail] = useState(currentUser.email);
@@ -23,11 +23,9 @@ const UpdatePage = (props) => {
       username,
       email,
       steamID
-    })
+    }, { headers: {"Authorization" : props.token} })
     .then(res => {
-      setCurrentProfile({})
-      localStorage.setItem("user", JSON.stringify(res.data));
-      setCurrentUser(res.data)
+      setToken(res.data.token)
       setRedirect(true);
     });
   }

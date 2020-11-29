@@ -12,7 +12,8 @@ module.exports = (io, {
   getGameBySession,
   getGameByID,
   checkForJoinedSession,
-  userRejoinSession
+  userRejoinSession,
+  usersInPrevSession
 }) => {
 
 
@@ -74,6 +75,28 @@ module.exports = (io, {
       }
     });
   });
+
+  router.get('/:sessionID', (req, res) => {
+    
+    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        usersInPrevSession(req.params.sessionID)
+          .then(list => {
+            res.json(list);
+          })
+          .catch((err) => res.json({
+            error: err.message
+          }));
+      }
+    });
+  });
+
+
+
+
+  
 
   io.on("connection", (socket) => {
   

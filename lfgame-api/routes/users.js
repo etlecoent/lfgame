@@ -10,19 +10,20 @@ module.exports = ({
     addUser,
     getUserByUsername,
     getPreviousSessions,
-    usersInPrevSession,
     favouriteGame,
     updateUserProfile,
+    getUserByID
 }) => {
 
 
     router.get('/', (req, res) => {
       console.log("HEADER TOKEN: ", req.headers);
       jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
+        // console.log(err)
         if (err) {
           res.sendStatus(403);
         } else {
-          getUserByUsername(data.username)
+          getUserByID(data.id)
           .then(user => {
             res.json(user)
           })
@@ -51,7 +52,7 @@ module.exports = ({
         const hashedPassword = bcrypt.hashSync(password, process.env.SALT_ROUNDS | 0);
         addUser(username, email, hashedPassword)
           .then(user => res.json({
-            token: jsonwebtoken.sign({ username: user.username, email: user.email, id: user.id }, process.env.JWT_SECRET)
+            token: jsonwebtoken.sign({ id: user.id }, process.env.JWT_SECRET)
           }));
       }
     }).catch(err => res.json({
@@ -73,7 +74,7 @@ module.exports = ({
         if (user) {            
           if (bcrypt.compareSync(password, user.password)) {
             res.json({
-              token: jsonwebtoken.sign({ username: user.username, email: user.email, id: user.id }, process.env.JWT_SECRET)
+              token: jsonwebtoken.sign({ id: user.id }, process.env.JWT_SECRET)
             });
           } else {
             res.status(401).json({ error: 'Wrong password'});
@@ -87,14 +88,14 @@ module.exports = ({
       }));
   });
 
-  router.get('/:username', (req, res) => {
+  router.get('/:userID', (req, res) => {
 
     jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err) => {
       if (err) {
         res.sendStatus(403);
       } else {
-        const username = req.params.username;
-        getUserByUsername(username)
+        const userID = req.params.userID;
+        getUserByID(userID)
           .then(user => {
             const result = { user };
 
@@ -114,39 +115,23 @@ module.exports = ({
     });
   });
 
-  router.get('/:username/:id', (req, res) => {
-    
-    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err) => {
-      if (err) {
-        res.sendStatus(403);
-      } else {
-        usersInPrevSession(req.params.id)
-          .then(list => {
-            res.json(list);
-          })
-          .catch((err) => res.json({
-            error: err.message
+  router.post('/:userID', (req, res) => {
+      // GET ID FROM TOKEN INSTEAD OF REQ.BODY
+      jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
+        if (err) {
+          res.sendStatus(403);
+        } else {
+          const {avatar, username, email, steamID} = req.body;
+          
+          updateUserProfile(avatar, username, email, steamID, data.id)
+          .then(result => {
+            console.log("CHECK IF THIS IS HITTING!!!!!!")
+              res.json({
+                  token: jsonwebtoken.sign({ id: result.id }, process.env.JWT_SECRET)
+              })
+          }).catch(err => res.json({
+              error: err.message
           }));
-      }
-    });
-  });
-
-    router.post('/:username', (req, res) => {
-        // GET ID FROM TOKEN INSTEAD OF REQ.BODY
-        jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
-          if (err) {
-            res.sendStatus(403);
-          } else {
-            const {avatar, username, email, steamID} = req.body;
-            
-            updateUserProfile(avatar, username, email, steamID, data.id)
-            .then(result => {
-                res.json({
-                    token: jsonwebtoken.sign({ username: result.username, email: result.email, id: result.id }, process.env.JWT_SECRET)
-                })
-            }).catch(err => res.json({
-                error: err.message
-            }));
       }
     });
   });
