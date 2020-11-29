@@ -40,7 +40,6 @@ const SessionPage = (props) => {
   }
 
   useEffect(() => {
-    
     // get the session's game infos when the page loads
     axios.get(`/api/sessions/${currentSession.session_id}/games`, { headers: {"Authorization" : props.token} }).then(res => {
       setGameInfo(res.data);

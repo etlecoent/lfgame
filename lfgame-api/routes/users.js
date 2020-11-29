@@ -19,7 +19,6 @@ module.exports = ({
     router.get('/', (req, res) => {
       console.log("HEADER TOKEN: ", req.headers);
       jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
-        // console.log(err)
         if (err) {
           res.sendStatus(403);
         } else {
@@ -133,11 +132,11 @@ module.exports = ({
           } else {
             updateUserProfile(avatar, username, email, steamID, data.id)
             .then(result => {
-                res.json({
-                    token: jsonwebtoken.sign({ id: result.id }, process.env.JWT_SECRET)
-                })
+              res.json({
+                token: jsonwebtoken.sign({ id: result.id }, process.env.JWT_SECRET)
+              })
             }).catch(err => res.json({
-                error: err.message
+              error: err.message
             }));
           }
         })
