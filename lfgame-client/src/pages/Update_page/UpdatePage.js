@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { useState, Fragment } from 'react';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { isEmail } from 'validator';
 
 import './UpdatePage.scss';
@@ -14,7 +14,8 @@ const UpdatePage = (props) => {
   const [email, setEmail] = useState(currentUser.email);
   const [steamID, setSteamID] = useState(currentUser.steam_id || null);
   const [message, setMessage] = useState("");
-  
+  let history = useHistory();
+
   const update = (avatar, username, email) => {
     return axios.post(`/api/users/${currentUser.username}`, {
       avatar,
@@ -24,14 +25,8 @@ const UpdatePage = (props) => {
     }, { headers: {"Authorization" : props.token} })
     .then(res => {
       setToken(res.data.token)
-      // setRedirect(true);
+      history.push("/profile")
     });
-  }
-
-  const redirectProfile = () => {
-    // if (redirect) {
-    //   return <Redirect to='/profile'/>
-    // }
   }
 
   const validate = () => {
@@ -50,7 +45,7 @@ const UpdatePage = (props) => {
     } else {
       setMessage("");
       update(avatar, username, email, steamID)
-      .catch(err => setMessage("Error! We could not update your profile! Please try again later!"));
+      .catch(err => setMessage("Sorry, a user account with this email or username already exists"));
     }
   }
 
@@ -84,10 +79,8 @@ const UpdatePage = (props) => {
               <label className="update-user-header">Update Steam ID:</label>
               <input className="update-user-info" type="text" placeholder="Enter Steam ID" value={steamID} onChange={event => setSteamID(event.target.value)}/>
             </div>
-            <div className="update-button">  
-              <Link to={"/profile"} onClick={validate}>
-                <button type="button" className="btn btn-primary">Update</button>
-              </Link>
+            <div className="update-button">                
+              <button type="button" onClick={validate} className="btn btn-primary">Update</button>
             </div>
             </form>
           </div>
