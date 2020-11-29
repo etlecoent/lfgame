@@ -69,6 +69,8 @@ const App = () => {
   }
 
   const checkForSession = () => {
+    console.log('currentSession:', currentSession)
+    console.log('currentUser:', currentUser)    
     if (!currentUser) {
       return redirectHome();
     } else if (currentUser && !currentSession) {
@@ -101,7 +103,7 @@ const App = () => {
               </Route>
 
               <Route exact path="/sessions">
-              {checkForSession() || <SessionPage token={token} currentSession={currentSession} setCurrentSession={setCurrentSession} currentUser={currentUser}/>}
+              { checkForSession() || <SessionPage token={token} currentSession={currentSession} setCurrentSession={setCurrentSession} currentUser={currentUser}/>}
               </Route>
 
               <Route exact path="/profile">

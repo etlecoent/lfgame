@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import axios from "axios";
 
@@ -20,6 +20,7 @@ const GamesPage = (props) => {
     gameID: null,
     userID: props.currentUser.id
   });
+  let history = useHistory();
 
 
   useEffect(() => {
@@ -36,13 +37,14 @@ const GamesPage = (props) => {
   }, [term])
 
   const findSession = (difficultyLevel) => {
-    
     axios.post("/api/sessions", {
       gameID: modalState.gameID,
       userID: modalState.userID,
       difficultyLevel
     }, { headers: {"Authorization" : props.token} }).then((res) => {
+      console.log("settings sessions")
       props.setCurrentSession({session_id: res.data.session_id});
+      history.push("/sessions");
     })
   }
 
