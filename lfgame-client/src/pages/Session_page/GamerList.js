@@ -5,10 +5,7 @@ import "./GamerList.scss";
 const GamerList = (props) => {
 
   return (
-    
     <section className="gamerList">
-      <h1>Users</h1>
-    
       <div className="gamerListDiv">
         {props.users.map((user, i) => ( 
         
