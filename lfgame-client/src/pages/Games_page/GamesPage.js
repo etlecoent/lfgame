@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import axios from "axios";
@@ -42,7 +42,6 @@ const GamesPage = (props) => {
       userID: modalState.userID,
       difficultyLevel
     }, { headers: {"Authorization" : props.token} }).then((res) => {
-      console.log("settings sessions")
       props.setCurrentSession({session_id: res.data.session_id});
       history.push("/sessions");
     })
