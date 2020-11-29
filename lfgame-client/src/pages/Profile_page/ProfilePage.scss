@@ -118,6 +118,14 @@
           align-items: center;
           padding: 0.5em 0 0 1em;
 
+          .prev-user-avatar{
+            width: 7%;
+            height: 7%;
+            max-height: 15%;
+            max-width: 15%;
+            border-radius: 50%;
+          }
+
           .username {
             padding-left: 1em;
             margin-bottom: 0;
