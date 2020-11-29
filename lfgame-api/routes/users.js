@@ -116,22 +116,31 @@ module.exports = ({
   });
 
   router.post('/:userID', (req, res) => {
-      // GET ID FROM TOKEN INSTEAD OF REQ.BODY
-      jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
-        if (err) {
-          res.sendStatus(403);
-        } else {
-          const {avatar, username, email, steamID} = req.body;
-          
-          updateUserProfile(avatar, username, email, steamID, data.id)
-          .then(result => {
-            console.log("CHECK IF THIS IS HITTING!!!!!!")
-              res.json({
-                  token: jsonwebtoken.sign({ id: result.id }, process.env.JWT_SECRET)
-              })
-          }).catch(err => res.json({
-              error: err.message
-          }));
+    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        const {avatar, username, email, steamID} = req.body;
+        
+        Promise.all([
+          getUserByEmail(email),
+          getUserByUsername(username)
+        ]).then((all) => {
+          if ((all[0] && all[0].id !== data.id) || (all[1] && all[1].id !== data.id)) {
+            res.status(401).json({
+              msg: 'Sorry, a user account with this email or username already exists'
+            });
+          } else {
+            updateUserProfile(avatar, username, email, steamID, data.id)
+            .then(result => {
+                res.json({
+                    token: jsonwebtoken.sign({ id: result.id }, process.env.JWT_SECRET)
+                })
+            }).catch(err => res.json({
+                error: err.message
+            }));
+          }
+        })
       }
     });
   });
