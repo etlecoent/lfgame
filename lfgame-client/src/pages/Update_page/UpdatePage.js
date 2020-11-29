@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { useState, Fragment } from 'react';
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { isEmail } from 'validator';
 
 import './UpdatePage.scss';
@@ -14,10 +14,8 @@ const UpdatePage = (props) => {
   const [email, setEmail] = useState(currentUser.email);
   const [steamID, setSteamID] = useState(currentUser.steam_id || null);
   const [message, setMessage] = useState("");
-  const [redirect, setRedirect] = useState(false);
   
   const update = (avatar, username, email) => {
-
     return axios.post(`/api/users/${currentUser.username}`, {
       avatar,
       username,
@@ -26,14 +24,14 @@ const UpdatePage = (props) => {
     }, { headers: {"Authorization" : props.token} })
     .then(res => {
       setToken(res.data.token)
-      setRedirect(true);
+      // setRedirect(true);
     });
   }
 
   const redirectProfile = () => {
-    if (redirect) {
-      return <Redirect to='/profile'/>
-    }
+    // if (redirect) {
+    //   return <Redirect to='/profile'/>
+    // }
   }
 
   const validate = () => {
@@ -58,7 +56,7 @@ const UpdatePage = (props) => {
 
   return (
     <Fragment>
-    {redirectProfile() || 
+    
       <section className="page">
         <div className="update-page">
           <header className="update-header">Update Profile</header>
@@ -86,14 +84,16 @@ const UpdatePage = (props) => {
               <label className="update-user-header">Update Steam ID:</label>
               <input className="update-user-info" type="text" placeholder="Enter Steam ID" value={steamID} onChange={event => setSteamID(event.target.value)}/>
             </div>
-            <div className="update-button">
-              <button type="button" className="btn btn-primary" onClick={validate}>Update</ button>
+            <div className="update-button">  
+              <Link to={"/profile"} onClick={validate}>
+                <button type="button" className="btn btn-primary">Update</button>
+              </Link>
             </div>
             </form>
           </div>
         </div>
       </section>
-    }
+    
     </Fragment>
 
 

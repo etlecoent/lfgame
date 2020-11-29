@@ -15,15 +15,12 @@ const GamesPage = (props) => {
   const [term, setTerm] = useState("");
   const [games, setGames] = useState([]);
   const [results, setResults] = useState([]);
-  const [redirect, setRedirect] = useState(null);
   const [modalState, setModalState] = useState({
     show: false,
     gameID: null,
     userID: props.currentUser.id
   });
 
-  // pass the setModal to the gameListItem for it to show on click
-  // pass the findSession event to the modal 
 
   useEffect(() => {
     if (games.length === 0) {
@@ -46,33 +43,23 @@ const GamesPage = (props) => {
       difficultyLevel
     }, { headers: {"Authorization" : props.token} }).then((res) => {
       props.setCurrentSession({session_id: res.data.session_id});
-      setRedirect(true);
     })
   }
 
-  const redirectSessions = () => {
-    if (redirect) {
-      return <Redirect to='/sessions'/>
-    }
-  }
-
   return (
-    <Fragment>
-    { redirectSessions() ||
-      <section className="page">
-        <SearchBar onSearch={term => setTerm(term)}/>
-        <div className="gameList">
-          <GameList games={results} setModalState={setModalState}/>
-        </div>
-        <DifficultyLevel
-        show={modalState.show}
-        onHide={() => setModalState(state => ({...state, show:false}))}
-        animation={false}
-        findSession={findSession}
-        />
-      </section> 
-    }
-    </Fragment>
+  
+    <section className="page">
+      <SearchBar onSearch={term => setTerm(term)}/>
+      <div className="gameList">
+        <GameList games={results} setModalState={setModalState}/>
+      </div>
+      <DifficultyLevel
+      show={modalState.show}
+      onHide={() => setModalState(state => ({...state, show:false}))}
+      animation={false}
+      findSession={findSession}
+      />
+    </section> 
   )
 }
 

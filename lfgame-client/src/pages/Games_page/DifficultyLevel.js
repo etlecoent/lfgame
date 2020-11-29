@@ -1,4 +1,5 @@
 import {Modal} from "react-bootstrap/";
+import { Link } from "react-router-dom";
 
 function DifficultyLevel(props) {
   
@@ -19,22 +20,27 @@ function DifficultyLevel(props) {
       </Modal.Header>
 
       <Modal.Body>
+        <Link to={"/sessions"} onClick={() => props.findSession("Beginner")}>
+          <div className="difficultyLevel" onClick={() => props.findSession("Beginner")}>
+            Beginner
+          </div>
+        </Link>
 
-        <div className="difficultyLevel" onClick={() => props.findSession("Beginner")}>
-          Beginner
-        </div>
-
-        <div className="difficultyLevel" onClick={() => props.findSession("Intermediate")}>
-          Intermediate
-        </div>
-
-        <div className="difficultyLevel" onClick={() => props.findSession("Advanced")}>
-          Advanced
-        </div>
-
-        <div className="difficultyLevel" onClick={() => props.findSession("Competitive")}>
-          Competitive
-        </div>
+        <Link to={"/sessions"} onClick={() => props.findSession("Intermediate")}>
+          <div className="difficultyLevel" onClick={() => props.findSession("Intermediate")}>
+            Intermediate
+          </div>
+        </Link>
+        <Link to={"/sessions"} onClick={() => props.findSession("Advanced")}>
+          <div className="difficultyLevel" onClick={() => props.findSession("Advanced")}>
+            Advanced
+          </div>
+        </Link>
+        <Link to={"/sessions"} onClick={() => props.findSession("Competitive")}>
+          <div className="difficultyLevel" onClick={() => props.findSession("Competitive")}>
+            Competitive
+          </div>
+        </Link>
 
       </Modal.Body>
     </Modal>

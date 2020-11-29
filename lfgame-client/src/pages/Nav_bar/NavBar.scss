@@ -41,21 +41,21 @@
     padding: 1em;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .logo:hover {
-      animation-name: spin;
-      animation-duration: 1500ms;
-      animation-iteration-count: 1;
-      animation-timing-function: linear;
+  // @media (prefers-reduced-motion: no-preference) {
+  //   .logo:hover {
+  //     animation-name: spin;
+  //     animation-duration: 1500ms;
+  //     animation-iteration-count: 1;
+  //     animation-timing-function: linear;
       
-      @keyframes spin {
-        from {
-          transform:rotate(0deg);
-        }
-        to {
-          transform:rotate(360deg);
-        }
-      }
-    }
-  }
+  //     @keyframes spin {
+  //       from {
+  //         transform:rotate(0deg);
+  //       }
+  //       to {
+  //         transform:rotate(360deg);
+  //       }
+  //     }
+  //   }
+  // }
 }

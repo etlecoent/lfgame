@@ -12,7 +12,6 @@ const LoginPage = (props) => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-
   const login = (email, password) => {
     return axios
       .post(API_URL, {

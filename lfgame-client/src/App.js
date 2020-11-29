@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import NavBar from './pages/Nav_bar/NavBar';
+import MenuBar from './pages/Menu_bar/MenuBar';
+import Loading from './pages/Loading/Loading';
 import GamesPage from './pages/Games_page/GamesPage';
 import LoginPage from './pages/Login_page/LoginPage';
 import RegisterPage from './pages/Register_page/RegisterPage';
 import SessionPage from './pages/Session_page/SessionPage';
-import MenuBar from './pages/Menu_bar/MenuBar';
 import HomePage from './pages/Home_page/HomePage';
 import ProfilePage from './pages/Profile_page/ProfilePage';
 import UpdatePage from './pages/Update_page/UpdatePage';
@@ -24,6 +25,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     
     setTimeout(() => {
 
@@ -44,7 +46,7 @@ const App = () => {
 
     }, 2000);
 
-  }, [token]);
+  }, [token, currentSession]);
 
 
   const logout = () => {
@@ -79,7 +81,7 @@ const App = () => {
       <Router>
         <NavBar currentUser={currentUser} logout={() => logout()}/>
           { loading ? 
-            <div className="page"><h1>Loading</h1></div> :
+            <Loading /> :
             <Switch>
               
               <Route exact path="/">
