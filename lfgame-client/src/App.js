@@ -77,7 +77,7 @@ const App = () => {
             <Switch>
               
               <Route exact path="/">
-                <div>{redirectGames() || <HomePage/> }</div>
+                {redirectGames() || <HomePage/> }
               </Route>
 
               <Route exact path ="/register">
