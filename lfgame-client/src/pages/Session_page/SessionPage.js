@@ -21,11 +21,6 @@ const SessionPage = (props) => {
   const [messages, setMessages] = useState([]);
   const [msg, setMsg] = useState("");
 
-  const leaveSession = () => {
-    socketRef.current.disconnect();
-    setCurrentSession(null);
-  };
-
   const updateScroll = () => {
     const element = document.getElementById("scrollable");
     element.scrollTop = element.scrollHeight - element.clientHeight;
@@ -77,6 +72,7 @@ const SessionPage = (props) => {
 
     return () => {
       socketRef.current.disconnect();
+      setCurrentSession(null);
     };
 
   }, []);
@@ -96,7 +92,7 @@ const SessionPage = (props) => {
         messages={messages}
       />
       <Link to="/">
-        <Button className="leaveSession" onClick={() => leaveSession()}>
+        <Button className="leaveSession">
           Leave session
         </Button>
       </Link>
