@@ -9,11 +9,12 @@
   align-items: center;
   height: 100%;
   width: 100%;
+  padding-bottom: 6em;
 
   .logo {
   
-    height: 60px;
-    width: 60px;
+    height: 100px;
+    width: 100px;
     transition: opacity 0.3s;
     animation: spin 1.1s infinite linear;
     // transition: opacity 0.3s;
