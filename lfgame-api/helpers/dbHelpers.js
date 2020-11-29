@@ -123,7 +123,8 @@ module.exports = (db) => {
                 JOIN joined_sessions ON user_id = users.id
                 WHERE joined_sessions.session_id = $1
                 AND joined_sessions.in_session = true
-                GROUP BY users.id`,
+                GROUP BY users.id
+                ORDER BY username`,
       values: [sessionID]
     };
 
@@ -230,19 +231,21 @@ module.exports = (db) => {
   const getGameBySession = sessionID => {
 
     const query = {
-      text: `SELECT game_id FROM sessions WHERE id = $1`,
+      text: `SELECT sessions.difficulty_level, games.* FROM sessions
+             JOIN games ON game_id = games.id
+             WHERE sessions.id = $1`,
       values: [sessionID]
     };
 
     return db
       .query(query)
-      .then(result => getGameByID(result.rows[0].game_id))
+      .then(result => result.rows[0])
       .catch((err) => err);
   };
 
   const usersInPrevSession = (sessionID) => {
     const query = {
-      text:`SELECT users.id, username FROM users
+      text:`SELECT users.id, username, image FROM users
               JOIN joined_sessions ON user_id = users.id
               WHERE joined_sessions.session_id = $1
               GROUP BY users.id`,
