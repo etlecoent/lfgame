@@ -17,7 +17,6 @@ module.exports = ({
 
 
     router.get('/', (req, res) => {
-      console.log("HEADER TOKEN: ", req.headers);
       jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
         if (err) {
           res.sendStatus(403);
