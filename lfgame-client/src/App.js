@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import NavBar from './pages/Nav_bar/NavBar';
