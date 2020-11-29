@@ -24,21 +24,26 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (token) {
-      
-      axios.get("/api/users", {
-        headers: {"Authorization" : token}
-      })
-      .then((res) => {
-        setCurrentUser(res.data);
+    
+    setTimeout(() => {
+
+      if (token) {
+        axios.get("/api/users", {
+          headers: {"Authorization" : token}
+        })
+        .then((res) => {
+          setCurrentUser(res.data);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      } else {
         setLoading(false);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    } else {
-      setLoading(false);
-    }
+      }
+
+    }, 2000);
+
   }, [token]);
 
 
@@ -73,7 +78,8 @@ const App = () => {
     <div id="App" >
       <Router>
         <NavBar currentUser={currentUser} logout={() => logout()}/>
-          { !loading &&
+          { loading ? 
+            <div className="page"><h1>Loading</h1></div> :
             <Switch>
               
               <Route exact path="/">
