@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import connect from  "./../../styles/connect.jpg";
 import "./HomePage.scss";
 
 const HomePage = (props) => {
