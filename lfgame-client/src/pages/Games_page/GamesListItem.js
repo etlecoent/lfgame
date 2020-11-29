@@ -8,7 +8,7 @@ const GamesListItem = (props) => {
         <h1>{props.name}</h1>
       </header>
       <div>
-        <img className="gameImage" alt={props.id} src={props.imageSource}></img>
+        <img className="gameImage" alt={"Game"} src={props.imageSource}></img>
       </div>
       <footer className="gameListSessions">
         Current gamers: {props.numCurrentGamers}
