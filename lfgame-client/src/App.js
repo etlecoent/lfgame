@@ -34,7 +34,7 @@ const App = () => {
         setLoading(false);
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
       });
     } else {
       setLoading(false);
@@ -51,14 +51,12 @@ const App = () => {
   
   const redirectHome = () => {
     if (!currentUser) {
-      console.log("REDIRECT HOME")
       return <Redirect to="/" />;
     }
   }
 
   const redirectGames = () => {
     if (currentUser) {
-      console.log("REDIRECT GAMES")
       return <Redirect to="/games" />;
     }
   }
