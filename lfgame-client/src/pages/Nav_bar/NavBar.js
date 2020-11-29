@@ -10,7 +10,7 @@ const NavBar = (props) => {
     <nav className="topNav">
       <div className="logo-container"> 
         <Link to="/">
-        <img className="logo" alt= "logo" src={logo}/>  
+          <img className="logo" alt= "logo" src={logo}/>
         </Link>
       </div>
       
