@@ -15,6 +15,22 @@ module.exports = ({
     updateUserProfile,
 }) => {
 
+
+    router.get('/', (req, res) => {
+      console.log("HEADER TOKEN: ", req.headers);
+      jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
+        if (err) {
+          res.sendStatus(403);
+        } else {
+          getUserByUsername(data.username)
+          .then(user => {
+            res.json(user)
+          })
+          .catch(err => res.json(err));
+        }
+      })
+    });
+
     router.post('/register', (req, res) => {
 
     const {
@@ -35,12 +51,7 @@ module.exports = ({
         const hashedPassword = bcrypt.hashSync(password, process.env.SALT_ROUNDS | 0);
         addUser(username, email, hashedPassword)
           .then(user => res.json({
-            username: user.username,
-            email: user.email,
-            image: user.image,
-            steam_id: user.steam_id,
-            id: user.id,
-            token: jsonwebtoken.sign({ username: user.username }, process.env.JWT_SECRET)
+            token: jsonwebtoken.sign({ username: user.username, email: user.email, id: user.id }, process.env.JWT_SECRET)
           }));
       }
     }).catch(err => res.json({
@@ -62,12 +73,7 @@ module.exports = ({
         if (user) {            
           if (bcrypt.compareSync(password, user.password)) {
             res.json({
-              username: user.username,
-              email: user.email,
-              image: user.image,
-              steam_id: user.steam_id,
-              id: user.id,
-              token: jsonwebtoken.sign({ username: user.username }, process.env.JWT_SECRET)
+              token: jsonwebtoken.sign({ username: user.username, email: user.email, id: user.id }, process.env.JWT_SECRET)
             });
           } else {
             res.status(401).json({ error: 'Wrong password'});
@@ -126,24 +132,24 @@ module.exports = ({
   });
 
     router.post('/:username', (req, res) => {
-
-        const {id, avatar, username, email, steamID} = req.body;
-
-        updateUserProfile(avatar, username, email, steamID, id)
-        .then(result => {
-            res.json({
-                username: result.username,
-                email: result.email,
-                image: result.image,
-                steam_id: result.steam_id,
-                id: result.id,
-                token: jsonwebtoken.sign({ username: result.username }, process.env.JWT_SECRET)
-            })
-        }).catch(err => res.json({
-            error: err.message
-        }));
-    })
-
+        // GET ID FROM TOKEN INSTEAD OF REQ.BODY
+        jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
+          if (err) {
+            res.sendStatus(403);
+          } else {
+            const {avatar, username, email, steamID} = req.body;
+            
+            updateUserProfile(avatar, username, email, steamID, data.id)
+            .then(result => {
+                res.json({
+                    token: jsonwebtoken.sign({ username: result.username, email: result.email, id: result.id }, process.env.JWT_SECRET)
+                })
+            }).catch(err => res.json({
+                error: err.message
+            }));
+      }
+    });
+  });
 
   return router;
 };

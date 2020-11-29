@@ -19,9 +19,8 @@ const ProfilePage = (props) => {
 
   useEffect(() => {  
     if (isEmpty(currentProfile)) {
-      axios.get(`/api/users/${currentUser.username}`, { headers: {"Authorization" : currentUser.token} })
+      axios.get(`/api/users/${currentUser.username}`, { headers: {"Authorization" : props.token} })
       .then(res => {
-        console.log("CHECK FOR THIS PLEASE!!!!!!!!!!!", res.data)
         setCurrentProfile(res.data.user)
         setFavouriteGame(res.data.favourite)
         setPreviousSessions(res.data.sessionsList)
@@ -73,6 +72,7 @@ const ProfilePage = (props) => {
               setPreviousSessions={setPreviousSessions}
               showSessions={showSessions}
               setShowSessions={setShowSessions}
+              token={props.token}
             />
           }
         </div>

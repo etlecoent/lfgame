@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { Fragment, useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import NavBar from './pages/Nav_bar/NavBar';
 import GamesPage from './pages/Games_page/GamesPage';
@@ -8,44 +9,61 @@ import RegisterPage from './pages/Register_page/RegisterPage';
 import SessionPage from './pages/Session_page/SessionPage';
 import MenuBar from './pages/Menu_bar/MenuBar';
 import HomePage from './pages/Home_page/HomePage';
+import ProfilePage from './pages/Profile_page/ProfilePage';
 import UpdatePage from './pages/Update_page/UpdatePage';
 
 import './App.scss';
 
-import useApplicationData from "./hooks/useApplication.js"
-import ProfilePage from './pages/Profile_page/ProfilePage';
 
 const App = () => {
-  
-  const {
-    state,
-    dispatch
-  } = useApplicationData();
+   
 
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+  const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')) || null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentSession, setCurrentSession] = useState(null);
   const [currentProfile, setCurrentProfile] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    
+    console.log("UseEffect", 1);
+
+    if (token) {
+      
+      axios.get("/api/users", {
+        headers: {"Authorization" : token}
+      })
+      .then((res) => {
+        setCurrentUser(res.data);
+        setLoading(false);
+      });
+    }
+  }, [token]);
+
 
   const logout = () => {
     setCurrentUser(null);
-    setCurrentSession(null)
-    localStorage.removeItem("user");
+    setCurrentSession(null);
+    setToken(null);
+    localStorage.removeItem("token");
   };
   
   const redirectHome = () => {
     if (!currentUser) {
+      console.log("REDIRECT HOME")
       return <Redirect to="/" />;
     }
   }
 
   const redirectGames = () => {
     if (currentUser) {
+      console.log("REDIRECT GAMES")
       return <Redirect to="/games" />;
     }
   }
 
   const checkForSession = () => {
-
+    console.log("CHECK FOR SESSION")
     if (!currentUser) {
       return redirectHome();
     } else if (currentUser && !currentSession) {
@@ -57,41 +75,43 @@ const App = () => {
     <div id="App" >
       <Router>
         <NavBar currentUser={currentUser} logout={() => logout()}/>
-        <Switch>
+        { !loading &&
+          <Switch>
+            
+              <Route exact path="/">
+                {redirectGames() || <HomePage/> }
+              </Route>
 
-            <Route exact path="/">
-              {redirectGames() || <HomePage/> }
-            </Route>
+              <Route exact path="/games">
+                {redirectHome() || <GamesPage token={token} currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
+              </Route>
 
-            <Route exact path="/games">
-              {redirectHome() || <GamesPage currentUser={currentUser} setCurrentSession={setCurrentSession}/> }
-            </Route>
+              <Route exact path="/sessions">
+              {!currentSession ? checkForSession() : <SessionPage token={token} currentSession={currentSession} currentUser={currentUser}/>}
+              </Route>
 
-            <Route exact path="/sessions">
-            {!currentSession ? checkForSession() : <SessionPage currentSession={currentSession} currentUser={currentUser}/>}
-            </Route>
+              <Route exact path="/profile">
+                {redirectHome() || <ProfilePage token={token} currentUser={currentUser} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile}/>}
+              </Route>
 
-            <Route exact path="/profile">
-              {redirectHome() || <ProfilePage currentUser={currentUser} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile}/>}
-            </Route>
+              <Route exact path="/update">
+                {redirectHome() || <UpdatePage token={token} currentUser={currentUser} setCurrentUser={setCurrentUser}/>}
+              </Route>
 
-            <Route exact path="/update">
-              {redirectHome() || <UpdatePage currentUser={currentUser} setCurrentUser={setCurrentUser} setCurrentProfile={setCurrentProfile}/>}
-            </Route>
+              <Route exact path ="/register">
+                {redirectGames() || <RegisterPage setToken={setToken}/>}
+              </Route>
+            
+              <Route exact path ="/login">
+                {redirectGames() || <LoginPage setToken={setToken}/>}
+              </Route>
+            
 
-            <Route exact path ="/register">
-              {redirectGames() || <RegisterPage setCurrentUser={setCurrentUser}/>}
+            <Route path="*">
+              <h1 className="notFound">404 - Not Found</h1>
             </Route>
-          
-            <Route exact path ="/login">
-              {redirectGames() || <LoginPage setCurrentUser={setCurrentUser}/>}         
-            </Route>
-          
-
-          <Route path="*">
-            <h1 className="notFound">404 - Not Found</h1>
-          </Route>
-        </Switch>
+          </Switch>
+        }
         <MenuBar currentUser={currentUser} logout={() => logout()}/>
       </Router>
     </div>

@@ -38,6 +38,14 @@
   color: $white;
 }
 
+.menuItem:hover {
+  
+  span{
+    color: $black;
+
+  }
+}
+
 .dropdown-menu.show {
   color: $white;
   background-color: $black;

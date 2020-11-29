@@ -20,7 +20,7 @@ module.exports = (io, {
   router.post('/', (req, res) => {
     
     const { gameID, userID, difficultyLevel } = req.body;
-    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err) => {
+    jsonwebtoken.verify(req.headers.authorization, process.env.JWT_SECRET, (err, data) => {
       if (err) {
 
         res.sendStatus(403);
@@ -31,12 +31,12 @@ module.exports = (io, {
           .then((session) => {
             // if there is a session with space, add them to the session
             if (session) {
-              return checkForJoinedSession(userID, session.id)
+              return checkForJoinedSession(data.id, session.id)
                 .then(result => {
                   if (result) {
-                    return userRejoinSession(userID, session.id);
+                    return userRejoinSession(data.id, session.id);
                   } else {
-                    return addUserToAvailableSession(userID, session.id);
+                    return addUserToAvailableSession(data.id, session.id);
                   }
                 });
                   
@@ -45,7 +45,7 @@ module.exports = (io, {
               return createNewSession(gameID, difficultyLevel)
               // set timeout for 12 hours, change status to f after 12 hours
                 .then(newSession => {
-                  return addUserToAvailableSession(userID, newSession.id);
+                  return addUserToAvailableSession(data.id, newSession.id);
                 });
             }
           })

@@ -20,7 +20,7 @@ const PrevSessionsList = (props) => {
         setPreviousSessions={props.setPreviousSessions}
         showSessions={props.showSessions}
         setShowSessions={props.setShowSessions}
-        
+        token={props.token}
       
       
       />

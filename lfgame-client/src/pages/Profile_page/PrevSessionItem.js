@@ -14,7 +14,7 @@ const PrevSessionItem = (props) => {
     if (userList.length > 0) {
       setUserList([]);
     } else {
-      axios.get(`api/users/${currentUser.username}/${sessionID}`, { headers: {"Authorization" : currentUser.token} }).then(res => {
+      axios.get(`api/users/${currentUser.username}/${sessionID}`, { headers: {"Authorization" : props.token} }).then(res => {
         const parsedList = res.data.map(user => user.username);
         setUserList([...parsedList]);
       })
@@ -22,7 +22,7 @@ const PrevSessionItem = (props) => {
   }
 
   const goToFriend = (username) => {
-    axios.get(`/api/users/${username}`, { headers: {"Authorization" : currentUser.token} })
+    axios.get(`/api/users/${username}`, { headers: {"Authorization" : props.token} })
     .then(res => {
       setCurrentProfile(res.data.user)
       setFavouriteGame(res.data.favourite)

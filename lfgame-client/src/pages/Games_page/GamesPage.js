@@ -27,7 +27,7 @@ const GamesPage = (props) => {
 
   useEffect(() => {
     if (games.length === 0) {
-      axios.get("/api/games", { headers: {"Authorization" : props.currentUser.token} }).then((res) => {
+      axios.get("/api/games", { headers: {"Authorization" : props.token} }).then((res) => {
         setGames(res.data)
         setResults(res.data)
       })
@@ -39,11 +39,12 @@ const GamesPage = (props) => {
   }, [term])
 
   const findSession = (difficultyLevel) => {
+    
     axios.post("/api/sessions", {
       gameID: modalState.gameID,
       userID: modalState.userID,
       difficultyLevel
-    }, { headers: {"Authorization" : props.currentUser.token} }).then((res) => {
+    }, { headers: {"Authorization" : props.token} }).then((res) => {
       props.setCurrentSession({session_id: res.data.session_id});
       setRedirect(true);
     })
@@ -61,7 +62,7 @@ const GamesPage = (props) => {
       <section className="page">
         <SearchBar onSearch={term => setTerm(term)}/>
         <div className="gameList">
-          <GameList currentUser={props.currentUser} games={results} setModalState={setModalState}/>
+          <GameList games={results} setModalState={setModalState}/>
         </div>
         <DifficultyLevel
         show={modalState.show}

@@ -11,7 +11,7 @@ const NavBar = (props) => {
       <div className="logo-container"> 
         <Link to="/">
         <img className="logo" alt= "logo" src={logo}/>  
-        </Link> 
+        </Link>
       </div>
       
       <div className="username"> 

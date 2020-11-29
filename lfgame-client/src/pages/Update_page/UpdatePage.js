@@ -19,7 +19,6 @@ const UpdatePage = (props) => {
   const update = (avatar, username, email) => {
 
     return axios.post(`/api/users/${currentUser.username}`, {
-      id: currentUser.id,
       avatar,
       username,
       email,
