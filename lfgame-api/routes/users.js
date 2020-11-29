@@ -23,7 +23,13 @@ module.exports = ({
         } else {
           getUserByID(data.id)
           .then(user => {
-            res.json(user)
+            res.json({
+              id: user.id,
+              username: user.username,
+              email: user.email,
+              steam_id: user.steam_id,
+              image: user.image
+            })
           })
           .catch(err => res.json(err));
         }
