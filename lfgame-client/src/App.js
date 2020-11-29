@@ -37,16 +37,13 @@ const App = () => {
           setCurrentUser(res.data);
           setLoading(false);
         })
-        .catch(err => {
-          console.log(err);
-        });
       } else {
         setLoading(false);
       }
 
     }, 2000);
 
-  }, [token, currentSession]);
+  }, [token]);
 
 
   const logout = () => {
@@ -69,8 +66,6 @@ const App = () => {
   }
 
   const checkForSession = () => {
-    console.log('currentSession:', currentSession)
-    console.log('currentUser:', currentUser)    
     if (!currentUser) {
       return redirectHome();
     } else if (currentUser && !currentSession) {
