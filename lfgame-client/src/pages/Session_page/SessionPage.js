@@ -52,14 +52,14 @@ const SessionPage = (props) => {
 
     socketRef.current.on("user has joined", ({users, joiningUser}) => {
       
-      setMessages(messages => [...messages, {username: "System", content: `User ${joiningUser} has joined the channel`}])
+      setMessages(messages => [...messages, {username: "System", content: `${joiningUser} has joined the channel`}])
       
       setUsers([...users]);
     });
 
     socketRef.current.on("user has left", ({users , leavingUser}) => {
       
-      setMessages(messages => [...messages, {username: "System", content: `User ${leavingUser} has left the channel`}])
+      setMessages(messages => [...messages, {username: "System", content: `${leavingUser} has left the channel`}])
       
       setUsers([...users]);
     });

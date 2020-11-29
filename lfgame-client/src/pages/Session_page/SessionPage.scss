@@ -9,15 +9,37 @@
   padding: 1em;
 
   .gameListName {
-    font-size: x-large;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .difficulty{
+      font-size: 1.4em;
+    }
   }
 
-  .gameInfoImage {
-    height: 69px;
-    width: 184px;
-    border: .1em solid $grey;
+  .game-image-container{
+    padding-bottom: 1em;
+
+    .gameInfoImage {
+      height: 69px;
+      width: 184px;
+      border: .1em solid $grey;
+    }
   }
 }
+
+.gamerList{
+
+  height: 60%;
+
+  .gamerListDiv {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 38vh;
+  }
+}
+
 
 .messages {
   position: fixed;
