@@ -101,7 +101,7 @@ const App = () => {
               </Route>
 
               <Route exact path="/sessions">
-              {!currentSession ? checkForSession() : <SessionPage token={token} currentSession={currentSession} currentUser={currentUser}/>}
+              {checkForSession() || <SessionPage token={token} currentSession={currentSession} setCurrentSession={setCurrentSession} currentUser={currentUser}/>}
               </Route>
 
               <Route exact path="/profile">

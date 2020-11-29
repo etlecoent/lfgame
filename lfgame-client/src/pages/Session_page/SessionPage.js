@@ -13,7 +13,7 @@ import './SessionPage.scss';
 
 const SessionPage = (props) => {
   
-  const { currentSession, currentUser } = props;
+  const { currentSession, currentUser, setCurrentSession } = props;
 
   const socketRef = useRef();
   const [gameInfo, setGameInfo] = useState({});
@@ -23,6 +23,7 @@ const SessionPage = (props) => {
 
   const leaveSession = () => {
     socketRef.current.disconnect();
+    setCurrentSession(null);
   };
 
   const updateScroll = () => {
