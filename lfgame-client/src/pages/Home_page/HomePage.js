@@ -7,6 +7,7 @@ const HomePage = (props) => {
 
   return (
     <section className="page">
+      <div className="homepage-container">
       <div id="homePage">
         
         <h1 id="lfgame">Lfga.me</h1>
@@ -47,6 +48,7 @@ const HomePage = (props) => {
           </div>
 
         </div>
+      </div>
       </div>
     </section>
   );
