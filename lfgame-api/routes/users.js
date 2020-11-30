@@ -4,7 +4,6 @@ const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 
-
 module.exports = ({
     getUserByEmail,
     addUser,
@@ -48,10 +47,10 @@ module.exports = ({
       getUserByEmail(email),
       getUserByUsername(username)
     ]).then((all) => {
-      if (all[0] || all[1]) {
-        res.status(401).json({
-          msg: 'Sorry, a user account with this email or username already exists'
-        });
+      if (all[0]) {
+        res.status(401).json({error: 'Sorry, a user account with this email already exists'});
+      } else if (all[1]) {
+        res.status(401).json({error: 'Sorry, a user account with this username already exists'})
       } else {
         const hashedPassword = bcrypt.hashSync(password, process.env.SALT_ROUNDS | 0);
         addUser(username, email, hashedPassword)
@@ -130,9 +129,13 @@ module.exports = ({
           getUserByEmail(email),
           getUserByUsername(username)
         ]).then((all) => {
-          if ((all[0] && all[0].id !== data.id) || (all[1] && all[1].id !== data.id)) {
+          if (all[0] && all[0].id !== data.id) {
             res.status(401).json({
-              msg: 'Sorry, a user account with this email or username already exists'
+              error: 'Sorry, a user account with this email already exists'
+            });
+          } else if (all[1] && all[1].id !== data.id) {
+            res.status(401).json({
+              error: 'Sorry, a user account with this username already exists'
             });
           } else {
             updateUserProfile(avatar, username, email, steamID, data.id)
