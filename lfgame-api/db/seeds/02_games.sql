@@ -6,6 +6,7 @@ VALUES
     ('DOTA 2', 'https://steamcdn-a.akamaihd.net/steam/apps/570/capsule_184x69.jpg'),
     ('Destiny 2', 'https://steamcdn-a.akamaihd.net/steam/apps/1085660/capsule_184x69.jpg'),
     ('GTAV', 'https://steamcdn-a.akamaihd.net/steam/apps/271590/capsule_184x69.jpg'),
+    ('Lets Get Trivial', 'https://github.com/dpletzke/lets-get-trivial/blob/master/client/src/components/images/logo.jpg?raw=true'),
     ('Apex Legends', 'https://steamcdn-a.akamaihd.net/steam/apps/1172470/capsule_184x69.jpg'),
     ('TF2', 'https://steamcdn-a.akamaihd.net/steam/apps/440/capsule_184x69.jpg'),
     ('Rust', 'https://steamcdn-a.akamaihd.net/steam/apps/252490/capsule_184x69.jpg'),
