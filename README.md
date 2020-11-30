@@ -4,7 +4,7 @@ Lfga.me is an app built with Node, React, Express and PostGresql that allows gam
 
 ### Screenshots:
 
-<img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Register.png" width="705" height="1432">
+<img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Register.png" width="353" height="716">
 !["Register Page"](./docs/Register.png)
 !["Games Page"](./docs/Games.png)
 !["Session Page"](./docs/Session-1.png)
