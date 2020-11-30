@@ -48,18 +48,17 @@ const RegisterPage = (props) => {
     } else {
       setMessage("");
       register(username, email, password)
-      .catch(err => setMessage("Email already exists, please use a different one!"));
+      .catch(err => setMessage(err.response.data.error));
     }
   }
 
   return(
     <section className="page">
+      <div className="register-container">
       <div id="registerPage">
-
-        <header>Register</header>
-
+        <header className="register-header">Register</header>
           {message && <div className="alert alert-danger">{message}</div>}
-          <form onSubmit={event => event.preventDefault()}>
+          <form className="form-container" onSubmit={event => event.preventDefault()}>
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email address</label>
               <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={email} onChange={event => setEmail(event.target.value)}/>
@@ -82,6 +81,7 @@ const RegisterPage = (props) => {
             </button>
           </Link>
         </div>
+      </div>
       </div>
     </section>
   );

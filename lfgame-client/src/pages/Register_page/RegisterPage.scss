@@ -1,49 +1,64 @@
 @import "./../../styles/variables.scss";
 
-#registerPage {
 
+
+.register-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-
-  header {
-    font-size: 3em;
-  }
   
-  .alert {
-    margin: 0.5em 0;
-  }
-
-  form {
-    
-    width: 50%;
+  
+  #registerPage {
     display: flex;
     flex-direction: column;
-    margin-bottom: 0.5em;
-
-    .form-group {
-      padding-top: 0.5em;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 95%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8%;
+  
+    .register-header {
+      font-size: 3em;
+      padding: 0.5em 0 0.2em 0;
+    }
+    
+    .alert {
+      margin: 0.5em 0;
+      width: 90%;
     }
   
-    .btn-primary {
-      margin-top: 1em;
-    }
-
-  }
-
-  .loginButton {
-    
-    padding-top: 0.5em;    
-    padding-bottom: 1em;
-    
-    .btn {
-      color: $white;
-      // background-color: $menuBlue;
-      // border:none;
-    }
+    .form-container {
       
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.5em;
+      padding-top: 0.7em;
+  
+      .form-group {
+        width: 100%;
+      }
+    
+      .btn-primary {
+        margin-top: 1em;
+      }
+  
+    }
+  
+    .loginButton {
+      
+      padding-top: 0.5em;    
+      padding-bottom: 2em;
+      
+      .btn {
+        color: $white;
+      }
+        
+    }
   }
+
 }
