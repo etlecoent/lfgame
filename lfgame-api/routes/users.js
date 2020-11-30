@@ -80,14 +80,14 @@ module.exports = ({
               token: jsonwebtoken.sign({ id: user.id }, process.env.JWT_SECRET)
             });
           } else {
-            res.status(401).json({ error: 'Wrong password'});
+            res.status(401).json({ error: 'Wrong email or password. Please try again!'});
           }
         } else {
-          res.status(401).json({ error: 'Wrong email adress'});
+          res.status(401).json({ error: 'No account linked to this email address'});
         }
       })
       .catch(err => res.json({
-        error: err.message
+        error: err
       }));
   });
 

@@ -40,7 +40,7 @@ const LoginPage = (props) => {
     } else {
       setMessage("");
       login(email, password)
-      .catch(err => setMessage("Invalid email or password, please try again!"));
+      .catch(err => setMessage(err.response.data.error));
     }
   }
 
