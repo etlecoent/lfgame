@@ -46,12 +46,13 @@ const LoginPage = (props) => {
 
   return(
     <section className="page">
+      <div className="login-container">
       <div id="loginPage">
-        <header>Login</header>
+        <header className="login-header">Login</header>
         
         {message && <div className="alert alert-danger">{message}</div>}
         
-        <form onSubmit={event => event.preventDefault()}>
+        <form className="form-container" onSubmit={event => event.preventDefault()}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={email} onChange={event => setEmail(event.target.value)}/>
@@ -70,6 +71,7 @@ const LoginPage = (props) => {
             </button>
           </Link>
         </div>
+      </div>
       </div>
     </section>
   );
