@@ -5,12 +5,11 @@ Lfga.me is an app built with Node, React, Express and PostGresql that allows gam
 ### Screenshots:
 
 <img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Register.png" width="353" height="716">
-!["Register Page"](./docs/Register.png)
-!["Games Page"](./docs/Games.png)
-!["Session Page"](./docs/Session-1.png)
-!["Session Chat"](./docs/Session-2.png)
-!["Profile Page"](./docs/Profile.png)
-!["Update Profile Page"](./docs/Update.png)
+<img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Games.png" width="353" height="716">
+<img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Session-1.png" width="353" height="716">
+<img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Session-2.png" width="353" height="716">
+<img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Profile.png" width="353" height="716">
+<img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Update.png" width="353" height="716">
 
 ## Dependencies
 
