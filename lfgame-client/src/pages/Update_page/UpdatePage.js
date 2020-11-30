@@ -17,7 +17,7 @@ const UpdatePage = (props) => {
   let history = useHistory();
 
   const update = (avatar, username, email) => {
-    return axios.post(`/api/users/${currentUser.username}`, {
+    return axios.post(`/api/users/${currentUser.id}`, {
       avatar,
       username,
       email,
@@ -30,14 +30,14 @@ const UpdatePage = (props) => {
   }
 
   const validate = () => {
-    if (!email) {
+    if (!username) {
+      setMessage("Username cannot be blank");
+      return;
+    } else if (!email) {
       setMessage("Email cannot be blank");
       return;
     } else if (!isEmail(email)) {
       setMessage(`${email} is not a valid email`);
-      return;
-    } else if (!username) {
-      setMessage("Username cannot be blank");
       return;
     } else if (!avatar) {
       setMessage("Avatar cannot be blank");
@@ -48,7 +48,7 @@ const UpdatePage = (props) => {
     } else {
       setMessage("");
       update(avatar, username, email, steamID)
-      .catch(err => setMessage("Sorry, a user account with this email or username already exists"));
+      .catch(err => setMessage(err.response.data.error));
     }
   }
 
