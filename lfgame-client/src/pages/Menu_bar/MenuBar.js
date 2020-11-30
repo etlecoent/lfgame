@@ -40,7 +40,7 @@ const MenuBar = (props) => {
               <path fillRule="evenodd" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
               <path d="M8 12c4 0 5 1.755 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12z"/>
             </svg>
-            <span> Edit Profile</span>
+            <span> Update</span>
         </Dropdown.Item>
         
         <Dropdown.Item className="menuItem" onClick={props.logout}>
