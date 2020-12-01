@@ -95,10 +95,11 @@
         .game-logo {
           display: flex;
           justify-content: center;
+          padding: 0 1em;
           
           .game-logo-img {
-            width: 75%;
-            height: 75%;
+            width: 137.5px;
+            height: 52px;
             align-self: center;
             border-radius: 3%;
             border: 1px solid $grey;
