@@ -3,14 +3,14 @@
 Lfga.me is an app built with Node, React, Express and PostGresql that allows gamers to create more intimate and lasting connections than they would through normal matchmaking in games. It is for gamers who are looking for new people to play with. Through Lfga.me gamers can find groups of players based on their prefered level of play, and chat with them. 
 
 ### Screenshots:
-<div style="display: flex; flex-wrap: wrap; justify-content: space-evenly">
+<p align="center">
   <img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Register.png" width="353" height="716">
   <img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Games.png" width="353" height="716">
   <img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Session-1.png" width="353" height="716">
   <img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Session-2.png" width="353" height="716">
   <img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Profile.png" width="353" height="716">
   <img src="https://github.com/Deteri0n/lfgame/blob/master/docs/Update.png" width="353" height="716">
-</div>
+</p>
 
 ## Dependencies
 
